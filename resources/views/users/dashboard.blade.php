@@ -286,17 +286,7 @@
   </div>
 </div>
             </div><!-- /.row -->
-            <div class="row">
-              <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <nav class="pagination-area">
-                  <ul class="pagination justify-content-center">
-                    <li><a class="current" href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                  </ul>
-                </nav><!-- /.pagination-area -->
-              </div><!-- /.col-lg-12 -->
-            </div><!-- /.row -->
+            
           </div><!-- /.col-lg-9 -->
           <div class="col-sm-12 col-md-4 col-lg-3">
             <aside class="sidebar-layout2">
