@@ -23,7 +23,7 @@ use imageUpload;
             $file = $this->UploadImage($request, '/carts/images');
          }
          $response = Cart::add([
-             'product_id' => $product->id,
+             'id' => $product->id,
              'name' => $product->name,
              'price' => $product->sale_price,
              'options' => [
@@ -36,6 +36,7 @@ use imageUpload;
        
          if($response){
           return response()->json($response);
+          
 
          }
      }
@@ -61,6 +62,7 @@ use imageUpload;
         ->with('breadcrumb', 'Shopping Cart');
     }
 
+   
 
 
 

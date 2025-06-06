@@ -56,7 +56,7 @@ class PageController extends Controller
         // $products = Product::findorfail($id[0]);
     return view('users.pages.product_details')
     ->with('product', Product::where('id', decrypt($id))->first())
-    ->with('products', Product::all());
+    ->with('products', Product::latest()->simplePaginate(4));
     
 
     }

@@ -260,46 +260,31 @@
               </select>
             </div>
             <div class="row">
-              <!-- Product item #1 -->
-              @forelse ($products as $prods)
-              <div class="col-sm-6 col-md-6 col-lg-4">
-                <div class="product-item">
-                  <div class="product__img">
-                    <img src="{{asset('images/products/'.$prods->image_path)}}" alt="Product" loading="lazy">
-                    <div class="product__action">
-                      <a href="#" class="btn btn__primary btn__rounded">
-                        <i class="icon-cart"></i> <span>Add To Cart</span>
-                      </a>
-                    </div><!-- /.product-action -->
-                  </div><!-- /.product-img -->
-                  <div class="product__info">
-                    <h4 class="product__title"><a href="{{ route('product.details',encrypt($prods->id)) }}">{{ $prods->name }}</a></h4>
-                    <span class="product__price">${{ $prods->price }}</span>
-                  </div><!-- /.product-content -->
-                </div><!-- /.product-item -->
-              </div><!-- /.col-lg-4 -->
-              @empty
-                  
-              @endforelse
-              
-              <!-- Product item #2 -->
-              {{-- <div class="col-sm-6 col-md-6 col-lg-4">
-                <div class="product-item">
-                  <div class="product__img">
-                    <img src="{{asset('frontend/images/blog/grid/pp.jpg')}}" alt="Product" loading="lazy">
-                    <div class="product__action">
-                      <a href="#" class="btn btn__primary btn__rounded">
-                        <i class="icon-cart"></i> <span>Add To Cart</span>
-                      </a>
-                    </div><!-- /.product-action -->
-                  </div><!-- /.product-img -->
-                  <div class="product__info">
-                    <h4 class="product__title"><a href="#">Biotin Complex</a></h4>
-                    <span class="product__price">$12,99</span>
-                  </div><!-- /.product-content -->
-                </div><!-- /.product-item -->
-              </div><!-- /.col-lg-4 --> --}}
-              
+              <!-- Product item #1 -->           
+
+<div class="container my-5">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <!-- Card 1 -->
+    @forelse ($products as $prods)
+    <div class="col">
+      <div class="card h-100 shadow-sm rounded-4">
+        <img src="{{ asset('images/products/'.$prods->image_path) }}" class="card-img-top" alt="Product Image">
+        <div class="card-body">
+          <b class="card-title"><a href="{{ route('product.details',encrypt($prods->id)) }}"> {{ $prods->name }}</a> </b>
+          <p class="card-text mb-1">
+            <small class="text-muted text-decoration-line-through">${{ $prods->price }}</small>
+            <span class="text-danger fw-bold ms-2">${{ $prods->sale_price }}</span>
+          </p>
+          <a href="{{ route('product.details',encrypt($prods->id)) }}" class="btn btn-sm btn-primary mt-2 w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+ @empty
+                    
+ @endforelse
+   
+  </div>
+</div>
             </div><!-- /.row -->
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12 text-center">

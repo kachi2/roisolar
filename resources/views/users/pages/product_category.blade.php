@@ -171,31 +171,31 @@
         <div class="col-md-9">
             <h6 class="mb-3">{{ $currentCategory->name ?? 'All Products' }}</h6>
             <div class="row">
+               
+       <div class="container my-5">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                 @forelse ($product as $prod)
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                        <p class="card-text"><center>{{ $currentCategory->name }} </center></p> <hr>
-                            <img src="{{ asset('images/products/' . $prod->image_path) }}" class="card-img-top" alt="{{ $prod->name }}">
-                            <div class="card-body d-flex flex-column">
-                                <p class="card-title"><a href="{{ route('product.details',encrypt($prod->id)) }}" style="color: black; text-decoration: none; "><b>{{ $prod->name }}</b></a> </p>
-                                <p class="card-text">${{ number_format($prod->price, 2) }}</p>
-                                {{-- <a href="" class="btn btn-outline-primary mt-auto">View Details</a> --}}
-
-                  <ul class="navbar-nav ms-auto">
-                   <li class="nav-item">
-                   <a class="nav-link" href="" class="btn btn-primary mt-auto" style="color:blue; front-weight:400;"> 
-                     Add to Cart &nbsp; <i class="fas fa-shopping-cart"></i>
-                 </a>
-             </li>
-         </ul>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="col">
+      <div class="card h-100 shadow-sm rounded-4">
+        {{-- <p class="card-text"><center>{{ $currentCategory->name }} </center></p> <hr> --}}
+        <img src="{{ asset('images/products/' . $prod->image_path) }}" class="card-img-top" alt="Product Image">
+        <div class="card-body">
+          <b class="card-title"><a href="{{ route('product.details',encrypt($prod->id)) }}"> {{ $prod->name }}</a> </b>
+          <p class="card-text mb-1">
+            <small class="text-muted text-decoration-line-through">${{ number_format($prod->price, 2) }}</small>
+            <span class="text-danger fw-bold ms-2">${{ number_format($prod->sale_price, 2) }}</span>
+          </p>
+         <center><a href="{{ route('product.details',encrypt($prod->id)) }}" class="btn btn-sm btn-primary mt-2 w-100">Add to Cart</a></center> 
+        </div>
+      </div>
+    </div>
                 @empty
                     <p>No products found in this category.</p>
                 @endforelse
-            </div>
+    </div>
+  </div>
+
+</div>
 
             <div class="mt-4">
                 
