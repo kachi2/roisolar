@@ -79,11 +79,11 @@ Route::get('/pages/about', 'AboutUs')->name('about-us');
 Route::get('/pages/terms', 'Terms')->name('pages.terms');
 Route::get('/pages/privacypolicy', 'PrivacyPolicy')->name('PrivacyPolicy');
 Route::get('/pages/contactus', 'ContactUs')->name('contact-us');
-Route::get('/pages/products', 'Products')->name('users.products');
+Route::get('/pages/products/', 'Products')->name('users.products');
 Route::get('/pages/products/details/{id}', 'ProductDetails')->name('product.details');
 Route::get('/pages/services', 'Services')->name('users.services');
 Route::get('/pages/services/details/{id}', 'ServiceDetails')->name('service.details');
-Route::get('/category/{id}', 'productsByCategory')->name('category.products');
+Route::get('/product/category/{id}', 'productsByCategory')->name('category.products');
 
 // Route::get('/pages/blogs', 'Blogs')->name('users.blogs');
 });

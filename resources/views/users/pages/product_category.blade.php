@@ -146,199 +146,62 @@
       <!-- ========================
          shop 
       =========================== -->
-      <section class="shop-grid" >
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-8 col-lg-9">
-              <div class="sorting-options d-flex flex-wrap justify-content-between align-items-center mb-30">
-                
-                <select>
-                  <option selected="" value="0">Sort by latest</option>
-                  <option value="1">Sort by Popular</option>
-                  <option value="2">Sort by highest Price </option>
-                  <option value="3">Sort by lowest Price </option>
-                </select>
-              </div>
-              <div class="row">
-                <!-- Product item #1 -->
-                @foreach ($product as $prod)
-                <div class="col-sm-6 col-md-6 col-lg-4">
-                  <div class="product-item">
-                    <div class="product__img">
-                      <img src="{{asset('images/products/'.$prod->image_path)}}" alt="{{$prod->name }}" loading="lazy">
-                      <div class="product__action">
-                        <form action="{{ route('carts.add', encrypt($prod->id)) }}" method="POST">
-                          @csrf
-                          <input type="hidden" name="product_id" value="{{ $prod->id }}">
-                          <input type="hidden" name="quantity" value="1" min="1">
-                          <button type="submit" class="btn btn__primary btn__rounded"><i class="icon-cart">
-                            </i> <span>Add To Cart</span></button>
-                        
-                      </form>
-                        {{-- <a href="{{ route('carts.add') }}" class="btn btn__primary btn__rounded">
-                          <i class="icon-cart"></i> <span>Add To Cart</span>
-                        </a> --}}
-                      </div><!-- /.product-action -->
-                    </div><!-- /.product-img -->
-                    <div class="product__info">
-                      <h4 class="product__title"><a href="{{ route('product.details',encrypt($prod->id)) }}">{{ $prod->name }}</a></h4>
-                      <span class="product__price">${{ $prod->price }}</span>
-                    </div><!-- /.product-content -->
-                  </div><!-- /.product-item -->
-                </div><!-- /.col-lg-4 -->
-
+     <div class="container py-5">
+    <div class="row">
+        <!-- Categories Sidebar -->
+        <div class="col-md-3">
+            <h6 class="mb-3">Categories</h6>
+            <!-- Search -->
+                <div class="mb-3">
+                    <input type="text" name="search" value="" class="form-control" placeholder="Search Category...">
+                </div>
+            <ul class="list-group">
+                @foreach ($cate as $cat)
+                    <li class="list-group-item {{ request()->category == $cat->id ? 'active' : '' }}">
+                        <a href="{{route('category.products',$cat->id)}}" style="color: inherit; text-decoration: none;" class="text-decoration-none d-block {{ request()->category == $cat->id ? 'text-white' : '' }}">
+                            {{ $cat->name }}
+                        </a>
+                    </li>
                 @endforeach
-               
-              </div><!-- /.row -->
-              <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                  {{-- <nav class="pagination-area">
-                    <ul class="pagination justify-content-center">
-                      <li><a class="current" href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
-                  </nav><!-- /.pagination-area --> --}}
-
-                  <nav class="pagination-area">
-                    <ul class="pagination justify-content-center">
-                      @php
-                      $start = max($product->currentPage() - 1, 1);
-                      $end = min($product->currentPage() + 1, $product->lastPage());
-                     @endphp
-                        {{-- Previous Arrow --}}
-                        @if ($product->onFirstPage())
-                            <li class="disabled"><span><i class="icon-arrow-left"></i></span></li>
-                        @else
-                            <li><a href="{{ $product->previousPageUrl() }}"><i class="icon-arrow-left"></i></a></li>
-                        @endif
-                
-                        {{-- Page Numbers --}}
-                        @for ($a = $start; $a <= $end; $a++)
-                            <li>
-                                <a 
-                                    href="{{ $product->url($a) }}" 
-                                    class="{{ $product->currentPage() == $a ? 'current' : '' }}">
-                                    {{ $a }}
-                                </a>
-                            </li>
-                        @endfor
-
-                        
-                
-                        {{-- Next Arrow --}}
-                        @if ($product->hasMorePages())
-                            <li><a href="{{ $product->nextPageUrl() }}"><i class="icon-arrow-right"></i></a></li>
-                        @else
-                            <li class="disabled"><span><i class="icon-arrow-right"></i></span></li>
-                        @endif
-                
-                    </ul>
-                </nav>
-                </div><!-- /.col-lg-12 -->
-              </div><!-- /.row -->
-
-             
+            </ul>
+        </div>
 
 
-            </div><!-- /.col-lg-9 -->
-            <div class="col-sm-12 col-md-4 col-lg-3">
-              <aside class="sidebar-layout2">
-                <div class="widget widget-search">
-                  <h5 class="widget__title">Search</h5>
-                  <div class="widget__content">
-                    <form class="widget__form-search">
-                      <input type="text" class="form-control" placeholder="Search...">
-                      <button class="btn" type="submit"><i class="icon-search"></i></button>
-                    </form>
-                  </div><!-- /.widget-content -->
-                </div><!-- /.widget-search -->
-                {{-- <div class="widget widget-poducts">
-                  <h5 class="widget__title">Best Sellers</h5>
-                  <div class="widget__content">
-                    <!-- product item #1 -->
-                    <div class="widget-product-item d-flex align-items-center">
-                      <div class="widget-product__img">
-                        <a href="#"><img src="{{ asset('frontend/images/products/11.jpg') }}" alt="Product" loading="lazy"></a>
-                      </div><!-- /.product-product-img -->
-                      <div class="widget-product__content">
-                        <h5 class="widget-product__title"><a href="#">Calming Herps</a></h5>
-                        <span class="widget-product__price">$ 38.00</span>
-                      </div><!-- /.widget-product-content -->
-                    </div><!-- /.widget-product-item -->
-                    <!-- product item #2 -->
-                    <div class="widget-product-item d-flex align-items-center">
-                      <div class="widget-product__img">
-                        <a href="#"><img src="{{ asset('frontend/images/products/10.jpg') }}" alt="Product" loading="lazy"></a>
-                      </div><!-- /.product-product-img -->
-                      <div class="widget-product__content">
-                        <h5 class="widget-product__title"><a href="#">Goji Powder</a></h5>
-                        <span class="widget-product__price">$ 33.00</span>
-                      </div><!-- /.widget-product-content -->
-                    </div><!-- /.widget-product-item -->
-                    <!-- product item #3 -->
-                    <div class="widget-product-item d-flex align-items-center">
-                      <div class="widget-product__img">
-                        <a href="#"><img src="{{ asset('frontend/images/products/12.jpg') }}" alt="Product" loading="lazy"></a>
-                      </div><!-- /.product-product-img -->
-                      <div class="widget-product__content">
-                        <h5 class="widget-product__title"><a href="#">Biotin Complex</a></h5>
-                        <span class="widget-product__price">$ 18.00</span>
-                      </div><!-- /.widget-product-content -->
-                    </div><!-- /.widget-product-item -->
-                  </div><!-- /.widget-content -->
-                </div><!-- /.widget-poducts --> --}}
+        <!-- Products Grid -->
+        <div class="col-md-9">
+            <h6 class="mb-3">{{ $currentCategory->name ?? 'All Products' }}</h6>
+            <div class="row">
+                @forelse ($product as $prod)
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                        <p class="card-text"><center>{{ $currentCategory->name }} </center></p> <hr>
+                            <img src="{{ asset('images/products/' . $prod->image_path) }}" class="card-img-top" alt="{{ $prod->name }}">
+                            <div class="card-body d-flex flex-column">
+                                <p class="card-title"><a href="{{ route('product.details',encrypt($prod->id)) }}" style="color: black; text-decoration: none; "><b>{{ $prod->name }}</b></a> </p>
+                                <p class="card-text">${{ number_format($prod->price, 2) }}</p>
+                                {{-- <a href="" class="btn btn-outline-primary mt-auto">View Details</a> --}}
 
-                <div class="widget widget-categories">
-                  <h6 class="widget__title"> Categories </h6>
-                  <div class="widget-content">
-                    <ul class="list-unstyled mb-0">
-                    <li> <h6> {{$category->name}} </h6> </li>
-                        
-                        @forelse ($product as $item)
-                        
-                        <li><a href="{{ route('product.details',encrypt($item->id)) }}"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;<span>{{ $item->name }}</span></a></li>
-                        @empty
-                            
-                        @endforelse
-                       
-                      {{-- <li><a href="#"><span class="cat-count">0</span><span>Cardiology</span></a></li>
-                      <li><a href="#"><span class="cat-count">3</span><span>Pathology</span></a></li>
-                      <li><a href="#"><span class="cat-count">2</span><span>Laboratory</span></a></li>
-                      <li><a href="#"><span class="cat-count">4</span><span>Pediatric</span></a></li>
-                      <li><a href="#"><span class="cat-count">1</span><span>Cardiac Clinic</span></a></li> --}}
-                    </ul>
-                  </div><!-- /.widget-content -->
-                </div><!-- /.widget-categories -->
-                <div class="widget widget-filter">
-                  <h5 class="widget__title">Pricing Filter</h5>
-                  <div class="widget__content">
-                    <div id="rangeSlider"></div>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="price-output d-flex align-items-center">
-                        <label for="rangeSliderResult">Price: </label>
-                        <input type="text" id="rangeSliderResult" readonly>
-                      </div>
-                      <button class="btn__filter">Filter</button>
+                  <ul class="navbar-nav ms-auto">
+                   <li class="nav-item">
+                   <a class="nav-link" href="" class="btn btn-primary mt-auto" style="color:blue; front-weight:400;"> 
+                     Add to Cart &nbsp; <i class="fas fa-shopping-cart"></i>
+                 </a>
+             </li>
+         </ul>
+                            </div>
+
+                        </div>
                     </div>
-                  </div><!-- /.widget-content -->
-                </div><!-- /.widget-filter -->
-                <div class="widget widget-tags">
-                  <h5 class="widget__title">Tags</h5>
-                  <div class="widget-content">
-                    <ul class="list-unstyled">
-                      <li><a href="#">Responsive</a></li>
-                      <li><a href="#">Fresh</a></li>
-                      <li><a href="#">Modern</a></li>
-                      <li><a href="#">Corporate</a></li>
-                      <li><a href="#">Business</a></li>
-                    </ul>
-                  </div><!-- /.widget-content -->
-                </div><!-- /.widget-Tags -->
-              </aside><!-- /.sidebar -->
-            </div><!-- /.col-lg-3 -->
-          </div><!-- /.row -->
-        </div><!-- /.container -->
-      </section><!-- /.shop -->
+                @empty
+                    <p>No products found in this category.</p>
+                @endforelse
+            </div>
+
+            <div class="mt-4">
+                
+            </div>
+        </div>
+    </div>
+</div>
       
 @endsection

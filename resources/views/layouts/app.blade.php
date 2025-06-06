@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 {{-- <title>@if(isset($breadcrum)){{$breadcrum}} @else {{$settings->site_name}} @endif </title> --}}
 <!-- Stylesheets -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Roboto:wght@400;700&amp;display=swap">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
@@ -17,6 +18,8 @@ href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&am
 
 <link rel="shortcut icon" href="{{asset('images/'.$settings->fav)}}" type="image/x-icon">
 @yield('styles')
+
+
 </head>
 <body>
     <div class="wrapper">

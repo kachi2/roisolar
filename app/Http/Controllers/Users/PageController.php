@@ -37,11 +37,14 @@ class PageController extends Controller
     }
 
     public function products(){
-        $products =  Product::paginate(6);
-        $category = Category::latest()->simplePaginate(10);
-        return view('users.pages.products')
-        ->with('products', $products)
-        ->with('categories', $category);
+       
+         return view('users.pages.products', [
+        'products' => product::all(),
+        'categories' => Category::all(),
+        
+    ]);
+
+        
     }
 
     public function ProductDetails($id){
@@ -53,7 +56,7 @@ class PageController extends Controller
         // $products = Product::findorfail($id[0]);
     return view('users.pages.product_details')
     ->with('product', Product::where('id', decrypt($id))->first())
-    ->with('products', Product::latest()->simplePaginate(4));
+    ->with('products', Product::all());
     
 
     }
@@ -62,9 +65,10 @@ class PageController extends Controller
     public function productsByCategory($id)
         {
             $category = Category::where('id',$id)->firstOrFail();
-            $product = $category->products()->paginate(10); // or ->get()
-
-            return view('users.pages.product_category', compact('category', 'product'));
+            $product = $category->products()->get(); // or ->get()
+            $cate = Category::all();
+            $currentCategory = $category;
+            return view('users.pages.product_category', compact('category', 'product', 'cate','currentCategory'));
         }
 
     
@@ -82,5 +86,28 @@ class PageController extends Controller
         ->with('se', Services::latest()->simplePaginate(6));
         
     }
+
+
+
+
+//     public function Products()
+// {
+//     return view('users.pages.products', [
+//         'categories' => Category::all(),
+//         'products' => Product::all(),
+//         'currentCategory' => null
+//     ]);
+// }
+
+// public function productsByCategory($id)
+// {
+//     $category = Category::where('category_id', $id)->firstOrFail();
+//     return view('users.pages.products', [
+//         'categories' => Category::all(),
+//         'products' => Product::where('category_id', $category->id)->paginate(9),
+//         'currentCategory' => $category
+//     ]);
+// }
+
 
 }
