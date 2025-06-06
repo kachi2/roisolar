@@ -122,7 +122,7 @@
                       <div class="form-group">
                         <textarea class="form-control" placeholder="Review"></textarea>
                       </div><!-- /.form-group -->
-                      <button type="submit" class="btn btn__primary btn__rounded">Submit</button>
+                      <button>  class="btn btn__primary btn__rounded">Submit</button>
                     </form>
                   </div><!-- /.reviews-tab -->
                 </div>
