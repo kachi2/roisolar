@@ -74,7 +74,7 @@
                       <i class="increase-qty fa fa-plus"></i>
                       
                     </div>
-                    <button type="submit" class="btn btn__secondary btn__rounded"> add to cart <i class="icon-cart"></i></button>
+                    <button  class="btn btn__secondary btn__rounded"> add to cart <i class="icon-cart"></i></button>
                   </form>
                   </div><!-- /.product-quantity -->
                   <div class="product__meta-details">
@@ -122,7 +122,7 @@
                       <div class="form-group">
                         <textarea class="form-control" placeholder="Review"></textarea>
                       </div><!-- /.form-group -->
-                      <button>  class="btn btn__primary btn__rounded">Submit</button>
+                      <button  class="btn btn__primary btn__rounded">Submit </button>
                     </form>
                   </div><!-- /.reviews-tab -->
                 </div>
