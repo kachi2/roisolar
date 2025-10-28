@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Http\Controllers\Controller;
+use Cart;
 
 use Illuminate\Http\Request;
 use App\Models\ShippingAddress;
-use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AddressController extends Controller
 {
@@ -42,7 +43,7 @@ class AddressController extends Controller
 
     public function CreateAddress(){
         return view('users.carts.create_address')
-        ->with('carts', \Cart::content());
+        ->with('carts', Cart::content());
     }
 
     public function storeAddress(Request $req){

@@ -76,19 +76,6 @@
                                             @enderror
                                          </div>
 
-                                         
-                                  <!--             <div class="col-md-6 pt-4">-->
-                                  <!--<div class="custom-file">-->
-                                  <!--          <input required type="file"name="images[]" multiple class="custom-file-input  @error('images') is-invalid @enderror" id="customFile">-->
-                                  <!--              <label class="custom-file-label" for="customFile">Choose More Image</label>-->
-                                  <!--          </div>-->
-                                  <!--          <small id="emailHelp" class="form-text text-muted"> Choose more images of the design sample slides-->
-                                  <!--          </small>-->
-                                  <!--            @error('images')-->
-                                  <!--          <span class="invalid-feedback"> <small> *</small> </span>-->
-                                  <!--          @enderror-->
-                                  <!--       </div>-->
-
                                          <div class="col-md-6 pt-4">
                                           <div class="custom-file">
                                             <label  for="requires_prescription">

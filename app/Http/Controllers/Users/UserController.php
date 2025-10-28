@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -37,30 +38,51 @@ class UserController extends Controller
 
     public function Orders()
     {
-        $orders = DB::table('orders')->join('cart_items', 'orders.order_no', '=', 'cart_items.Order_no')
+        $orders = DB::table('orders')->join('cart_items', 'orders.order_no', '=', 'cart_items.order_no')
             ->where('orders.user_id', auth_user()->id)
             ->orderBy('orders.created_at', 'DESC')
             ->simplePaginate(5);
         addHashId($orders);
+// dd($orders);
+        //  $orders = Order::with('cartItems')
+        // ->where('user_id', auth()->id())
+        // ->orderBy('created_at', 'DESC')
+        // ->paginate(5);
+      
         return view('users.accounts.orders')
             ->with('orders',  $orders);
     }
 
+    public function myorders()
+{
+//     $orders = auth()->user()->Orders()->latest()->get();
+// dd($orders);
+    return view('users.accounts.orders', compact('orders'));
+}
+
+
     public function OrderDetails($order_no)
     {
         $orders = Order::where('order_no', $order_no)->first();
+        // dd($orders);
         if(!isset($orders)){
             Session::flash('alert', 'error');
             Session::flash('msg', 'An error occured fetching order details');
             return back();
         }
-        $order_items = CartItem::where('Order_no', $order_no)->get();
+        $order_items = CartItem::where('order_no', $order_no)->get();
         $shipping = ShippingAddress::where('id', $orders->address_id)->first();
+        // $shipping = Order::with(['cartItems', 'shipping'])
+        // ->where('order_no', $order_no)
+        // ->firstOrFail();
+        // dd( $shipping);
+
         $delivery = CreateShipment::where('order_id', $order_no)->first();
         return view('users.accounts.order_details')
             ->with('orders', $orders)
             ->with('order_items', $order_items)
             ->with('shipping', $shipping)
+           
             ->with('delivery', $delivery);
     }
 

@@ -1,210 +1,262 @@
 @extends('layouts.app')
 @section('title')
-<title>  Checkout | Sanlive Pharmarcy</title>
+<title>  Checkout | Risolar</title>
 @endsection
 @section('head')
 
 <link rel="canonical" href="{{ url()->current() }}">
+
+@endsection
+@section('scripts')
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
 @endsection
 @section('content')
 @section('styles')
 
 <style>
+<!-- Custom Styles for Payment Button -->
+<style>
+  .btn-gradient {
+    background: linear-gradient(135deg, #007bff, #0056d2);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #0056d2, #003d99);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
 
 .delivery{
     color:#343232;
      font-size:14px;
     font-family:Verdana,'Geneva', Tahoma, sans-serif"
 }
+.bgg{
+    background-color: grey !important;
+    font-size: 15px !important;
+    color: white;
+    padding-left: 8px;
+}
 </style>
 @endsection
- <div class="ps-shopping" style="background: #eee">
-    <form action="{{route('payment.checkout')}}" method="post">
-        @csrf
-    <div class="container">
-        <div class="ps-shopping__content" >
-            <div class="row" >
-                <div class="col-12 col-md-7 col-lg-9 mt-5" >
-                <div class="row">
-                <div class="col-12 col-md-12 col-lg-12 mb-0 border-r-amber-50"  style="background: #878484;  border-radius: 10px 10px 0px 0px">
-                <p class="m-4" style="color:#ffffff; font-weight:bolder"> Shipping Address
-                <span style="float:right">
-                <a href="{{ route('checkouts.changeAddress') }}"> {{ _('Change >') }} </a> </span></p>
-               </div>
-               <div class="col-6 mb-2" style="background: #fff">
-                <p style="color:#76717a">Name: {{ $address->name }}</p>
+
+<div style="height: 2em; background:#eee"></div>
+
+
+
+<div class="container my-5">
+  <div class="row g-4">
+    <!-- Billing Info -->
+    <div class="col-lg-7">
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="mb-0 text-secondary fw-semibold">Billing Information</h6>
+            <a href="" class="small text-decoration-none text-primary">Change Address</a>
+          </div>
+
+          {{-- <p class="mb-1 fw-medium">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
+          <p class="text-muted mb-0">
+            {{ Auth::user()->address ?? 'No address saved' }}
+          </p> --}}
+          
+           <p style="color:#76717a">Name: {{ $address->name }}</p>
                 <p style="color:#76717a">Address: {{ $address->address?$address->address.',': '' }} {{ $address->city?$address->city.',': '' }} 
                     {{ $address->state?$address->state.',':'' }} {{ $address->country?$address->country.',':'' }} </p>
-            </div>
-            <div class="col-6 mb-2" style="background: #fff">
+
+                     
                 <p style="color:#76717a"> {{ $address->phone?'Phone: '.$address->phone: '' }}</p>
                 <p style="color:#76717a">  {{ $address->email?'Email: '. $address->email: '' }}</p>
-             </div>
+                <p style="color:#76717a">  {{ $address->country?'Country: '. $address->country: '' }}</p>
+                <p style="color:#76717a">  {{ $address->city?'City: '. $address->city: '' }}</p>
 
+                <p style="color:#76717a">Order No:  {{ $orderNo}}</p>
+                
+        </div>
+      </div>
 
-            <div class="col-12 col-md-12 col-lg-12 mb-0 border-r-amber-50"  style="background: #878484;  border-radius: 10px 10px 0px 0px">
-                        <p class="m-4" style="color:#ffffff; font-weight:bolder"> Delivery Details
-                    </p>
-                    </div>
-                    <div class="card" style="background:#fff; border:none;width: 100%;">
-                        <div class="card-header" id="" >
-                    <label for="delivery" style="width: 100%; background: #fff">
-                        <div  style="border:1px solid #00000031; border-radius:10px">
-                    <div class="ps-categogy--ist p-4" style="display: flex; ">
-                    <input type="radio" id="delivery" name="delivery" value="pickup_delivery" data-amount="0" checked> 
-                    <label for="delivery" class="pl-2"> Pick-up Delivery </label>
-                    </div>
+      <!-- 🚀 Payment Method -->
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h6 class="mb-3 text-secondary fw-semibold">Payment Method</h6>
 
-                    <div style="">
-                    <p class="p-4 delivery" > {{$start->format('D d, M')}} - {{$end->format('D, d M')}} 
-                        <span style="float:right; color:green"> N0 </span></p>
-                    <p class="p-4 delivery" > You have to visit our office at {{$settings->address}} to pick your item</p>
-                    <input type="hidden" name="address_id" value="{{$address->id}}"> 
-                    <input type="hidden" name="orderNo" value="{{$orderNo}}"> 
-                    <input type="hidden" name="fee" value="0"> 
-                </div>
-                </div>
+          <!-- Credit Card Option -->
+          <form action="{{ route('checkout.process') }}" method="POST">
+                @csrf
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="payment_method" id="card" value="credit" data-bs-toggle="collapse" data-bs-target="#cardDetails" checked>
+            <label class="form-check-label" for="creditCard">
+              <i class="fas fa-credit-card me-2 text-primary"></i> Credit / Debit Card
             </label>
-        </div>
-    </div>
-            <div class="card" style="background:#fff; border:none; width: 100%;">
-                <div class="card-header" id="" >
-                 <label for="home" style="width: 100%">
-                 <div  style="border:1px solid #00000031; border-radius:10px">
-                 <div class="ps-categogy--ist p-4" style="display: flex; ">
-                    <input type="radio" name="delivery" id="home" value="home_delivery" data-amount="{{$shipping_fee}}"> 
-                    <input type="hidden" value="{{$shipping_fee}}" name="shipping_cost"> 
-                    <label for="home" class="pl-2"> Home Delivery Delivery </label>
-                    </div>
-                    <div  class="mb-5" >
-                    <p class="p-4 delivery" > Delivery between {{$start->format('D d M')}} - {{$end->format('D d M')}} <span style="float:right; color:green"> {{moneyFormat($shipping_fee)??'0'}}</span></p>
-                    <p class="p-4 delivery" > Item will be shipped to your location at  {{ $address->address?$address->address.',': '' }} {{ $address->city?$address->city.',': '' }} 
-                        {{ $address->state?$address->state.',':'' }} {{ $address->country?$address->country.',':'' }}  </p>
-                    <input type="hidden" name="fee" value="{{$shipping_fee}}"> 
-                 </div>
-                </div>
-                 </label>
-        
+            <div class="ms-4 mt-2 small text-muted">
+              Pay securely using Visa, Mastercard, or Verve.
             </div>
-        </div>
-   
+          </div>
 
-                    <div class="col-12 col-md-12 col-lg-12 mt-0"
-                        style="background: #878484;  border-radius: 10px 10px 0px 0px">
-                        <p class="m-4" style="color:#ffffff; font-weight:bolder"> Select Payment Method
-                        </p>
-
-                    </div>
-                    <div class="col-12 col-md-12 col-lg-12  pb-3 pt-3" style="background:#fff">
-                        <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <label data-toggle="collapse" data-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        <div class="row">
-                                            <div style="width: 50px; padding-left:10px">
-                                                <input style="border-radius: 5px"
-                                                    class="@error('payment_method') is-invalid @enderror"
-                                                    type="radio"
-                                                    value="{{ old('payment_method', 'paystack') }}"
-                                                    id="paystack" name="payment_method">
-                                            </div>
-                                            <div class="col-md-6 col-lg-6 col-12">
-                                                <strong> Secured Local Payment with Paystack </strong>
-                                            </div>
-                                            <div class="col-md-2 col-lg-2 col-2">
-                                                <img src="{{ asset('frontend/paystack.webp') }}">
-                                            </div>
-
-                                        </div>
-                                    </label>
-                                    <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
-                                        data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <small> Pay with Paystack with your local Nigerian card
-                                              <br> Your  information is secured
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion" id="accordionExampleTwo">
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <label data-toggle="collapse" data-target="#collapseTwo"
-                                        aria-expanded="true" aria-controls="collapseTwo">
-                                        <div class="row">
-                                            <div style="width: 50px; padding-left:10px">
-                                                <input style="border-radius: 5px"
-                                                    class="@error('payment_method') is-invalid @enderror"
-                                                    type="radio"
-                                                    value="{{ old('payment_method', 'flutter') }}"
-                                                    id="paystack" name="payment_method">
-                                            </div>
-                                            <div class="col-md-6 col-lg-6 col-12">
-                                                <strong> Secured Internation Payment with Flutterwave</strong>
-                                            </div>
-                                            <div class="col-md-2 col-lg-2 col-2">
-                                                <img src="{{ asset('frontend/FLUTTER.webp') }}">
-                                            </div>
-
-                                        </div>
-                                    </label>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                        data-parent="#accordionExampleTwo">
-                                        <div class="card-body">
-                                            <small>
-                                                Pay with Flutterwave for both local and internation cards,
-                                                your card <br> information is secured
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-   
-
-               </div>
+          <!-- Collapsible Card Fields -->
+          {{-- <div class="collapse show" id="cardDetails">
+            <div class="border rounded p-3 bg-light">
+              <div class="mb-3">
+                <label for="cardNumber" class="form-label small">Card Number</label>
+                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="expiryDate" class="form-label small">Expiry Date</label>
+                  <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
                 </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cvv" class="form-label small">CVV</label>
+                  <input type="text" class="form-control" id="cvv" placeholder="123">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="cardName" class="form-label small">Name on Card</label>
+                <input type="text" class="form-control" id="cardName" placeholder="John Doe">
+              </div>
+            </div>
+          </div> --}}
+
+          <!-- PayPal Option -->
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="payment_method" id="delivery" value="delivery" data-bs-toggle="" data-bs-target="#cardDetails">
+            <label class="form-check-label" for="delivery">
+              <i class="fab fa-paypal me-2 text-primary"></i> Home Delivery
+            </label>
+            <div class="ms-4 mt-2 small text-muted">
+              Redirects to Shipment address.
+            </div>
+          </div>
+
+          
+
+          <!-- Bank Transfer Option -->
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="bank" value="bank" data-bs-toggle="collapse" data-bs-target="#cardDetails">
+            <label class="form-check-label" for="bank">
+              <i class="fas fa-university me-2 text-primary"></i> Bank Transfer
+            </label>
+            <div class="ms-4 mt-2 small text-muted">
+              Transfer funds directly to our account. Details will be shown after checkout.
+            </div>
+          </div>
+          <a  href="{{route('users.products')}}">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+      <!-- Existing addresses -->
+     
+                    @if($address)
+    <input type="hidden" name="address_id" id="address_id" value="{{ $address->id }}">
+    
+
+@endif
+
+
+    <!-- Order Summary -->
+    <div class="col-lg-5">
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h6 class="mb-4 text-secondary fw-semibold">Order Summary</h6>
+
+          @php
+            $totalItems = 0;
+            $totalCost = 0;
+          @endphp
+
+          @if(session('cart') && count(session('cart')) > 0)
+            @foreach (session('cart') as $id => $cart)
+              @php
+                $totalItems += $cart['quantity'];
+                $totalCost += $cart['price'] * $cart['quantity'];
+              @endphp
+              <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                <div>
+                  <p class="mb-0 fw-medium">{{ $cart['name'] }}</p>
+                  <small class="text-muted">Qty: {{ $cart['quantity'] }}</small>
+                </div>
+                <span class="fw-semibold">
+                  {{ moneyFormat($cart['price'] * $cart['quantity'], 2) }}
+                </span>
+              </div>
+            @endforeach
+
+            <!-- Shipping -->
+            <div class="d-flex justify-content-between py-2">
+              <span class="text-muted">Shipping</span>
+              <span class="fw-medium">{{ moneyFormat($shipping_fee) }}</span>
+            </div>
+
+            <!-- Total Items -->
+            <div class="d-flex justify-content-between py-2">
+              <span class="text-muted">Total Items</span>
+              <span class="fw-medium">{{ $totalItems }} items</span>
+            </div>
+
+            <hr>
+
+            <!-- Final Total -->
+            <div class="d-flex justify-content-between fw-semibold fs-6">
+              <span>Total</span>
+              <span>{{ moneyFormat($totalCost + $shipping_fee, 2) }}</span>
+            </div>
+
+            <div class="d-flex justify-content-between fw-semibold fs-6">
             
-                @if(count($carts) > 0)
-                <div class="col-12 col-md-5 col-lg-3">
-                    <div class="ps-shopping__box mt-5" style="background: #fff">
-                        <div class="ps-shopping__row" >
-                            <div class="ps-shopping__label">Cart Summary</div>
-                        </div>
-                        <div class="ps-shopping__row">
-                            <div class="ps-shopping__label">Item Total</div>
-                            <div class="ps-shopping__price">₦{{\Cart::priceTotal()}}</div>
-                        </div>
-                        <div class="ps-shopping__row">
-                            <div class="ps-shopping__label" >Delivery Fee</div>
-                            <div class="ps-shopping__price" id="fee">{{moneyFormat(0)}}</div>
-                            
-                        </div>
-                        <div class="ps-shopping__row">
-                            <div class="ps-shopping__label">Total</div>
-                            <div class="ps-shopping__price" id="total">{{moneyFormat(\Cart::priceTotalFloat())}}</div>
-                            <input type="hidden" id="sub_total" value={{\Cart::priceTotalFloat()}}>
-                        </div>
-                        {{-- <div class="ps-shopping__text">You will be able to add a voucher when selecting your payment method.</div> --}}
-                        <input type="hidden" id="amount" name="amount" value="{{\Cart::priceTotalFloat()}}">
-                        <div class="ps-shopping__checkout">
-                            <button class="ps-btn ps-btn--success"  style="border-radius:5px" href="{{route('checkout.index')}}">Complete Order</button>
-                            <a class="ps-shopping__link" href="{{route('shops.index')}}">Continue Shopping</a></div>
-                    </div>
-                </div>
-                @endif
+              <span><a href=""> Modity Cart </a> </span>
             </div>
-        
-        </div>
 
-    </form>
+          @else
+            <p class="text-muted">Your cart is empty.</p>
+          @endif
+
+
+          <!-- 🚀 Payment Button -->
+          <div class="mt-4">
+          @if(session()->has('cartSession'))
+            <button type="submit" id="payBtn" class="btn btn-gradient w-100 py-3 d-flex justify-content-center align-items-center">
+              <i class="fas fa-lock me-2"></i>
+              Proceed to Secure Payment
+            </button> 
+            @endif
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-<div style="height: 2em; background:#eee"></div>
+</form>
+<!-- Custom Styles -->
+<style>
+  .btn-gradient {
+    background: linear-gradient(135deg, #007bff, #0056d2);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #0056d2, #003d99);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+</style>
+
+
+
+
+
 
 @endsection
 
@@ -237,9 +289,25 @@
     });
 
 
-</script>
-<script>
-  
+
+document.getElementById('proceedBtn').addEventListener('click', function() {
+    let selected = document.querySelector('input[name="payment_method"]:checked').value;
+
+    if (selected === 'card') {
+        // Show card form
+        document.getElementById('cardForm').classList.remove('d-none');
+        document.getElementById('cardForm').scrollIntoView({ behavior: 'smooth' });
+    } else if (selected === 'delivery') {
+        // Redirect to place order immediately
+        window.location.href = "{{ route('checkout.index') }}";
+    }
+});
+
+
 
 </script>
+
+ 
+
+
 @endsection

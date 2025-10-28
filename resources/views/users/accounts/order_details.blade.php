@@ -24,138 +24,107 @@
     <div class="container">
         <div class="ps-shopping__content">
             <div class="row">
-              @include('includes.accountSidebar')
-                <div class="col-12 col-md-7 col-lg-8 mt-5" style="background: #fff; border-radius: 5px" id="pdfContent">
-                    <div class="row">
-                        
-                       
-                        <span class="pt-5 pl-5"> <a href="#" onclick="history.back()"> {{_('<< Order Details ')}} </a>   &nbsp;  &nbsp; &nbsp;  <button  id="downloadBtn" class="btn btn-outline-info" style=" left:50px"> Download Receipt</button>   </span>  <hr style="width:100%"> </span>
-                        
-                        <div class="col-12 col-md-12 "  id="userDetails"  hidden>
-                            <span style="float:right; padding-right: 20px">
-                                <img src="{{asset('images/'.$settings->site_logo)}}" width="100px" >
-                            </span>
-                           
+              @include('includes.sidebarAccount')
+                
 
-                            <p class=" pl-3" style="color:#050505"> 
-                                First Name: {{auth_user()->first_name}} <br>
-                              Last Name: {{auth_user()->last_name}}<br>
-                              Email: {{auth_user()->email}}</p>
+              <div class="col-12 col-md-7 col-lg-8 mt-4" style="background: #fff; border-radius: 5px">
+                    
+                    {{-- Back button --}}
+                    {{-- <a href="" class="btn btn-link mt-3">
+                        &laquo; Back
+                    </a> --}}
+
+                    {{-- Order Header --}}
+                    <h6 class="mt-2">Order Details</h6>
                     <hr>
-                        </div>
-                       
-                           <div class="col-12 col-md-12 "  >
-                            <p class="pl-3" style="color:#414040"> Order No: {{$orders->order_no}} <br>
-                             Placed On: {{$orders->created_at}}<br>
-                             Total Amount: {{moneyFormat($orders->payable)}}</p>  
-                          </div>
-                     
-                       <span class="pt-5 pl-5"> Items in Your Order    </span> 
-                        @forelse($order_items as $order)
-                        <div class="col-12 col-md-12 " >
-                            <div class="ps-product ps-product--list" style="border:2px solid #d1d5dad4; border-radius:10px; margin-top:15px">
-                                <div class="ps-product__content" style="border-right:0px">
-                                    <div class="ps-product__thumbnil" style="">
-                                        <a class="ps-product__image" href="#">
-                                            <figure><img src="{{asset('/images/products/'.$order->image)}}" style="width: 100px" alt="{{$order->product_name}}">
-                                            </figure>
-                                        </a>
-                                    </div>
-                                    <div class="ps-product__info">
-                                        <p class="ps-product__tite" style="font-size:16px; color:#1e1b1b">
-                                            <a class="ps-product__branch" href="#">{{isset($order->product_name)?$order->product_name:null}}</a><br>
-                                            <a style="color:#201c1c">Order: {{isset($order->Order_no)?$order->Order_no:null}}</a><br>
-                                            <a style="color:#1c1818">QTY:  {{isset($order->qty)?$order->qty:null}}</a><br>
-                                            {{isset($order->payable)?moneyFormat($order->payable,2):null}}
-                                        </p>
-                                    </div>
-                                </div>
 
+                    <p>
+                        <strong>Order No:</strong> {{ $orders->order_no }} <br>
+                        <strong>Total Amount:</strong> {{ moneyFormat($orders->payable, 2) }} <br>
+                        <strong>Placed On:</strong> {{ $orders->created_at->format('Y-m-d h:i:s A') }}
+                    </p>
+
+                    {{-- Items in this Order --}}
+                    <h6 class="mt-4">Items in this Order</h6>
+                    <hr>
+                    @foreach($order_items as $item)
+                        <div class="row mb-3">
+                             @if($item)
+                            <div class="col-md-3">
+                                <img src="{{ asset('images/products/'.$item->image) }}" 
+                                     class="img-fluid rounded border" 
+                                     alt="{{ $item->product_name }}">
+
+                    @else
+                        <img src="{{ asset('images/no-image.png') }}" 
+                             class="img-fluid rounded-start" 
+                             alt="No product">
+                    @endif
+                            </div>
+                            <div class="col-md-9">
+                                <p class="mb-1"><strong>{{ $item->product_name }}</strong></p>
+                                <p class="mb-1">Placed On: {{ $item->created_at->format('Y-m-d h:i:s A') }}</p>
+                                <p class="mb-1">Amount: {{ moneyFormat($item->price, 2) }}</p>
+                                <p class="mb-1">QTY: {{ $item->qty }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- Shipping and Payment Info --}}
+                    <div class="row mt-4">
+                        {{-- Shipping Info --}}
+              
+                        
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-light">
+                                    <strong>Shipping Information</strong>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Phone:</strong> {{isset($shipping->phone)?$shipping->phone:''}} </p>
+                                    <p><strong>Email:</strong> {{isset($shipping->email)?$shipping->email:''}} </p>
+                                    <p><strong>Address:</strong> {{isset($shipping->address)?$shipping->address:''}} </p>
+                                    <p><strong>City:</strong>  {{isset($shipping->city)?$shipping->city:''}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Payment Info --}}
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-light">
+                                    <strong>Payment Information</strong>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Transaction Ref:</strong> {{ $orders->transaction_ref ?? '-' }}</p>
+                                    <p><strong>Amount:</strong> {{ moneyFormat($orders->payable, 2) }}</p>
                                     
-                                
-                                {{-- <div class="ps-product__footer" >
-                                    <div class="d-none  d-xl-block ">
-                                    <span style=" float:right; color:rgb(10, 10, 128)"><a href=""  class="btn btn-info btn-lg" style="" > BUY AGAIN</a></span> </div>
-                                </div> --}}
-                                
-                            </div>
-                        </div>
-                        @empty 
-                        @endforelse
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="ps-categogy--list">
-                                <div class="ps-product ps-product--list"
-                                    style="border:2px solid #d1d5dad4; border-radius:10px">
-                                    <div class="ps-product__conent" style="border-right:0px">
-                                        <div class="ps-product__info"><a class="ps-product__branch" href="#"></a>
-                                            <p class="ps-product__tite " style="font-size:16px; color:#262525"><a></a>
+                                    <p><strong>Payment Status:</strong>
+                                        @if($orders->is_paid == 1)
+                                            <span class="badge bg-success">Paid</span>
+                                        @else
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        @endif
+                                    </p>
 
-                                                Payment Information
-                                            </p>
-                                            <hr>
-                                            <div class="ps-product__meta">
-                                                <span class="ps-product__price"
-                                                    style="font-size:15px; "> Payment Method: {{$orders->payment_method}} </span>
-                                            </div>
-                                            <ul class="ps-product__list"> Payment Details
-                                                <li> <span class="ps-list__title"> </span> Items Total: {{isset($orders->payable)?moneyFormat($orders->payable):moneyFormat('0')}} 
-                                                </li>
-                                                <li> <span class="ps-list__title"> </span>Delivery Fee: {{isset($delivery->fee)?moneyFormat($delivery->fee):moneyFormat('0')}}
-                                            </li>
-                                                <li> <span class="ps-list__title"> </span>Payment Ref: {{isset($order->payment_ref)?$order->payment_ref:null}}
-                                            </li>
-                                            <li> <span class="ps-list__title"> </span>Payment Channel: {{isset($order->channel)?$order->channel:null}}
-                                            </li>
-                                            </ul>
-                                        </div>
-
-
-                                    </div>
+                                    <p><strong>Delivery Status:</strong>
+                                        @if($orders->dispatch_status == 1)
+                                            <span class="badge bg-success">Delivered</span>
+                                        @elseif($orders->dispatch_status == 0)
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        @elseif($orders->dispatch_status == 2)
+                                            <span class="badge bg-primary">Shipped</span>
+                                        @elseif($orders->dispatch_status == -1)
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="ps-categogy--list">
-                                <div class="ps-product ps-product--list"
-                                style="border:2px solid #d1d5dad4; border-radius:10px">
-                                <div class="ps-product__conent" style="border-right:0px">
-                                    <div class="ps-product__info"><a class="ps-product__branch" href="#"></a>
-                                        <p class="ps-product__tite " style="font-size:16px; color:#262525"><a></a>
-
-                              Shipping Information 
-                                            
-                                        </p>
-                                        <hr>
-                                        <div class="ps-product__meta">
-                                            <span class="ps-product__price"
-                                                style="font-size:15px; "> Delivery Method: {{$orders->shipping_method == 'home_delivery' ? "Home delivery":"Pick-up Delivery"}} </span>
-                                        </div>
-                                        <ul class="ps-product__list">
-                                            <li> <span class="ps-list__title"> {{isset($shipping->name)?$shipping->name:''}}</span>
-                                            </li>
-                                            <li> <span class="ps-list__title"> {{isset($shipping->phone)?$shipping->phone:''}}</span>
-                                            </li>
-                                            <li> <span class="ps-list__title"> {{isset($shipping->address)?$shipping->address:''}}</span>
-                                            </li>
-                                            <li> <span class="ps-list__title"> {{$shipping->city.','.$shipping->city.','.$shipping->state.','.$shipping->country}}</span>
-                                            </li>
-                                            <li> <span class="ps-list__title"> </span>
-                                                 
-                                        </li>
-                                        </ul>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            </div>
-                        </div>
                     </div>
+
+                    <br>
                 </div>
-
-             
 
 
 
@@ -164,7 +133,8 @@
         </div>
     </div>
 </div>
-<div style="height: 2em; background:#eee"></div>
+
+
 
 @endsection
 

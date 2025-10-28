@@ -76,6 +76,26 @@ class PaymentController extends Controller
 
     }
 
+    public function redirectToGateway()
+    {
+        return Paystack::getAuthorizationUrl()->redirectNow();
+    }
+
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+
+        // Store payment/order in DB
+        // Example:
+        // Order::create([
+        //   'user_id' => auth()->id(),
+        //   'amount' => $paymentDetails['data']['amount'] / 100,
+        //   'reference' => $paymentDetails['data']['reference'],
+        //   'status' => $paymentDetails['data']['status'],
+        // ]);
+
+        return redirect()->route('orders.success')->with('success', 'Payment successful! Your order has been placed.');
+    }
 
 
 

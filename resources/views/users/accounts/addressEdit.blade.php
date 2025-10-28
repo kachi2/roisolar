@@ -17,6 +17,15 @@
         .dropdown-item:hover {
             background: rgb(219, 218, 218);
         }
+
+        /* Remove rounded corners from card and form controls */
+.card, 
+.card-header, 
+.form-control, 
+.btn {
+    border-radius: 0 !important;
+}
+
     </style>
 @endsection
 
@@ -24,7 +33,7 @@
     <div class="container">
         <div class="ps-shopping__content">
             <div class="row">
-              @include('includes.accountSidebar')
+              @include('includes.sidebarAccount')
                 <div class="col-12 col-md-7 col-lg-8 mt-5" style="background: #fff; border-radius: 5px">
                    <form method="post" action="{{route('users.address.update', $address->hashid)}}">
                     @csrf
@@ -81,6 +90,19 @@
                                             placeholder="Full Address" id="address" value="{{$address->address}}" name="address">
                                     </div>
                                     @error('address')
+                                    <span class="alert alert-danger" role="error">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                 <div class="col-12 col-md-6 mt-1">
+                                    <div class="ps-form__group">
+                                        <label id="city" style="color:rgb(114, 111, 111)"> City </label>
+                                        <input class="form-control ps-form__input @error('city') is-invalid @enderror" type="text"
+                                            placeholder="City" id="city" value="{{$address->city}}" name="city">
+                                    </div>
+                                    @error('city')
                                     <span class="alert alert-danger" role="error">
                                         {{$message}}
                                     </span>

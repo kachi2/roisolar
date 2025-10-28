@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
@@ -16,6 +17,7 @@ class ProductDetailsController extends Controller
     {
       $ss =   Hashids::connection('products')->decode($id);
       $product = Product::findorfail($ss[0]);
+      // $cat = Category::find($id);
       session()->push('products.recently_viewed', $product->getKey());
       $data['latest'] = Product::where('category_id', $product->category->id)->take(10)->get();
       $product->hashid = Hashids::connection('products')->encode($product->id);

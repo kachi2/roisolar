@@ -35,4 +35,7 @@ return [
      */
     'merchantEmail' => getenv('MERCHANT_EMAIL'),
 
+    'callback_url' => env('APP_URL') . '/payment/callback',
+
+
 ];

@@ -10,117 +10,199 @@
 
 
 
-<section class="page-title page-title-layout5 text-center">
-  <div class="bg-img"><img src="{{ asset('frontend/images/backgrounds/6.jpg') }}" alt="background"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
-        <div class="heading text-center mb-60">
+{{-- <section class="page-title page-title-layout5 text-center"> --}}
+  {{-- <div class="bg-img"><img src="{{ asset('frontend/images/backgrounds/6.jpg') }}" alt="background"></div> --}}
+  {{-- <div class="container">
+    <div class="row"> --}}
+      {{-- <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3"> --}}
+        {{-- <div class="heading text-center mb-60">
           <h2 class="heading__title ">Our services</h2>
           <h3 class="heading__subtitle"><p>The company offers a complete assortment of both on-grid and off-grid solutions, including modules, inverters, mounting systems and accessories.</p></h3>
-        </div><!-- /.heading -->
-      
-        <nav>
+        </div><!-- /.heading --> --}}
+       <section class="page-title">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mt-0 mb-0">
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+        {{-- <nav>
           <ol class="breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">shop</li>
           </ol>
-        </nav>
-      </div><!-- /.col-xl-6 -->
-    </div><!-- /.row -->
-  </div><!-- /.container -->
-</section><!-- /.page-title -->
+        </nav> --}}
+      {{-- </div><!-- /.col-xl-6 --> --}}
+    {{-- </div><!-- /.row --> --}}
+  {{-- </div><!-- /.container --> --}}
+{{-- </section><!-- /.page-title --> --}}
   
   
       <!-- ========================
           Services Layout 1
       =========================== -->
-      <section class="services-layout1 pt-130">
-        
-        <div class="container">
-          
-          <div class="row">
-            <!-- service item #1 -->
-            {{-- @forelse ($services as $service) --}}
-                
-           @foreach ($services as $service)
-               
-          
-            <div class="col-sm-12 col-md-6 col-lg-4">
-              <div class="service-item">
-                <div class="service__icon">
-                  <img src="{{asset('/images/services/'.$service->images)}}" alt="Product" loading="lazy">
-                </div><!-- /.service__icon -->
-                <div class="service__content">
-                  <h4 class="service__title">{{ $service->title }}</h4>
-                  <p class="service__desc">{{ trim(strip_tags($service->contents)) }}
-                  </p>
-                 
-                  <a href="{{ route('service.details',encrypt($service->id)) }}" class="btn btn__secondary btn__outlined btn__rounded">
-                    <span>Read More</span>
-                    <i class="icon-arrow-right"></i>
-                  </a>
-                </div><!-- /.service__content -->
-              </div><!-- /.service-item -->
-            </div><!-- /.col-lg-4 -->
-            {{-- @empty
-                
-            @endforelse --}}
-            @endforeach
-           
-           
-          </div><!-- /.row -->
-
-          <div class="row">
-            <div class="col-12 text-center">
-              {{-- <nav class="pagination-area">
-                <ul class="pagination justify-content-center">
-                  <li><a class="current" href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#"><i class="icon-arrow-right"></i></a></li>
-                </ul>
-              </nav><!-- .pagination-area --> --}}
+      <!-- /.Services Layout 1 -->
 
 
-              <nav class="pagination-area">
-                <ul class="pagination justify-content-center">
-                  @php
-                  $start = max($services->currentPage() - 1, 1);
-                  $end = min($services->currentPage() + 1, $services->lastPage());
-                 @endphp
-                    {{-- Previous Arrow --}}
-                    @if ($services->onFirstPage())
-                        <li class="disabled"><span><i class="icon-arrow-left"></i></span></li>
-                    @else
-                        <li><a href="{{ $services->previousPageUrl() }}"><i class="icon-arrow-left"></i></a></li>
-                    @endif
-            
-                    {{-- Page Numbers --}}
-                    @for ($i = $start; $i <= $end; $i++)
-                        <li>
-                            <a 
-                                href="{{ $services->url($i) }}" 
-                                class="{{ $services->currentPage() == $i ? 'current' : '' }}">
-                                {{ $i }}
-                            </a>
-                        </li>
-                    @endfor
-            
-                    {{-- Next Arrow --}}
-                    @if ($services->hasMorePages())
-                        <li><a href="{{ $services->nextPageUrl() }}"><i class="icon-arrow-right"></i></a></li>
-                    @else
-                        <li class="disabled"><span><i class="icon-arrow-right"></i></span></li>
-                    @endif
-            
-                </ul>
-            </nav>
-            
+      {{-- resources/views/components/services-blade-template.blade.php --}}
+{{--
+  Responsive Blade template (pure CSS) for showing services in a grid.
+  - Mobile: 2 services per row
+  - Tablet / Desktop: adjusts to 3–4 per row
+  - Includes smooth hover animations
+--}}
+@section('styles')
+<style>
+.page-title {
+    padding: 8px 0;
+    background: #f5f6fa;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 0;
+  }
 
-            </div><!-- /.col-12 -->
-          </div><!-- /.row -->
-        </div><!-- /.container -->
-      </section><!-- /.Services Layout 1 -->
+  .breadcrumb {
+    background: none;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .breadcrumb a {
+    color: #4f46e5;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .services-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .services-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .service-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+  }
+
+  .service-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+  }
+  .service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .service-body {
+    padding: 12px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #222;
+  }
+  .service-body p {
+    font-size: 14px;
+    color: #666;
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* limits to 2 lines */
+    -webkit-box-orient: vertical;
+  }
+  .service-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #4f46e5;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+  .service-btn:hover {
+    background: #3730a3;
+  }
+
+  .no-services {
+    text-align: center;
+    margin-top: 30px;
+    color: #888;
+  }
+</style>
+@endsection
+
+<div class="services-wrapper">
+  <h2 class="services-title">Our Services</h2>
+
+  <div class="services-grid">
+    @foreach($services as $service)
+      <article class="service-card">
+        <div class="service-image">
+          <img src="{{asset('/images/services/'.$service->images)}}" alt="Product" loading="lazy"> alt="{{ $service['title'] ?? '' }}">
+        </div>
+
+        <div class="service-body">
+          <h3>{{ $service['title'] ?? $service->title }}</h3>
+          <p>{{ trim(strip_tags($service->contents)) }}</p>
+          <a href="{{ route('service.details',encrypt($service->id)) }}" class="service-btn">Learn More</a>
+        </div>
+      </article>
+    @endforeach
+  </div>
+
+  @if(count($services) === 0)
+    <p class="no-services">No services available at the moment.</p>
+  @endif
+</div>
+
 
 
 @endsection

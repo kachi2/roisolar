@@ -24,7 +24,7 @@
     <div class="container">
         <div class="ps-shopping__content">
             <div class="row">
-              @include('includes.accountSidebar')
+              @include('includes.sidebarAccount')
                 <div class="col-12 col-md-7 col-lg-8 mt-5" style="background: #fff; border-radius: 5px">
 
                     <div class="row">

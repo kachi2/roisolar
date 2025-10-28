@@ -30,15 +30,15 @@ class AddCartItems implements ShouldQueue
             foreach($events->carts as $cart){
             $data = [
                 'user_id' => auth_user()->id,
-                'product_id' => $cart->model->id,
+                'product_id' => $cart['rowId'],
                 'Order_no' => $events->orderNo,
-                'qty' => $cart->qty,
-                'payable' => $cart->price * $cart->qty,
+                'qty' => $cart['quantity'],
+                'payable' => $cart['price'] * $cart['quantity'],
                 'status' => 0,
                 'cartSession' => $events->cartSession,
-                'image' => $cart->model->image_path,
-                'product_name' => $cart->model->name,
-                'price' => $cart->model->sale_price,
+                'image' => $cart['image'],
+                'product_name' => $cart['name'],
+                'price' => $cart['price'],
                 'product_prescription' => $cart->options->image??null
             ];
             CartItem::create($data);
