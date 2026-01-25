@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Users;
 
 use Carbon\Carbon;
+use App\Models\Menu;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Category;
-use App\Models\Menu;
 use App\Models\Services;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CountryCurrency;
 use Vinkla\Hashids\Facades\Hashids;
@@ -41,13 +42,14 @@ class HomeController extends Controller
     //     }
     //   }
     
-        // $site_menu = Menu::latest()->get();
+        $site_menu = Menu::latest()->get();
+        $cate = Category::all();
         $slider = Slider::latest()->get();
         $category = Category::latest()->simplePaginate(10);
         $product = Product::latest()->simplePaginate(9);
         $services = Services::latest()->simplePaginate(5);
          $services->transform(function ($service) {
-        $service->short_description = \Str::words($service->contents, 10, '...'); 
+        $service->short_description = Str::words($service->contents, 10, '...'); 
         return $service;
     });
         $data['latest'] = Product::latest()->inRandomOrder()->take(6)->get();
@@ -66,8 +68,9 @@ class HomeController extends Controller
         addHashId($data['advert']);
         return view('users.dashboard', $data, [
             'sliders' => $slider,
-            // 'site_menu' => $site_menu,
+            'site_menu' => $site_menu,
             'categories' => $category,
+            'cate' => $cate,
             'products' => $product,
             'service' => $services,
             
@@ -77,7 +80,7 @@ class HomeController extends Controller
     public function Index(){
         // $site_menu = Menu::get();
         $slider = Slider::latest()->get();
-        $category = Category::latest()->simplePaginate(10);
+        $category = Category::latest()->get();
         $product = Product::latest()->simplePaginate(9);
         $services = Services::limit(5)->get();
         return view('users.dashboard')
@@ -87,4 +90,14 @@ class HomeController extends Controller
         ->with('products', $product);
 
     }
+
+     public function productsByCat($id)
+        {
+            $category = Category::where('id',$id)->firstOrFail();
+            // $product = $category->products()->get(); // or ->get()
+            $cate = Category::all();
+            $currentCategory = $category;
+            $latest =  Product::latest()->simplePaginate(4);
+            return view('users.pages.product_category', compact('category', 'product', 'cate','currentCategory', 'latest'));
+        }
 }

@@ -57,7 +57,7 @@ class CategoryController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'markup' => 'required|numeric',
                 'inflated' => 'required|numeric'
         ]);
@@ -71,12 +71,12 @@ class CategoryController extends Controller
         }
 
         if ($request->file('image')) {
-            $fileName = $this->UploadImage($request, 'images/category/');
+            $fileName = $this->UploadImage($request, 'images/category/',400, 400);
         }
         //  dd($fileName);
         $data = [
             'name' => $request->name,
-            'image_path' => $fileName,
+            // 'image_path' => $fileName,
             'markup' => $request->markup,
             'inflated' => $request->inflated,
         ];

@@ -10,12 +10,13 @@
 
 @section('content')
 <!-- ===== Breadcrumb Section ===== -->
-     <section class="page-title">
+
+<section class="page-title">
   <div class="container">
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mt-0 mb-0">
+      <ol class="breadcrumb mt-0">
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        <li class="breadcrumb-item active" aria-current="page">About Us</li>
       </ol>
     </nav>
   </div>
@@ -28,28 +29,28 @@
       
       <!-- Left: Info Cards -->
       <div class="col-lg-5 mb-4 mb-lg-0">
-        <h2 class="contact-title">Get in Touch</h2>
+        <h5 class="contact-title">Get in Touch</h5>
         <p class="contact-subtitle">We’d love to hear from you. Reach out with any inquiries, feedback, or business opportunities.</p>
 
         <div class="contact-info">
           <div class="info-item">
             <i class="fa-solid fa-location-dot"></i>
             <div>
-              <h5>Our Office</h5>
+              <h6>Our Office</h6>
               <p>123 Risolar Street, Lagos, Nigeria</p>
             </div>
           </div>
           <div class="info-item">
             <i class="fa-solid fa-phone"></i>
             <div>
-              <h5>Phone</h5>
+              <h6>Phone</h6>
               <p>+234 802 123 4567</p>
             </div>
           </div>
           <div class="info-item">
             <i class="fa-solid fa-envelope"></i>
             <div>
-              <h5>Email</h5>
+              <h6>Email</h6>
               <p>support@risolar.com</p>
             </div>
           </div>
@@ -107,11 +108,11 @@ body {
   color: #222;
 }
 
-.page-title {
-    padding: 8px 0;
+  /* ===== Breadcrumb ===== */
+  .page-title {
+    padding: 10px 0;
     background: #f5f6fa;
     border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 0;
   }
 
   .breadcrumb {
@@ -135,7 +136,7 @@ body {
 }
 
 .contact-title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 700;
   color: #111827;
   margin-bottom: 12px;

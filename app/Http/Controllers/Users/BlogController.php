@@ -14,10 +14,12 @@ class BlogController extends Controller
     public function Index(){
     
         $blogs =  Blog::Paginate(6);
+        $category = Category::All();
         foreach($blogs as $Blog){
             $Blog->hashid = Hashids::connection('products')->encode($Blog->id);
         }
-        return view('users.pages.blogs')->with('blogs',$blogs);
+        return view('users.pages.blogs')->with('blogs',$blogs)
+        ->with('categories',$category);
     }
 
     public function BlogDetails($id){

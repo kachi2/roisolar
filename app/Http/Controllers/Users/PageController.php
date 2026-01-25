@@ -31,11 +31,14 @@ class PageController extends Controller
 
     public function aboutUs(){
         return  view('users.pages.aboutUs')
-        ->with('aboutUs', AboutUs::latest()->first());
+        ->with('aboutUs', AboutUs::latest()->first())
+        ->with('categories', Category::all());
     }
 
     public function contactUs(){
-        return view('users.pages.contactUs');
+        return view('users.pages.contactUs', [
+    'categories' => Category::all()
+    ]);
     }
 
     public function ContactStore(){
@@ -112,7 +115,8 @@ class PageController extends Controller
 
     public function services(){
         return view('users.pages.services')
-        ->with('services', Services::paginate(5));
+        ->with('services', Services::paginate(5))
+        ->with('categories', Category::all());
         // ->with('settings', Settings::first());
     }
 
@@ -120,7 +124,8 @@ class PageController extends Controller
     {
         return view('users.pages.service_details')
         ->with('service', Services::where('id', decrypt($id))->first())
-        ->with('se', Services::latest()->simplePaginate(6));
+        ->with('se', Services::latest()->simplePaginate(6))
+        ->with('categories', Category::all());
         
     }
 

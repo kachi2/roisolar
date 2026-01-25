@@ -9,51 +9,6 @@
 
 
 
-
-{{-- <section class="page-title page-title-layout5 text-center"> --}}
-  {{-- <div class="bg-img"><img src="{{ asset('frontend/images/backgrounds/6.jpg') }}" alt="background"></div> --}}
-  {{-- <div class="container">
-    <div class="row"> --}}
-      {{-- <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3"> --}}
-        {{-- <div class="heading text-center mb-60">
-          <h2 class="heading__title ">Our services</h2>
-          <h3 class="heading__subtitle"><p>The company offers a complete assortment of both on-grid and off-grid solutions, including modules, inverters, mounting systems and accessories.</p></h3>
-        </div><!-- /.heading --> --}}
-       <section class="page-title">
-  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mt-0 mb-0">
-        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">About Us</li>
-      </ol>
-    </nav>
-  </div>
-</section>
-        {{-- <nav>
-          <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">shop</li>
-          </ol>
-        </nav> --}}
-      {{-- </div><!-- /.col-xl-6 --> --}}
-    {{-- </div><!-- /.row --> --}}
-  {{-- </div><!-- /.container --> --}}
-{{-- </section><!-- /.page-title --> --}}
-  
-  
-      <!-- ========================
-          Services Layout 1
-      =========================== -->
-      <!-- /.Services Layout 1 -->
-
-
-      {{-- resources/views/components/services-blade-template.blade.php --}}
-{{--
-  Responsive Blade template (pure CSS) for showing services in a grid.
-  - Mobile: 2 services per row
-  - Tablet / Desktop: adjusts to 3–4 per row
-  - Includes smooth hover animations
---}}
 @section('styles')
 <style>
 .page-title {
@@ -179,6 +134,17 @@
 </style>
 @endsection
 
+        <section class="page-title">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mt-0 mb-0">
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Services</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
 <div class="services-wrapper">
   <h2 class="services-title">Our Services</h2>
 
@@ -192,7 +158,7 @@
         <div class="service-body">
           <h3>{{ $service['title'] ?? $service->title }}</h3>
           <p>{{ trim(strip_tags($service->contents)) }}</p>
-          <a href="{{ route('service.details',encrypt($service->id)) }}" class="service-btn">Learn More</a>
+          <a href="{{ route('service.details',encrypt($service->id)) }}" class="service-btn">Read More</a>
         </div>
       </article>
     @endforeach

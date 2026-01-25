@@ -3,7 +3,7 @@
 .cart-count {
     position: absolute;
     top: -4px;
-    right: -4px;
+    right: -1px;
     background-color: red;
     color: white;
     font-size: 12px;
@@ -126,15 +126,8 @@
 </div> --}}
 
 
-
-
-
-          <div class="d-none d-xl-flex align-items-center position-relative ml-30">
-            <a href="{{ route('carts.index') }}" class=" btn-sm">
-              <i class="icon-cart"></i>
-              {{-- <span>MyCart</span> --}}
-                <span class="cart-badge position-absolute translate-middle badge rounded-pill bg-danger">
-       @php
+           
+       {{-- @php
         $cartCount = $cartCount = collect(session('cart', []))->sum('quantity');
 
         @endphp
@@ -143,74 +136,30 @@
         @else
       0
       @endif
-    </span>
+    </span> --}}
+
+
+          <div class="d-none d-xl-flex align-items-center position-relative ml-30">
+            <a href="{{ route('carts.index') }}" class=" btn-sm">
+              <i class="icon-cart"></i>
+               <span class="cart-badge position-absolute  badge rounded-pill bg-danger">
+              {{-- <span>MyCart</span> --}}
+                 @php
+        $cartCount = $cartCount = collect(session('cart', []))->sum('quantity');
+
+        @endphp
+        @if($cartCount > 0)
+            <span class="cart-count">{{ $cartCount }}</span>
+            @else
+            0
+        @endif
+
+            </a>
           </div>
         {{-- <button class="action__btn-search ml-30"><i class="fa fa-search"></i></button> --}}
       </div><!-- /.container -->
     </nav><!-- /.navabr -->
   </header><!-- /.Header -->
-{{-- 
-<nav class="navbar navbar-expand-lg" style="background: #1a1a1a; padding: 4px 0;">
-  <div class="container" style="max-width: 1100px;">
-
-    <!-- Brand -->
-    <a class="navbar-brand text-white fw-bold" href="#">MyShop</a>
-
-    <!-- Toggler for Mobile -->
-    <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <i class="bi bi-list" style="font-size: 1.4rem;"></i>
-    </button>
-
-    <!-- Navbar Content -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <div class="d-flex justify-content-between align-items-center w-100">
-
-        <!-- Left: Categories -->
-        <div class="d-flex align-items-center text-white fw-bold me-3 d-none d-lg-flex" style="font-size: 14px;">
-          <i class="bi bi-grid me-1"></i>
-          Categories
-        </div>
-
-        <!-- Center: Search (Flat Dark Style) -->
-        <form class="d-flex mx-auto flex-grow-1" style="max-width: 320px;">
-          <div class="input-group" style="height: 32px;">
-            <input 
-              type="search" 
-              class="form-control text-white" 
-              placeholder="Search..." 
-              aria-label="Search"
-              style="background: #333; border: none; font-size: 13px; padding: 6px 12px;"
-            >
-            <button class="btn text-white" type="submit" style="background: #444; border: none; font-size: 13px; padding: 6px 12px;">
-              <i class="bi bi-search"></i>
-            </button>
-          </div>
-        </form>
-
-        <!-- Right: Cart -->
-        <div class="d-flex align-items-center text-white ms-3" style="font-size: 14px;">
-          <div class="position-relative me-2">
-            <i class="bi bi-cart" style="font-size: 1.3rem;"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-white" style="font-size: 10px;">
-              3
-            </span>
-          </div>
-          <span>$90.00</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav> --}}
-
-<!-- Bootstrap CSS & JS + Icons -->
-{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"> --}}
 
 
-
-
-
-
-<!-- Bootstrap Icons CDN -->
 

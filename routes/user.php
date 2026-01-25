@@ -64,7 +64,7 @@ Route::get('flutter/callback', [PaymentController::class, 'handleFlutterCallback
 
 Route::get('/search', [PageController::class, 'search'])->name('prod.search');
 
-
+Route::get('/product/category/{id}', [HomeController::class, 'productsByCat'])->name('category.products');
 
 Route::controller(UserController::class)->group(function(){
     Route::get('/accounts/index', 'Index')->name('users.account.index');

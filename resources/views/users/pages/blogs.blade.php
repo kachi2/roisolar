@@ -67,7 +67,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mt-0 mb-0">
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
       </ol>
     </nav>
   </div>
@@ -339,7 +339,7 @@
 </style>
 @endsection
 <div class="blogs-wrapper">
-  <h2 class="blogs-title">Latest Blog Posts</h2>
+  <h5 class="blogs-title">Latest Blog Posts</h5>
 
   <div class="blogs-grid">
     @foreach($blogs as $item)
