@@ -49,7 +49,7 @@
                                                     <a href="#">@if(isset($sp->category->name)){{$sp->category->name}} @endif</a>
                                                 </td> 
                                                 <td>
-                                                    <a href="#">{{$sp->name}}</a>
+                                                    <a href="#">{{$sp->name}}</a> 
                                                 </td>
                                                 <td>
                                                     <a href="#">{{moneyFormat($sp->sale_price)}}</a>

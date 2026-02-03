@@ -7,78 +7,228 @@
 @endsection
 @section('styles')
 <style>
-.product-container {
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  border-radius: 8px !important; /* optional: makes corners round */
-  overflow: hidden !important;
+
+
+
+
+
+/* Product Card */
+.product-card-elegant {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Hover effect */
-.product-container:hover {
-  transform: scale(1.05) !important; /* zooms in slightly */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important; /* shadow on hover */
-  cursor: pointer !important;
+.product-card-elegant:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.1);
 }
 
+/* Title */
+.product-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 6px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
+}
+
+.product-title a {
+    color: #0a2540;
+    text-decoration: none;
+}
+
+.product-title a:hover {
+    color: #163a5f;
+}
+
+/* Image */
+.product-image {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card-elegant:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* Price */
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #dc3545;
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a2540;
+}
 
 .cart-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 8px;
-  background-color:rgb(4, 30, 58); /* Bootstrap blue */
-  border-radius: 50%;
-  padding: 8px;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cart-icon i {
-  color: white;
-  font-size: 13px;
+    font-size: 16px;
+    color: #0a2540;
+    transition: transform 0.25s ease;
 }
 
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
+.product-card-elegant:hover .cart-icon {
+    transform: scale(1.15);
 }
-/* .product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+
+/* Button */
+.product-card-elegant a.add-cart-btn {
+    margin-top: auto;
+    width: 100%;
+    background: transparent;
+    /* border: 1px solid #ddd; */
     text-align: center;
-} */
-/* .product-card img {
-    height: 150px;
-    object-fit: contain;
-} */
-.product-card h6 {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
+    padding: 7px;
+    font-size: 13px;
+    border-radius: 6px;
+    color: #0a2540;
+    transition: all 0.25s ease;
 }
-.product-card p {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
+
+.product-card-elegant a.add-cart-btn:hover {
+   background: #e0dbdb;
+    border-color: #0a2540;
 }
+
+/* Mobile */
+@media (max-width: 576px) {
+    .product-image {
+        height: 95px;
+    }
+
+    .add-cart-btn {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+.product__title{
+  font-size: 18px !important;
+  font-weight: 600 !important;
+}
+
+
+.product__price{
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #0a2540 !important;
+}
+
+
+
+.alert-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 320px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    margin-top: 10px;
+}
+
+/* Close button */
+.close-alert {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.25s;
+}
+
+.close-alert:hover {
+    color: #ddd;
+}
+
+/* Success & Error */
+.alert-success { background-color: #0a2540; }
+.alert-danger { background-color: #dc3545; }
+
+/* Fade out */
+.alert-message.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .alert-message {
+        max-width: 90%;
+        left: 5%;
+        right: 5%;
+        top: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+
 
 </style>
 
 @endsection
 
+
+
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    @foreach ($errors->all() as $error)
+        <div class="alert-message alert-danger">
+            <button type="button" class="close-alert">&times;</button>
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
+@if(session('success'))
+    <div class="alert-message alert-success">
+        <button type="button" class="close-alert">&times;</button>
+        {{ session('success') }}
     </div>
 @endif
+
+
+
+
 
 {{-- @if(session('success'))
         <div class="cart-success" id="cartSuccess">{{ session('success') }}</div>
@@ -94,8 +244,8 @@
             <div class="col-12">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                  <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Product Details</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
                 </ol>
               </nav>
@@ -158,9 +308,7 @@
                     <button  type="submit" class="btn btn__secondary"> add to cart <i class="icon-cart"></i></button>
                    
                   </form>
-                   @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+      
                   </div><!-- /.product-quantity -->
                   <div class="product__meta-details">
                     <ul class="list-unstyled mb-30">
@@ -176,6 +324,8 @@
                   </ul><!-- /.social-icons --> --}}
                 </div>
               </div><!-- /.row -->
+
+
               <div class="product__details mt-100">
                 <nav class="nav nav-tabs">
                   <a class="nav__link active" data-toggle="tab" href="#Description">Description</a>
@@ -184,7 +334,7 @@
                 </nav>
                 <div class="tab-content mb-50" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="Description">
-                    <p>{{trim(strip_tags($product->description))}}.</p>
+                    <p>{!! $product->description !!}.</p> 
                   </div><!-- /.desc-tab -->
                   {{-- <div class="tab-pane fade" id="Details">
                     <p>Yorks is not just about graphic design; it's more than that. We offer integral communication
@@ -213,69 +363,54 @@
                 </div>
               </div><!-- /.product-tabs -->
               
-              <h6 class="related__products-title text-center-xs mb-25">Related Products</h6>
-              <div class="row">
-                <!-- Product item #1 -->
-               
              
-<div class="container my-5">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-    <!-- Card 1 -->
-    @forelse ($products as $item)
-    <div class="col">
-      <div class="card h-100 shadow-sm rounded-4 product-container">
-      <a href="{{ route('product.details',encrypt($item->id)) }}"> 
-        <img src="{{ asset('images/products/'.$item->image_path) }}" class="card-img-top" alt="Product Image">
-        </a>
-        <div class="card-body product-card">
-          <h6 class="card-title"><a href="{{ route('product.details',encrypt($item->id)) }}"> {{ $item->name }}</a> </h6>
-          <p class="card-text mb-1">
-            <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-            <span class="text-danger fw-bold ms-2">${{ $item->sale_price }}</span>
-          </p>
-            <div class="cart-icon">
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-          {{-- <a href="" class="btn btn-sm btn-primary mt-2 w-100">Add to Cart</a> --}}
+      <h6 class="related__products-title text-center mb-4">
+    Related Products
+</h6>
+
+<div class="container">
+    <div class="row row-cols-2 row-cols-md-4 g-3">
+
+        @forelse ($products as $item)
+        <div class="col">
+            <div class="product-card-elegant">
+
+                <!-- Product Name -->
+                <h6 class="product-title">
+                    <a href="{{ route('product.details', encrypt($item->id)) }}">
+                        {{ $item->name }}
+                    </a>
+                </h6>
+
+                <!-- Image -->
+                <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+                    <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+                </a>
+
+                <!-- Price + Cart -->
+                <div class="price-row">
+                    <div class="price">
+                        <span class="old-price">${{ $item->price }}</span>
+                        <span class="new-price">${{ $item->sale_price }}</span>
+                    </div>
+
+                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                </div>
+
+                <!-- Add to Cart -->
+                <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
+                        Add to cart
+                    </a>
+
+            </div>
         </div>
-      </div>
+        @empty
+            <p class="text-center">No related products.</p>
+        @endforelse
+
     </div>
- @empty
-                    
- @endforelse
-   
-  </div>
 </div>
 
-
-{{-- <div class="container my-4">
-    <div class="product-grid">
-        @foreach($products as $product)
-            <div class="product-card">
-                <img src="{{ asset('images/products/'.$product->image_path) }}" alt="{{ $product->name }}">
-                <h6>{{ $product->name }}</h6>
-                <p>
-                    <span class="fw-bold text-success">₦{{ number_format($product->price, 2) }}</span>
-                    @if($product->sale_price)
-                        <span style="text-decoration: line-through; color:#888;">
-                            ₦{{ number_format($product->sale_price, 2) }}
-                        </span>
-                    @endif
-                </p>
-                
-                    <div class="cart-icon">
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-              
-            </div>
-        @endforeach
-    </div>
-</div> --}}
-
-
-
-    
-              </div><!-- /.row -->
             </div><!-- /.col-12 -->
           </div><!-- /.row -->
         </div><!-- /.container -->
@@ -284,6 +419,29 @@
       @endsection
 
       @section('scripts')
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const alerts = document.querySelectorAll('.alert-message');
+
+    alerts.forEach(alert => {
+        // Auto hide after 4 seconds
+        setTimeout(() => {
+            alert.classList.add('fade-out');
+            setTimeout(() => alert.remove(), 500);
+        }, 4000);
+
+        // Manual close
+        const closeBtn = alert.querySelector('.close-alert');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                alert.classList.add('fade-out');
+                setTimeout(() => alert.remove(), 500);
+            });
+        }
+    });
+});
+</script>
 
 
 

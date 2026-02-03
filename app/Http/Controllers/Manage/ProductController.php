@@ -90,38 +90,113 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $valid = Validator::make($request->all(), [
-            'name' => 'required',
-            'category_id' => 'required|integer',
-            'image' => 'required|mimes:png,jpg,jpeg,gif,webp',
-            'description' => 'required',
-            'cost_price' => 'required',
-        ]);
-        if ($valid->fails()) {
-            Session::flash('alert', 'error');
-            Session::flash('message', $valid->errors()->first());
-            return redirect()->back()->withErrors($valid)->withInput($request->all())
-                ->with('bheading', 'Product')
-                ->with('breadcrumb', 'Index');
-        }
 
-        $cat = Category::where('id', $request->category_id)->first();
-        DB::beginTransaction();
-        try {
-            $prod = new Product;
-            $prod->name = $request->name;
-            $prod->category_id = $request->category_id;
-            $prod->description = $request->description;
-            $prod->discount =  ((($request->cost_price * $cat->inflated) - ($request->cost_price * $cat->markup))/ ($request->cost_price * $cat->inflated)) *100;
-            $prod->cost_price = $request->cost_price;
-            $prod->price = $request->cost_price * $cat->inflated;
-            $prod->sale_price = $request->cost_price * $cat->markup;
-            $prod->requires_prescription= $request->requires_prescription??0;
-            $prod->sku = 'LVPH'.rand(11111,99999);
-            $prod->status = 0;
-            if ($request->file('image')) {
+
+    // public function store(Request $request)
+    // {
+    //     $valid = Validator::make($request->all(), [
+    //         'name' => 'required',
+    //         'category_id' => 'required|integer',
+    //         'image' => 'required|mimes:png,jpg,jpeg,gif,webp',
+    //         'description' => 'required',
+    //         'cost_price' => 'required',
+    //     ]);
+    //     if ($valid->fails()) {
+    //         Session::flash('alert', 'error');
+    //         Session::flash('message', $valid->errors()->first());
+    //         return redirect()->back()->withErrors($valid)->withInput($request->all())
+    //             ->with('bheading', 'Product')
+    //             ->with('breadcrumb', 'Index');
+    //     }
+
+    //     $cat = Category::where('id', $request->category_id)->first();
+    //     DB::beginTransaction();
+    //     try {
+    //         $prod = new Product;
+    //         $prod->name = $request->name;
+    //         $prod->category_id = $request->category_id;
+    //         $prod->description = $request->description;
+    //         $prod->discount =  ((($request->cost_price * $cat->inflated) - ($request->cost_price * $cat->markup))/ ($request->cost_price * $cat->inflated)) *100;
+    //         $prod->cost_price = $request->cost_price;
+    //         $prod->price = $request->cost_price * $cat->inflated;
+    //         $prod->sale_price = $request->cost_price * $cat->markup;
+    //         $prod->requires_prescription= $request->requires_prescription??0;
+    //         $prod->sku = 'LVPH'.rand(11111,99999);
+    //         $prod->status = 0;
+    //         if ($request->file('image')) {
+    //             $image =  $this->UploadImage($request, 'images/products/', 500,500);
+    //             $prod->image_path = $image;
+    //         }
+    //         if ($request->file('images')) {
+    //             $images = $this->UploadImages($request, 'images/products/',500,500);
+    //             $prod->gallery = json_encode($images);
+    //         }
+    //         $prod->save();
+    //         DB::commit();
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         Session::flash('alert', 'error');
+    //         Session::flash('message', $e);
+    //         return redirect()->back()->withErrors($valid)->withInput($request->all());
+    //     }
+
+    //     Session::flash('alert', 'success');
+    //     Session::flash('message', 'Product Added Successfully');
+    //     return redirect()->back();
+    // }
+
+
+
+
+
+
+
+
+
+    public function store(Request $request)
+{
+    $valid = Validator::make($request->all(), [
+        'name' => 'required|string',
+        'category_id' => 'required|integer',
+        'image' => 'required|image|mimes:png,jpg,jpeg,gif,webp',
+        'description' => 'required|string',
+        'cost_price' => 'required|numeric',
+        // 'images.*' => 'image|mimes:png,jpg,jpeg,gif,webp',
+    ]);
+
+    if ($valid->fails()) {
+        Session::flash('alert', 'error');
+        Session::flash('message', $valid->errors()->first());
+        return redirect()->back()
+            ->withErrors($valid)
+            ->withInput();
+    }
+
+    $cat = Category::findOrFail($request->category_id);
+
+    DB::beginTransaction();
+
+    try {
+        $prod = new Product();
+        $prod->name = $request->name;
+        $prod->category_id = $request->category_id;
+        $prod->description = $request->description;
+
+        $prod->discount = (
+            (($request->cost_price * $cat->inflated) -
+            ($request->cost_price * $cat->markup))
+            / ($request->cost_price * $cat->inflated)
+        ) * 100;
+
+        $prod->cost_price = $request->cost_price;
+        $prod->price = $request->cost_price * $cat->inflated;
+        $prod->sale_price = $request->cost_price * $cat->markup;
+        $prod->requires_prescription = $request->requires_prescription ?? 0;
+        $prod->sku = 'LVPH' . rand(11111, 99999);
+        $prod->status = 0;
+
+
+           if ($request->file('image')) {
                 $image =  $this->UploadImage($request, 'images/products/', 500,500);
                 $prod->image_path = $image;
             }
@@ -129,19 +204,54 @@ class ProductController extends Controller
                 $images = $this->UploadImages($request, 'images/products/',500,500);
                 $prod->gallery = json_encode($images);
             }
-            $prod->save();
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Session::flash('alert', 'error');
-            Session::flash('message', $e);
-            return redirect()->back()->withErrors($valid)->withInput($request->all());
-        }
 
-        Session::flash('alert', 'success');
-        Session::flash('message', 'Product Added Successfully');
-        return redirect()->back();
+        /** ---------- MAIN IMAGE ---------- */
+        // if ($request->hasFile('image')) {
+        //     $file = $request->file('image');
+        //     $filename = time() . '_' . $file->getClientOriginalName();
+        //     $file->move(public_path('images/products'), $filename);
+        //     $prod->image_path = 'images/products/' . $filename;
+        // }
+
+        // /** ---------- GALLERY IMAGES ---------- */
+        // if ($request->hasFile('images')) {
+        //     $gallery = [];
+        //     foreach ($request->file('images') as $file) {
+        //         $filename = time() . '_' . $file->getClientOriginalName();
+        //         $file->move(public_path('images/products'), $filename);
+        //         $gallery[] = 'images/products/' . $filename;
+        //     }
+        //     $prod->gallery = json_encode($gallery);
+        // }
+
+        $prod->save();
+
+        DB::commit();
+
+    } catch (\Throwable $e) {
+        DB::rollBack();
+
+        Session::flash('alert', 'error');
+        Session::flash('message', $e->getMessage());
+
+        return redirect()->back()->withInput();
     }
+
+    Session::flash('alert', 'success');
+    Session::flash('message', 'Product Added Successfully');
+
+    return redirect()->back();
+}
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Display the specified resource.

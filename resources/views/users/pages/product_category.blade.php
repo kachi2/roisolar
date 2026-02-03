@@ -1,49 +1,75 @@
 @extends('layouts.app')
 
 @section('title')
-<title>{{$product[0]?->category?->name }}</title>
+<title>{{$product[0]?->categories?->name }}</title>
 @endsection
 @section('head')
-<link rel="canonical" href="{{ url('catalogs/'.Str::slug($product[0]?->category?->name)) }}">
+<link rel="canonical" href="{{ url('catalogs/'.Str::slug($product[0]?->categories?->name)) }}">
+
 @endsection
-@section('content')
+
 @section('styles')
-<style>
+ <style>
+
+.page-title {
+    padding: 8px 0;
+    background: #f5f6fa;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 0;
+  }
+
+  .breadcrumb {
+    background: none;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .breadcrumb a {
+    color: #4f46e5;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
 .search-container {
     display: flex;
-    max-width: 100%;
     width: 100%;
-    border: 2px solid #ddd;
-    border-radius: 30px;
-    overflow: hidden;
-    background: #fff;
+    max-width: 100%;
+    margin-bottom: 20px;
 }
 
 .search-container input {
     flex: 1;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
     outline: none;
-    min-width: 0; /* Prevent overflow on mobile */
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #485269;
+    /* box-shadow: 0 0 4px rgba(255, 107, 0, 0.3); */
 }
 
 .search-container button {
-    background:rgb(10, 2, 48);
+    padding: 12px 20px;
+    background: #0a1831;
+    color: #fff;
+    font-size: 16px;
     border: none;
-    color: white;
-    padding: 0 16px;
-    font-size: 18px;
+    border-radius: 0 8px 8px 0;
     cursor: pointer;
     transition: background 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .search-container button:hover {
-    background: #e65a00;
+    /* background: #e65b00; */
 }
+
 
 /* Mobile adjustments */
 @media (max-width: 480px) {
@@ -57,64 +83,27 @@
         padding: 0 12px;
     }
 }
-.product-container {
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  border-radius: 8px !important; /* optional: makes corners round */
-  overflow: hidden !important;
-}
+    
+    
+    .category-card {
+      transition: 0.3s;
+      
+    }
+    .category-card:hover {
+      transform: scale(1.03);
+    }
+    .category-img {
+      height: 170px;
+      object-fit: cover;
+    }
 
-/* Hover effect */
-.product-container:hover {
-  transform: scale(1.05) !important; /* zooms in slightly */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important; /* shadow on hover */
-  cursor: pointer !important;
-}
-
-
-.cart-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 8px;
-  background-color:rgb(4, 30, 58); /* Bootstrap blue */
-  border-radius: 50%;
-  padding: 8px;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cart-icon i {
-  color: white;
-  font-size: 13px;
+    li.active a {
+    font-weight: bold;
+    color: #007bff;
 }
 
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-}
-/* .product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-} */
-/* .product-card img {
-    height: 150px;
-    object-fit: contain;
-} */
-.product-card h6 {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
-}
-.product-card p {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
-}
+
 
 .category-sidebar {
     width: 250px;
@@ -145,15 +134,15 @@
 .category-sidebar ul li a {
     display: block;
     padding: 8px 10px;
-    color: #333;
+    color: #04104b;
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .category-sidebar ul li a:hover {
-    background: #ff6b00;
-    color: #fff;
+    background: #060813;
+    color: #fff !important;
 }
 
 /* Mobile Friendly */
@@ -164,303 +153,432 @@
     }
 }
 
+
 .latest-products {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 15px;
-    font-family: Arial, sans-serif;
-    width: 280px;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-.latest-products h3 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 5px;
+.sidebar-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
 }
 
+/* Card */
 .latest-card {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 14px;
 }
 
 .latest-card:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Image */
+.latest-card .thumb {
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
 }
 
 .latest-card img {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 5px;
 }
 
-.latest-info h4 {
-    font-size: 15px;
-    margin: 0;
-    color: #333;
+/* Info */
+.latest-info {
+    flex: 1;
 }
 
-.latest-info .price {
-    font-weight: bold;
-    color: #ff6b00;
-    margin-top: 5px;
+.product-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    text-decoration: none;
 }
 
-/* Mobile Friendly */
-@media (max-width: 768px) {
+.product-name:hover {
+    color: #0d6efd;
+}
+
+.price-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Mobile polish */
+@media (max-width: 576px) {
     .latest-products {
-        width: 100%;
+        padding: 14px;
+    }
+
+    .latest-card .thumb {
+        width: 50px;
+        height: 50px;
+    }
+
+    .product-name {
+        font-size: 13px;
+    }
+
+    .new-price {
+        font-size: 13px;
     }
 }
 
-</style>
-@endsection
 
-{{-- <div class="ps-categogy ps-categogy--dark" style="background: #e8e8e8;">
-    <div class="container">
-        <ul class="ps-breadcrumb">
-            <li class="ps-breadcrumb__item"><a href="">Home</a></li>
-            <li class="ps-breadcrumb__item"><a href="">Category</a></li>
-            <li class="ps-breadcrumb__item"><a href="">Products</a></li>
-        </ul>
-        <div class="ps-categogy__content">
-            <div class="row row-reverse">
-                <div class="col-12 col-md-9" style="
-                background: #fff;
-                padding: 10px;
-                border-radius: 10px; top:-40px">
-                    <div class="ps-categogy__wrapper">
-                      
-                        <div class="ps-categogy__onsale">
-                            <form>
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="onSaleProduct" checked >
-                                    <label class="custom-control-label" for="onSaleProduct">@if(isset($searchterm)) {{$searchterm}} @else Showing All Results @endif</label>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="ps-categogy__sort">
-                            <form><span>Sort by</span>
-                                <select class="form-select">
-                                    <option selected="">Latest</option>
-                                    <option value="Popularity">Popularity</option>
-                                </select>
-                            </form>
-                        </div>
-                       
-                    </div>
-                    <div class="ps-categogy--grid">
-                        <div class="row m-0">
-                            @forelse ($products as $prods )
-                            <div class="col-6 col-lg-4 col-xl-3 p-0">
-                                <div class="ps-product ps-product--standard">
-                                    <div class="ps-product__thumbnail"><a class="ps-product__image" href="{{route('users.products',[$prods->hashid, $prods->productUrl])}}">
-                                            <!--<figure><img src="{{$prods->image_path}}" alt="{{$prods->image_path}}"><img src="{{$prods->image_path }}" alt="{{$prods->name }}">-->
-                                                   <figure><img src="{{asset('images/products/'.$prods->image_path)}}" alt="{{$prods->name }}" /><img src="{{asset('images/products/'.$prods->image_path)}}" alt="{{$prods->name }}" /> 
-                                            </figure>
-                                        </a>
-                                        <div class="ps-product__badge">
-                                            <span class="badge badge-warning"> -{{number_format($prods->discount,0)}}%</span>
-                                        </div>
-                                    </div>
-                                    <div class="ps-product__content">
-                                        <h5 class="ps-product__tite"><a href="{{route('users.products',[$prods->hashid, $prods->productUrl])}}">{{$prods->name}}</a></h5>
-                                        <div class="ps-product__meta"><span class="ps-product__price">{{moneyFormat($prods->sale_price)}}</span>
-                                        <span class="ps-product__price "> <small> <del> {{moneyFormat($prods->price)}}</del> </small></span>
-                                        </div>
-                                    </div>
-                                     <center> <a
-                                                        href="{{ route('users.products', [$prods->hashid, $prods->productUrl]) }}"
-                                                        class="btn  btn-lg" style="background:#fff; color:#73c2fb; border:1px solid #73c2fb; width:100px"> Add to
-                                                    Cart <i class="fa fa-shopping-basket"></i></a>
-                                                       <a target="_blank" rel="noopener noreferrer" href="https://wa.me/+2348058885913?text=Please i need {{ $prods->name }}, the  price on your website is {{ moneyFormat($prods->sale_price) }} ">
-                                                             <i class="fa fa-whatsapp" aria-hidden="true" style="font-size:20px; border:1px solid #eee; padding:5px; color:#73c2fb "> 
-                                                             </i></a> 
-                                                    </center>
-                                </div>
-                            </div> 
-                             
-                            @empty
-                            <div class="ps-delivery ps-delivery--info">
-                                <div class="ps-delivery__content">
-                                    <div class="ps-delivery__text"> <i class="icon-shield-check"></i><span> <strong>No Item found </strong></span></div>
-                                </div>
-                            </div>
-                            @endforelse
-                          
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-3" style="top:-40px">
-                    <div class="ps-widget ps-widget--product" style="
-                    background: #fff;
-                    border-radius: 10px;
-                    padding: 10px 20px;">
-                        <div class="ps-widget__block">
-                            <h4 class="ps-widget__title">Categories</h4><a class="ps-block-control" href="#"><i class="fa fa-angle-down"></i></a>
-                            <div class="ps-widget__content ps-widget__category">
-                                <ul class="menu--mobile">
-                                  
-                                 @forelse ($categories as $cat )
-                                    <li><a href="{{route('products.search',$cat->hashid)}}" style="font-size: 14px">{{substr($cat->name, 0,30)}}</a><span class="sub-toggle"><i class="fa fa-chevron-down"></i></span>
-                                        <ul class="sub-menu">
-                                            @foreach ($cat->products as $prod )
-                                           
-                                            <li><a href="{{route('users.products',[$prod->hashid, $prod->productUrl])}}">{{$prod->name}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
 
-                                     
-                                 @empty
-                                     
-                                 @endforelse 
 
-                                </ul>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  
-</div> --}}
+
+.product-card-elegant {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card-elegant:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+}
+
+
+/* Image hover zoom */
+.product-card-elegant:hover .product-image img {
+    transform: scale(1.05);
+}
+
+
+
+.product-card-elegant:hover .cart-icon {
+    transform: scale(1.15);
+    color: #163a5f;
+}
+
+/* Title – fixed height */
+.product-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 6px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
+}
+
+.product-title a {
+    text-decoration: none;
+     color: #040d5ef1;
+     font-weight: 600;
+}
+
+.product-title a:hover {
+    color: #163a5f;
+}
+
+/* Image */
+.product-image {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Price row */
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #dc3545; /* red strike */
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a2540; /* dark blue */
+}
+
+.cart-icon {
+    font-size: 16px;
+    color: #0a2540;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Add to cart button */
+.product-card-elegant a.add-cart-btn {
+    margin-top: auto;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    padding: 7px;
+    font-size: 13px;
+    border-radius: 6px;
+    color: #333;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.product-card-elegant a.add-cart-btn:hover {
+    background: #e0dbdb;
+    border-color: #0a2540;
+}
+
+/* Mobile tuning */
+@media (max-width: 576px) {
+    .product-image {
+        height: 95px;
+    }
+
+    .add-cart-btn {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+
+
+
+
+
+
+
+
+  </style>
+  @endsection
+@section('content')
+
+
+
 
   <!-- ========================
        page title 
     =========================== -->
-    <section class="page-title pt-30 pb-30">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mt-0">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Cart</li>
-                </ol>
-              </nav>
-            </div><!-- /.col-lg-12 -->
-          </div><!-- /.row -->
-        </div><!-- /.container -->
-        </section>
+<section class="page-title">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mt-0 mb-0">
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Products/category</li>
+      </ol>
+    </nav>
+  </div>
+</section>
 
- <!-- ========================
-       page title 
-    =========================== -->
-    {{-- <section class="page-title page-title-layout5 text-center">
-        <div class="bg-img"><img src="{{ asset('frontend/images/backgrounds/6.jpg') }}" alt="background"></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="pagetitle__heading">Our Products</h1>
-              <nav>
-                <ol class="breadcrumb justify-content-center mb-0">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Product</li>
-                </ol>
-              </nav>
-            </div><!-- /.col-xl-6 -->
-          </div><!-- /.row -->
-        </div><!-- /.container -->
-      </section><!-- /.page-title --> --}}
-  
-      <!-- ========================
-         shop 
-      =========================== -->
-     <div class="container py-5">
+ 
+
+<div class="container py-5">
     <div class="row">
         <!-- Categories Sidebar -->
         <div class="col-md-3">
-                <div class="search-container">
+            {{-- <h5 class="mb-3">Categories</h5> --}}
+            <!-- Search -->
+                {{-- <div class="search-container">
     <input type="text" placeholder="Search products...">
     <button type="submit">
-        🔍
+        
     </button>
-</div> <br>
-
-            <aside class="category-sidebar">
-          <h3>Categories</h3>
+</div> <br> --}}
+           
+        <aside class="category-sidebar">
+          <h3> Browse Categories</h3> 
           <ul>
               @foreach ($cate as $cat)
                           <li  {{ request('category') == $cat->id ? 'active' : '' }}>
                               <a href="{{route('category.products',$cat->id)}}" {{ request()->category == $cat->id ? 'text-yellow' : '' }}>
-                                  {{ $cat->name }}
+                                  {{ $cat->name }} 
                               </a>
                           </li>
+                          
                   @endforeach
           </ul>
     </aside>
 <br>
 
-    <aside class="latest-products">
-    <h3>Latest Products</h3>
-@foreach ($latest as $item)
-    <div class="latest-card">
-    <a href="{{ route('product.details',encrypt($item->id)) }}"> 
-        <img src="{{ asset('images/products/'.$item->image_path) }}" alt="Product Image">
-          </a>
-        <div class="latest-info">
-            <h4><a href="{{ route('product.details',encrypt($item->id)) }}">{{ $item->name }} </a> </h4>
-            <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-            <p class="price">{{ $item->sale_price }}</p>
+
+
+
+<aside class="latest-products">
+    <h3 class="sidebar-title">Latest Products</h3>
+
+    @foreach ($latest as $item)
+        <div class="latest-card">
+            <a class="thumb" href="{{ route('product.details', encrypt($item->id)) }}">
+                <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+            </a>
+
+            <div class="latest-info">
+                <a class="product-name" href="{{ route('product.details', encrypt($item->id)) }}">
+                    {{ $item->name }}
+                </a>
+
+                <div class="price-wrap">
+                    <span class="old-price">${{ $item->price }}</span>
+                    <span class="new-price">${{ $item->sale_price }}</span>
+                </div>
+            </div>
         </div>
-    </div>
-  @endforeach  
+    @endforeach
 </aside>
 
-        </div>
 
+        </div>
 
         <!-- Products Grid -->
         <div class="col-md-9">
-            <h6 class="mb-3">{{ $currentCategory->name ?? 'All Products' }}</h6>
+            <h5 class="mt-0 mb-2">{{ $currentCategory->name ?? ' Products' }}</h5>
             <div class="row">
-               
-      
-  <div class="container my-5">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-    <!-- Card 1 -->
+
+<form action="{{ route('prod.search') }}" method="GET" style="max-width: 860px;">
+@csrf
+  <div style="display: flex; width: 100%;">
+    <input 
+      type="text" 
+      name="query" 
+      placeholder="Search for Products" 
+      value="{{ request('query') }}" 
+      style="
+        flex: 1;
+        padding: 10px 12px;
+        border: 1px solid #0d2f6b;
+        border-right: none;
+        outline: none;
+        font-size: 14px;
+        border-radius: 4px 0 0 4px;
+      "
+    >
+    <button 
+      type="submit" 
+      style="
+        background-color: #0d2f6b;
+        color: #fff;
+        font-weight: bold;
+        padding: 0 18px;
+        border: 1px solid #0d2f6b;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
+      "
+    >
+      SEARCH
+    </button>
+  </div>
+</form>
+
+
+
+<div class="container my-4">
+  <div class="row row-cols-2 row-cols-md-4 g-3">
+
     @forelse ($product as $item)
-    <div class="col">
-      <div class="card h-100 shadow-sm rounded-4 product-container">
-      <a href="{{ route('product.details',encrypt($item->id)) }}"> 
-        <img src="{{ asset('images/products/'.$item->image_path) }}" class="card-img-top" alt="Product Image">
-        </a>
-        <div class="card-body product-card">
-          <h6 class="card-title"><a href="{{ route('product.details',encrypt($item->id)) }}"> {{ $item->name }}</a> </h6>
-          <p class="card-text mb-1">
-            <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-            <span class="text-danger fw-bold ms-2">${{ $item->sale_price }}</span>
-          </p>
-            <div class="cart-icon">
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-          {{-- <a href="" class="btn btn-sm btn-primary mt-2 w-100">Add to Cart</a> --}}
+      <div class="col">
+        <div class="product-card-elegant">
+
+          <!-- Product Name -->
+          <h6 class="product-title">
+            <a href="{{ route('product.details', encrypt($item->id)) }}">
+              <b>{{ $item->name }}</b>
+            </a>
+          </h6>
+
+          <!-- Image -->
+          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+            <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+          </a>
+
+          <!-- Price + Cart Icon -->
+          <div class="price-row">
+            <div class="price">
+              <span class="old-price">${{ $item->price }}</span>
+              <span class="new-price">${{ $item->sale_price }}</span>
+            </div>
+
+            <i class="fa-solid fa-cart-shopping cart-icon"></i>
+          </div>
+
+          <!-- Add to Cart -->
+          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
+                        Add to cart
+                    </a>
+
         </div>
       </div>
-    </div>
- @empty
-     <p>No products found in this category.</p>                
- @endforelse
-   
+    @empty
+      <p class="text-center">No products available.</p>
+    @endforelse
+
   </div>
 </div>
 
 
-</div>
+
+
+
+
+
+        
+       </div>
 
             
         </div>
     </div>
 </div>
-      
+
+
+
+
+
 @endsection

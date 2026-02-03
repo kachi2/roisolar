@@ -205,7 +205,7 @@
 
     <div class="about-image">
       <img src="{{ asset('images/Picture1.png') }}" alt="About Us Image">
-      <a href="" class="contact-btn">Contact Us</a>
+      <a href="{{ route('contact-us') }}" class="contact-btn">Contact Us</a>
     </div>
   </section>
 
@@ -214,22 +214,25 @@
     <h2>Meet Our Team</h2>
     <div class="team-grid">
       <div class="team-card">
-        <img src="https://via.placeholder.com/400x400?text=Jane+Doe" alt="Jane Doe">
+        <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80">
+
+
         <h4>Jane Doe</h4>
         <p>Founder & CEO</p>
       </div>
       <div class="team-card">
-        <img src="https://via.placeholder.com/400x400?text=John+Smith" alt="John Smith">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80">
+
         <h4>John Smith</h4>
         <p>Lead Developer</p>
       </div>
       <div class="team-card">
-        <img src="https://via.placeholder.com/400x400?text=Mary+Johnson" alt="Mary Johnson">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80">
         <h4>Mary Johnson</h4>
         <p>Creative Director</p>
       </div>
       <div class="team-card">
-        <img src="https://via.placeholder.com/400x400?text=David+Brown" alt="David Brown">
+        <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80">
         <h4>David Brown</h4>
         <p>Marketing Strategist</p>
       </div>

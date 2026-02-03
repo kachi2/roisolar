@@ -15,6 +15,7 @@ use App\Http\Controllers\Users\PaymentController;
 use App\Http\Controllers\Users\CheckoutController;
 use App\Http\Controllers\Users\PrescriptionController;
 use App\Http\Controllers\Users\ProductDetailsController;
+use App\Http\Controllers\ProjectController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, '__invoke'] )->name('dashboard');
@@ -99,9 +100,15 @@ Route::get('/pages/services', 'Services')->name('users.services');
 Route::get('/pages/services/details/{id}', 'ServiceDetails')->name('service.details');
 Route::get('/product/category/{id}', 'productsByCategory')->name('category.products');
 
+
 // Route::get('/pages/blogs', 'Blogs')->name('users.blogs');
 });
 
+Route::controller(ProjectController::class)->group(function(){
+
+Route::get('/pages/projects', 'Project')->name('users.project');
+Route::get('/pages/projects/details/{slug}', 'ProjectDetails')->name('project.details');
+});
 
 Route::controller(PrescriptionController::class)->group(function(){
 

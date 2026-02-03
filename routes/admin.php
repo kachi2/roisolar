@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Manage\ProjectController;
 use App\Http\Controllers\Manage\ProductController;
 use App\Http\Controllers\Manage\CategoryController;
 use App\Http\Controllers\Manage\AdminController;
@@ -132,6 +133,15 @@ Route::prefix('manage')->group(function () {
             Route::get('/service/edit/{id}', 'Edit')->name('admin.service.edit');
             Route::post('service/update/{id}', 'Update')->name('admin.service.update');
             Route::post('service/delete/{id}', 'Delete')->name('admin.service.delete');
+        });
+
+         Route::controller(ProjectController::class)->group(function(){
+            Route::get('/projects', 'Index')->name('admin.project.index');
+            Route::get('project/create', 'Create')->name('admin.project.create');
+            Route::post('/project/store', 'Store')->name('admin.project.store');
+            Route::get('/project/edit/{id}', 'Edit')->name('admin.project.edit');
+            Route::post('project/update/{id}', 'Update')->name('admin.project.update');
+            Route::post('project/delete/{id}', 'Delete')->name('admin.project.delete');
         });
 
         Route::controller(FaqController::class)->group(function (){

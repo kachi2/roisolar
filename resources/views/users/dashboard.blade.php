@@ -12,29 +12,7 @@
 <style>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
  /* ==== GENERAL ==== */
-  section {
-    scroll-margin-top: 80px;
-  }
-
-  /* ==== SERVICES ==== */
-  .service-card {
-    border-radius: 10px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    background-color: #fff;
-  }
-
-  .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .service-img {
-    height: 140px;
-    width: 100%;
-    object-fit: cover;
-  }
-
+  
   .text-truncate-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -42,55 +20,176 @@
     overflow: hidden;
   }
 
-  /* ==== PRODUCTS ==== */
-  .product-card {
-    transition: all 0.3s ease;
-    border-radius: 10px;
-    background-color: #fff;
-  }
+  .product-card-elegant {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-  .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
+.product-card-elegant:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+}
 
-  .product-img {
-    height: 120px;
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .add-btn {
-    font-size: 14px;
-    padding: 3px 10px;
-    border-radius: 2px;
-    color: #112e5aff;
-    transition: all 0.2s ease;
-  }
-
-  .add-btn:hover {
-    background-color: #0d6efd;
-    color: #fff;
-    border-color: #0d6efd;
-  }
-
-  /* ==== TEAM ==== */
-  .team-card {
-    border-radius: 12px;
+.product-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    transition: all 0.3s ease;
-    background-color: #fff;
+    min-height: 34px;
+}
+
+.product-title a {
+    color: #0a0441;
+    text-decoration: none;
+}
+
+.product-title a:hover {
+    color: #163a5f;
+}
+
+.product-image {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card-elegant:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #dc3545;
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a2540;
+}
+
+.cart-icon {
+    font-size: 16px;
+    color: #0a2540;
+    transition: transform 0.25s ease;
+}
+
+.product-card-elegant:hover .cart-icon {
+    transform: scale(1.15);
+}
+
+.product-card-elegant a.add-cart-btn {
+    margin-top: auto;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    padding: 7px;
+    font-size: 13px;
+    border-radius: 4px;
+    color: #0a2540;
+    transition: all 0.25s ease;
+}
+
+.product-card-elegant a.add-cart-btn:hover {
+    background: #e0dbdb;
+    border-color: #0a2540;
+}
+
+@media (max-width: 576px) {
+    .product-image {
+        height: 95px;
+    }
+
+    .add-cart-btn {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
+
+/* team section */
+ .team-section {
+    margin-top: 0; /* remove gap above */
+    padding-top: 5px;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  .team-section h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #111827;
+    margin-bottom: 24px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .team-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
   }
 
-  .team-img {
-    height: 180px;
+  .team-card img {
     width: 100%;
+    height: 240px;
     object-fit: cover;
+  }
+
+  .team-card h4 {
+    margin: 10px 0 4px;
+    color: #4f46e5;
+    font-size: 18px;
+  }
+
+  .team-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 12px;
+  }
+
+  /* ===== Animation ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ==== RESPONSIVE ==== */
@@ -106,17 +205,13 @@
       max-width: 33.333%;
     }
 
-    .service-card {
-      font-size: 14px;
-    }
+   
 
     .product-img {
       height: 100px;
     }
 
-    .team-img {
-      height: 150px;
-    }
+   
   }
 
   @media (max-width: 576px) {
@@ -136,163 +231,7 @@
 
 
 
-  /* ==== CATEGORY LIST ==== */
-  .category-list {
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-  }
-  .category-list::-webkit-scrollbar {
-    display: none;
-  }
-
-  .category-btn {
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    color: #333;
-    font-size: 13px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-  }
-
-  .category-btn:hover,
-  .category-btn.active {
-    background: #0d6efd;
-    color: #fff;
-    border-color: #0d6efd;
-  }
-
-  /* ==== PRODUCT CARD ==== */
-  .product-container {
-    transition: all 0.3s ease;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .product-container:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
-
-  .product-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-bottom: 1px solid #eee;
-  }
-
-  .product-card h6 {
-    font-size: 12px;
-    font-weight: 300;
-  }
-
-  .product-card p {
-    font-size: 13px;
-  }
-
-  .add-to-cart-btn {
-    font-size: 12px;
-    /* padding: 1px 2px; */
-    /* border: 0.5px solid #222; */
-    background: transparent;
-    color: #222;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
-
-  .add-to-cart-btn:hover {
-    background: #0d6efd;
-    color: #fff;
-    /* border-color: #0d6efd; */
-  }
-
-  .fa-cart-arrow-down {
-    font-size: 14px;
-  }
-
-  /* ==== RESPONSIVE ==== */
-  @media (max-width: 768px) {
-    .product-img {
-      height: 150px;
-    }
-    .add-to-cart-btn {
-      font-size: 11px;
-      padding: 3px 8px;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .product-img {
-      height: 130px;
-    }
-    .add-to-cart-btn {
-      font-size: 10px;
-      padding: 2px 6px;
-    }
-  }
-
-
-#brands {
-  overflow: hidden;
-  position: relative;
-}
-
-.brand-slider {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-
-.brand-track {
-  display: flex;
-  width: calc(250px * 12); /* total width based on number of logos */
-  animation: scroll 40s linear infinite;
-}
-
-.brand {
-background-color: white;
-  flex: 0 0 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.brand img {
-  width: 120px;
-  height: auto;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: all 0.3s ease;
-}
-
-.brand img:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .brand img {
-    width: 90px;
-  }
-  .brand {
-    flex: 0 0 150px;
-  }
-  .brand-track {
-    animation: scroll 30s linear infinite;
-  }
-}
-
-
+  
 
 
   .small-card {
@@ -329,196 +268,488 @@ background-color: white;
     background-color: white !important;
   }
 
+
+
+
+
+
+
+.category-card {
+    position: relative;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 130px;
+    box-shadow: 0 8px 25px rgba(189, 185, 185, 0.1);
+}
+
+.category-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,.7),
+        rgba(0,0,0,.1)
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+}
+
+.category-overlay span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Mobile tweaks */
+@media (max-width: 576px) {
+    .category-card {
+        height: 100px;
+    }
+    .category-overlay span {
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+
+/* ===== BRAND SECTION ===== */
+.brands-section {
+    background: linear-gradient(180deg, #f9fafb, #ffffff);
+    overflow: hidden;
+}
+
+.brands-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ===== SLIDE TRACK ===== */
+.brands-track {
+    display: flex;
+    gap: 30px;
+    animation: slideBrands 25s linear infinite;
+}
+
+/* Pause on hover */
+.brands-slider:hover .brands-track {
+    animation-play-state: paused;
+}
+
+/* ===== BRAND CARD ===== */
+.brand-card {
+    min-width: 180px;
+    height: 100px;
+    background: #fff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.brand-card img {
+    max-width: 120px;
+    max-height: 60px;
+    filter: grayscale(100%);
+    opacity: .85;
+    transition: all .3s ease;
+}
+
+/* Hover effect */
+.brand-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.brand-card:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes slideBrands {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .brand-card {
+        min-width: 140px;
+        height: 90px;
+    }
+
+    .brand-card img {
+        max-width: 100px;
+    }
+}
+
+
+
+
+
+/* ===== SERVICE TILES ===== */
+.service-tiles {
+  background: #ffffff;
+}
+
+.service-tile {
+  display: block;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+  text-decoration: none;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.service-tile:hover {
+  background: #ffffff;
+  border-color: #0d6efd;
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Icon */
+.icon-box {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #e8f2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* Title */
+.service-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+/* Description */
+.service-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.45;
+  margin-bottom: 10px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Link */
+.service-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #0d6efd;
+}
+
+/* Mobile fine-tune */
+@media (max-width: 576px) {
+  .icon-box {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon-box img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: #0f172a; /* dark professional background */
+  padding: 12px 0;
+}
+
+.ticker {
+  display: flex;
+  width: max-content;
+  animation: scroll 18s linear infinite;
+}
+
+.ticker span {
+  white-space: nowrap;
+  padding-right: 3rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  font-weight: 500;
+  color: #e5e7eb;
+  letter-spacing: 0.02em;
+}
+
+/* Pause on hover */
+.ticker-wrapper:hover .ticker {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    animation: none;
+  }
+}
+
 </style>
 
 @endsection
 
 @include('users.slider') 
 
-<!-- ===== SERVICES SECTION ===== -->
-<section id="services" class="py-5 bg-light">
+
+
+
+<!-- ===== SERVICES SECTION (ALT DESIGN) ===== -->
+<section id="services" class="py-5 service-tiles">
   <div class="container">
-    <div class="text-center mb-4">
-      <h6 class="fw-bold">Our Services</h6>
-      <p class="text-muted">Empowering you with innovative and sustainable energy solutions.</p>
+
+    <div class="text-center mb-5">
+      <span class="badge bg-success-subtle text-success mb-2">
+        What We Do
+      </span>
+      <h4 class="fw-bold">Our Professional Services</h4>
+      <p class="text-muted small">
+        End-to-end renewable energy solutions tailored for you.
+      </p>
     </div>
 
     <div class="row g-3">
       @foreach ($service as $serv)
-      <div class="col-4 col-md-4 col-lg-3">
-        <div class="card border-0 shadow-sm service-card h-100 text-center p-3">
-          <a href="{{ route('service.details', encrypt($serv->id)) }}">
-            <img src="{{ asset('images/services/'.$serv->images) }}" class="img-fluid rounded mb-3 service-img" alt="{{ $serv->title }}">
+        <!-- Mobile: 3 per row -->
+        <div class="col-4 col-md-4 col-lg-3">
+          <a href="{{ route('service.details', encrypt($serv->id)) }}" class="service-tile h-100">
+            
+            <div class="icon-box">
+              <img src="{{ asset('images/services/'.$serv->images) }}" alt="{{ $serv->title }}">
+            </div>
+
+            <h6 class="service-name">
+              {{ $serv->title }}
+            </h6>
+
+            <p class="service-text">
+              {{ trim(strip_tags($serv->short_description)) }}
+            </p>
+
+            <span class="service-link">
+              Learn more →
+            </span>
+
           </a>
-          <a href="{{ route('service.details', encrypt($serv->id)) }}">
-            <h6 class="fw-semibold mb-1 text-truncate">{{ $serv->title }}</h6> </a>
-          <p class="small text-muted text-truncate-2">{{ trim(strip_tags($serv->short_description)) }}</p>
         </div>
-      </div>
+      @endforeach
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CATEGORY SECTION ===== -->
+
+<section id="shop" class="py-5 bg-light">
+  <div class="container">
+    <h4 class="text-center fw-bold mb-4">Categories</h4>
+
+    <div class="row g-3 category-grid">
+      @foreach ($categories as $category)
+        <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+          <a href="{{ route('category.products', $category->id) }}"
+             class="category-card">
+            
+            <div class="category-img">
+             
+              <img src="{{ asset('images/category/'.$category->image_path) }}"
+                   alt="{{ $category->name }}">
+               
+            </div>
+
+            <div class="category-overlay">
+              
+              <span>{{ $category->name }}</span>
+             
+            </div>
+
+          </a>
+        </div>
       @endforeach
     </div>
   </div>
 </section>
 
-<!-- ===== PRODUCTS SECTION ===== -->
-<section id="shop" class="py-5">
- 
-
-{{-- <div class="container">
-    <!-- ===== CATEGORY LIST ===== -->
-    <div class="category-list mb-4 d-flex flex-wrap justify-content-center gap-2">
-      @foreach ($categories as $category)
-      <button class="btn category-btn">
-        {{ $category->name }}
-      </button>
-      @endforeach
-    </div> --}}
 
 
-<div class="container my-4">
-  <!-- ===== CAPTION ===== -->
-  {{-- <h6 class="text-center mb-4 fw-bold text-uppercase text-primary">
-    Categories
-  </h6> --}}
-  <h6 class=" text-center mb-4 fw-bold">Categories</h6>
 
-  <div class="row g-3">
-    @foreach ($categories as $category)
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card shadow-sm border h-100 small-card">
-          <div class="card-body text-center py-3 px-2">
-            
-            <!-- Category Title -->
-            <h6 class="card-title fw-semibold text-dark mb-2">
-              {{ $category->name }}
-            </h6>
 
-            <!-- Dropdown Button -->
-            <div class="dropdown">
-              <button class="btn btn-sm btn-outline-primary dropdown-toggle w-100"
-                      type="button"
-                      id="dropdownMenu{{ $category->id }}"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                View Products
-              </button>
 
-              <ul class="dropdown-menu w-100 text-start shadow-sm"
-                  aria-labelledby="dropdownMenu{{ $category->id }}">
-                @php
-                  $items = $products->where('category_id', $category->id);
-                @endphp
-
-                @forelse ($items as $item)
-                  <li>
-                    <a class="dropdown-item" href="{{ route('category.products', $item->id) }}">
-                      {{ $item->name }}
-                    </a>
-                  </li>
-                @empty
-                  <li><span class="dropdown-item text-muted">No items</span></li>
-                @endforelse
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    @endforeach
+<div class="ticker-wrapper">
+  <div class="ticker">
+    <span>
+      🚀 Our Product helps teams move faster • Secure • Scalable • Built for growth •
+    </span>
+    <span>
+      🚀 Our Product helps teams move faster • Secure • Scalable • Built for growth •
+    </span>
   </div>
 </div>
 
 
 
 
+<section id="shop" class="py-5">
+    <div class="container">
 
-    <!-- ===== PRODUCT GRID ===== -->
-    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
-      @forelse ($products as $item)
-      <div class="col">
-        <div class="card h-100 border-0 shadow-sm product-container">
-          <a href="{{ route('product.details', encrypt($item->id)) }}">
-            <img src="{{ asset('images/products/'.$item->image_path) }}" 
-                 class="card-img-top product-img" 
-                 alt="{{ $item->name }}">
-          </a>
+        <div class="row row-cols-2 row-cols-md-4 g-3">
 
-          <div class="card-body product-card text-center p-2">
-            <h6 class="card-title mb-1 text-truncate">
-              <a href="{{ route('product.details', encrypt($item->id)) }}" 
-                 class="text-dark text-decoration-none">
-                {{ $item->name }}
-              </a>
-            </h6>
+            @forelse ($products as $item)
+            <div class="col">
+                <div class="product-card-elegant">
 
-            <p class="card-text mb-1 small">
-              <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-              <span class="text-danger fw-bold ms-1">${{ $item->sale_price }}</span>
-            </p>
+                    <!-- Product Name -->
+                    <h6 class="product-title">
+                        <a href="{{ route('product.details', encrypt($item->id)) }}">
+                           <b>{{ $item->name }}</b> 
+                        </a>
+                    </h6>
 
-            <div class="cart-action d-flex align-items-center justify-content-center mt-2">
-              <a href="{{ route('product.details', encrypt($item->id)) }}"  <i class="fa-solid fa-cart-arrow-down text-primary me-2 fs-6"></i>
-              <button class="btn add-to-cart-btn">Add to Cart</button> </a>
+                    <!-- Image -->
+                    <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+                        <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+                    </a>
+
+                    <!-- Price + Cart -->
+                    <div class="price-row">
+                        <div class="price">
+                            <span class="old-price">${{ $item->price }}</span>
+                            <span class="new-price">${{ $item->sale_price }}</span>
+                        </div>
+
+                        <i class="fa-solid fa-cart-shopping cart-icon"></i>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
+                        Add to cart
+                    </a>
+
+                </div>
             </div>
-          </div>
+            @empty
+                <p class="text-center">No products available.</p>
+            @endforelse
+
         </div>
-      </div>
-      @empty
-        <p class="text-center">No products available.</p>
-      @endforelse
+
     </div>
-  </div>
 </section>
 
-<!-- ===== TEAM SECTION ===== -->
-<section id="team" class="py-5 bg-light">
+
+
+
+
+
+<section class="team-section">
+  <div class="container"> 
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80">
+
+
+        <h4>Jane Doe</h4>
+        <p>Founder & CEO</p>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80">
+
+        <h4>John Smith</h4>
+        <p>Lead Developer</p>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80">
+        <h4>Mary Johnson</h4>
+        <p>Creative Director</p>
+      </div>
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=800&q=80">
+        <h4>David Brown</h4>
+        <p>Marketing Strategist</p>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+
+
+<section id="brands" class="brands-section py-5">
   <div class="container">
     <div class="text-center mb-5">
-      <h6 class="fw-bold">Meet Our Team</h6>
-      <p class="text-muted">The brilliant minds powering our mission to light up Africa sustainably.</p>
+      <h4 class="fw-bold">Trusted Solar Partners</h4>
+      <p class="text-muted small">
+        We collaborate with leading renewable energy brands worldwide
+      </p>
     </div>
 
-    <div class="row g-4 justify-content-center">
-      {{-- @foreach ($team as $member) --}}
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card border-0 shadow-sm text-center team-card h-100">
-          {{-- <img src="{{ asset('images/team/'.$member->photo) }}" class="card-img-top team-img" alt="{{ $member->name }}"> --}}
-          <div class="card-body">
-            <h6 class="fw-bold mb-0">John Doe</h6>
-            <small class="text-muted">Solar Engineer</small>
+    <div class="brands-slider">
+      <div class="brands-track">
+        @foreach ([
+          'a.jpg','b.jpg','c.jpg','d.jpg','e.jpg','c.jpg',
+          'a.jpg','b.jpg','c.jpg','d.jpg','e.jpg','c.jpg'
+        ] as $brand)
+          <div class="brand-card">
+            <img src="{{ asset('frontend/images/brands/' . $brand) }}" alt="Solar Brand">
           </div>
-        </div>
-      </div>
-      {{-- @endforeach --}}
-    </div>
-  </div>
-</section>
-
-
-<section id="brands" class="py-5 bg-light border-top bgv">
-  <div class="container">
-    <div class="text-center mb-4">
-      <h6 class="fw-bold">Our Trusted Brands</h6>
-      <p class="text-muted small">We proudly work with top solar and energy brands.</p>
-    </div>
-
-    <div class="brand-slider">
-      <div class="brand-track">
-        <!-- Repeat logos to make infinite loop -->
-        <div class="brand"><img src="{{ asset('frontend/images/brands/a.jpg') }}" alt="Brand 1"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/b.jpg') }}" alt="Brand 2"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/c.jpg') }}" alt="Brand 3"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/d.jpg') }}" alt="Brand 4"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/e.jpg') }}" alt="Brand 5"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/c.jpg') }}" alt="Brand 6"></div>
-
-        <!-- Duplicate set for smooth looping -->
-        <div class="brand"><img src="{{ asset('frontend/images/brands/a.jpg') }}" alt="Brand 1"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/b.jpg') }}" alt="Brand 2"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/c.jpg') }}" alt="Brand 3"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/d.jpg') }}" alt="Brand 4"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/e.jpg') }}" alt="Brand 5"></div>
-        <div class="brand"><img src="{{ asset('frontend/images/brands/c.jpg') }}" alt="Brand 6"></div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -527,7 +758,6 @@ background-color: white;
 
 
 
- 
 
 
 @section('scripts')

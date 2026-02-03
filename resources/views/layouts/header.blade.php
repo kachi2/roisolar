@@ -1,6 +1,6 @@
 
 <style>
-.cart-count {
+<!-- .cart-count {
     position: absolute;
     top: -4px;
     right: -1px;
@@ -12,11 +12,11 @@
     font-weight: bold;
     min-width: 18px;
     text-align: center;
-}
+} -->
 
  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
-  .cart-icon {
+  <!-- .cart-icon {
     position: relative;
     display: inline-block;
   }
@@ -35,7 +35,67 @@
     right: -9px;
     font-size: 10px;
     padding: 3px 6px;
-  }
+  } -->
+
+  .cart-wrappers {
+    margin-left: 20px;
+}
+
+.cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: #f8fafc;
+    border-radius: 50%;
+    color: #0f172a;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.cart-link i {
+    font-size: 20px;
+}
+
+/* Hover effect */
+.cart-link:hover {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+/* Badge */
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    background: #f97316; /* Jumia-like orange */
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cart-link {
+        width: 38px;
+        height: 38px;
+    }
+
+    .cart-link i {
+        font-size: 18px;
+    }
+}
+
 </style>
 <header class="header header-layout2">
     <nav class="navbar navbar-expand-lg sticky-navbar">
@@ -139,7 +199,7 @@
     </span> --}}
 
 
-          <div class="d-none d-xl-flex align-items-center position-relative ml-30">
+          <!-- <div class="d-none d-xl-flex align-items-center position-relative ml-30">
             <a href="{{ route('carts.index') }}" class=" btn-sm">
               <i class="icon-cart"></i>
                <span class="cart-badge position-absolute  badge rounded-pill bg-danger">
@@ -155,7 +215,30 @@
         @endif
 
             </a>
-          </div>
+          </div> -->
+
+
+
+
+<div class="cart-wrappers d-flex align-items-center position-relative">
+    <a href="{{ route('carts.index') }}" class="cart-link">
+        <i class="icon-cart"></i>
+
+        @php
+            $cartCount = collect(session('cart', []))->sum('quantity');
+        @endphp
+
+        <span class="cart-badge">
+            {{ $cartCount > 0 ? $cartCount : 0 }}
+        </span>
+    </a>
+</div>
+
+
+
+
+
+
         {{-- <button class="action__btn-search ml-30"><i class="fa fa-search"></i></button> --}}
       </div><!-- /.container -->
     </nav><!-- /.navabr -->

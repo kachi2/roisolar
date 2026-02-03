@@ -7,7 +7,22 @@
            data-nav-target="#dashboards">
            <i class="fa fa-home"></i> &nbsp;Dashboard</a>
         </li>
+
          <li class="navigation-divider">Manage Website</li>
+
+
+          <li>
+            <a  href="" data-toggle="tooltip" data-placement="right" title="Manage Categories"
+            data-nav-target="#dashboards">
+             <i class="fa-solid fa-folder-open"></i>&nbsp; Manage Project</a>
+         </a>
+             <ul>
+                 <li><a  href="{{route('admin.project.create')}}">Add Project</a></li>
+                 <li><a href="{{route('admin.project.index')}}">Manage Project</a></li>
+             </ul>
+         </li>
+
+
         <li>
             <a  href="" data-toggle="tooltip" data-placement="right" title="Manage Categories"
             data-nav-target="#dashboards">
@@ -18,6 +33,8 @@
                  <li><a href="{{route('category.index')}}">Manage Category</a></li>
              </ul>
          </li>
+
+
          <li>
             <a  href="" data-toggle="tooltip" data-placement="right" title="Manage Menus"
            data-nav-target="#dashboards">

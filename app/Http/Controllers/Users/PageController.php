@@ -130,8 +130,7 @@ class PageController extends Controller
     }
 
 
-
-
+   
 //     public function Products()
 // {
 //     return view('users.pages.products', [

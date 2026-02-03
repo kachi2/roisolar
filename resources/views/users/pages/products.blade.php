@@ -103,64 +103,7 @@
 }
 
 
-/* .product-container {
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  border-radius: 8px !important; /* optional: makes corners round 
-  overflow: hidden !important;
-} */
 
-/* Hover effect */
-.product-container:hover {
-  transform: scale(1.05) !important; /* zooms in slightly */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important; /* shadow on hover */
-  cursor: pointer !important;
-}
-
-
-.cart-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 8px;
-  background-color:rgb(4, 30, 58); /* Bootstrap blue */
-  border-radius: 50%;
-  padding: 8px;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cart-icon i {
-  color: white;
-  font-size: 13px;
-}
-
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-}
-/* .product-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-} */
-/* .product-card img {
-    height: 150px;
-    object-fit: contain;
-} */
-.product-card h6 {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
-}
-.product-card p {
-    font-size: 14px;
-    height: 40px;
-    overflow: hidden;
-}
 
 .category-sidebar {
     width: 250px;
@@ -191,7 +134,7 @@
 .category-sidebar ul li a {
     display: block;
     padding: 8px 10px;
-    color: #000000;
+    color: #04104b;
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s ease, color 0.3s ease;
@@ -199,7 +142,7 @@
 
 .category-sidebar ul li a:hover {
     background: #060813;
-    color: #fff;
+    color: #fff !important;
 }
 
 /* Mobile Friendly */
@@ -213,154 +156,243 @@
 
 .latest-products {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 15px;
-    font-family: Arial, sans-serif;
-    width: 280px;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-.latest-products h3 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 5px;
+.sidebar-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
 }
 
+/* Card */
 .latest-card {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 14px;
 }
 
 .latest-card:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Image */
+.latest-card .thumb {
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
 }
 
 .latest-card img {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 5px;
 }
 
-.latest-info h4 {
-    font-size: 15px;
-    margin: 0;
-    color: #333;
+/* Info */
+.latest-info {
+    flex: 1;
 }
 
-.latest-info .price {
-    font-weight: bold;
-    color: #ff6b00;
-    margin-top: 5px;
+.product-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    text-decoration: none;
 }
 
-/* Mobile Friendly */
-@media (max-width: 768px) {
+.product-name:hover {
+    color: #0d6efd;
+}
+
+.price-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Mobile polish */
+@media (max-width: 576px) {
     .latest-products {
-        width: 100%;
+        padding: 14px;
+    }
+
+    .latest-card .thumb {
+        width: 50px;
+        height: 50px;
+    }
+
+    .product-name {
+        font-size: 13px;
+    }
+
+    .new-price {
+        font-size: 13px;
     }
 }
 
 
 
-h5.mb-3 {
-    margin-top: 0 !important; /* remove extra top margin before heading */
+
+
+.product-card-elegant {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card-elegant:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.1);
 }
 
 
-.latest-products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
+/* Image hover zoom */
+.product-card-elegant:hover .product-image img {
+    transform: scale(1.05);
 }
 
-.latest-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s ease;
+
+
+.product-card-elegant:hover .cart-icon {
+    transform: scale(1.15);
+    color: #163a5f;
 }
 
-.latest-card:hover {
-  transform: translateY(-4px);
+/* Title – fixed height */
+.product-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 6px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 34px;
 }
 
-.latest-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
+.product-title a {
+    text-decoration: none;
+     color: #040d5ef1;
+     font-weight: 600;
 }
 
-.latest-info {
-  padding: 10px;
+.product-title a:hover {
+    color: #163a5f;
 }
 
-.latest-info h4 {
-  font-size: 15px;
-  color: #222;
-  margin-bottom: 5px;
+/* Image */
+.product-image {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    
 }
 
-.latest-info .price {
-  color: #4f46e5;
-  font-weight: 600;
-  margin-top: 5px;
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
-.cart-action {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 6px;
-  flex-wrap: nowrap;
+/* Price row */
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
 }
 
-.add-to-cart-btn {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: transparent;
-  color: #333;
-  font-size: 12px;
-  padding: 4px 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap; /* Prevents text from wrapping */
-  flex-shrink: 0; /* Keeps button from resizing oddly */
+.price {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.add-to-cart-btn:hover {
-  background: #f5f5f5;
-  border-color: #999;
-  color: #000;
+.old-price {
+    font-size: 12px;
+    color: #dc3545; /* red strike */
+    text-decoration: line-through;
 }
 
-.product-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  overflow: hidden;
+.new-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a2540; /* dark blue */
 }
 
-/* Mobile optimization */
+.cart-icon {
+    font-size: 16px;
+    color: #0a2540;
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Add to cart button */
+.product-card-elegant a.add-cart-btn {
+    margin-top: auto;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    padding: 7px;
+    font-size: 13px;
+    border-radius: 6px;
+    color: #333;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.product-card-elegant a.add-cart-btn:hover {
+    background: #e0dbdb;
+    border-color: #0a2540;
+}
+
+/* Mobile tuning */
 @media (max-width: 576px) {
-  .add-to-cart-btn {
-    font-size: 11px;
-    padding: 3px 6px;
-  }
+    .product-image {
+        height: 95px;
+    }
 
-  .cart-action {
-    gap: 4px;
-  }
+    .add-cart-btn {
+        font-size: 12px;
+        padding: 6px;
+    }
 }
+
+
+
+
 
 
 
@@ -381,7 +413,7 @@ h5.mb-3 {
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mt-0 mb-0">
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+        <li class="breadcrumb-item active" aria-current="page">Products</li>
       </ol>
     </nav>
   </div>
@@ -403,35 +435,46 @@ h5.mb-3 {
 </div> <br> --}}
            
         <aside class="category-sidebar">
-          <h3>Categories</h3>
+          <h3> Browse Categories</h3> 
           <ul>
               @foreach ($categories as $cat)
                           <li  {{ request('category') == $cat->id ? 'active' : '' }}>
                               <a href="{{route('category.products',$cat->id)}}" {{ request()->category == $cat->id ? 'text-yellow' : '' }}>
-                                  {{ $cat->name }}
+                                  {{ $cat->name }} 
                               </a>
                           </li>
+                          
                   @endforeach
           </ul>
     </aside>
 <br>
-  <aside class="latest-products">
-  <h3>Latest Products</h3>
-  @foreach ($latest as $item)
-    <div class="latest-card">
-      <a href="{{ route('product.details', encrypt($item->id)) }}"> 
-        <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
-      </a>
-      <div class="latest-info">
-        <h4>
-          <a href="{{ route('product.details', encrypt($item->id)) }}">{{ $item->name }}</a>
-        </h4>
-        <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-        <p class="price">${{ $item->sale_price }}</p>
-      </div>
-    </div>
-  @endforeach
+
+
+
+
+<aside class="latest-products">
+    <h3 class="sidebar-title">Latest Products</h3>
+
+    @foreach ($latest as $item)
+        <div class="latest-card">
+            <a class="thumb" href="{{ route('product.details', encrypt($item->id)) }}">
+                <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+            </a>
+
+            <div class="latest-info">
+                <a class="product-name" href="{{ route('product.details', encrypt($item->id)) }}">
+                    {{ $item->name }}
+                </a>
+
+                <div class="price-wrap">
+                    <span class="old-price">${{ $item->price }}</span>
+                    <span class="new-price">${{ $item->sale_price }}</span>
+                </div>
+            </div>
+        </div>
+    @endforeach
 </aside>
+
 
         </div>
 
@@ -477,41 +520,54 @@ h5.mb-3 {
 
 
 
-<div class="container my-5">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+<div class="container my-4">
+  <div class="row row-cols-2 row-cols-md-4 g-3">
+
     @forelse ($products as $item)
-      <div class="col-6">
-        <div class="card h-100 product-container">
-          <a href="{{ route('product.details', encrypt($item->id)) }}">
-            <img src="{{ asset('images/products/'.$item->image_path) }}" class="card-img-top" alt="{{ $item->name }}">
+      <div class="col">
+        <div class="product-card-elegant">
+
+          <!-- Product Name -->
+          <h6 class="product-title">
+            <a href="{{ route('product.details', encrypt($item->id)) }}">
+              <b>{{ $item->name }}</b>
+            </a>
+          </h6>
+
+          <!-- Image -->
+          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+            <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
           </a>
 
-          <div class="card-body product-card">
-            <h6 class="card-title">
-              <a href="{{ route('product.details', encrypt($item->id)) }}">{{ $item->name }}</a>
-            </h6>
+          <!-- Price + Cart Icon -->
+          <div class="price-row">
+            <div class="price">
+              <span class="old-price">${{ $item->price }}</span>
+              <span class="new-price">${{ $item->sale_price }}</span>
+            </div>
 
-            <p class="card-text mb-1">
-              <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-              <span class="text-danger fw-bold ms-2">${{ $item->sale_price }}</span>
-            </p>
-
-<div class="cart-action d-flex align-items-center mt-2">
-  <i class="fa-solid fa-cart-arrow-down text-primary me-2 fs-6"></i>
-  <button class="btn add-to-cart-btn">Add to Cart</button>
-</div>
-
-
-
-
+            <i class="fa-solid fa-cart-shopping cart-icon"></i>
           </div>
+
+          <!-- Add to Cart -->
+          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
+                        Add to cart
+                    </a>
+
         </div>
       </div>
     @empty
       <p class="text-center">No products available.</p>
     @endforelse
+
   </div>
 </div>
+
+
+
+
+
+
 
         
        </div>
