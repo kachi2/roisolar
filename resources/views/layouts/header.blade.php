@@ -199,23 +199,7 @@
     </span> --}}
 
 
-          <!-- <div class="d-none d-xl-flex align-items-center position-relative ml-30">
-            <a href="{{ route('carts.index') }}" class=" btn-sm">
-              <i class="icon-cart"></i>
-               <span class="cart-badge position-absolute  badge rounded-pill bg-danger">
-              {{-- <span>MyCart</span> --}}
-                 @php
-        $cartCount = $cartCount = collect(session('cart', []))->sum('quantity');
-
-        @endphp
-        @if($cartCount > 0)
-            <span class="cart-count">{{ $cartCount }}</span>
-            @else
-            0
-        @endif
-
-            </a>
-          </div> -->
+          
 
 
 
