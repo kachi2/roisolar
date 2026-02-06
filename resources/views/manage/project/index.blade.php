@@ -54,9 +54,9 @@
                                                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                                 <a href="{{route('admin.project.edit', $sp->hashid)}}" class="dropdown-item">Edit Service</a>
+                                                                 <a href="{{route('admin.project.edit', $sp->hashid)}}" class="dropdown-item">Edit Project</a>
                                                     
-                                                            <form method="post" action="{{route('admin.project.delete',$sp->hashid)}}" id="form1"> 
+                                                            <form method="post" action="{{route('admin.project.delete', $sp->hashid)}}" id="form1"> 
                                                             @csrf  
                                                               <button type="submit" onclick="return confirm('Are you sure you want to delete project')" class="dropdown-item" style="color:red">Delete</button>
                                                              </form>

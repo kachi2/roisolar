@@ -39,11 +39,9 @@ class CheckoutController extends Controller
     }
 
     public function Index($cartSession = null){
-    if(!auth::check()){
-            $check = new RegisterUser;
-           return  $check->viewCheckout();
-           
-        }
+ if (!Auth::check()) {
+    return redirect()->route('login');
+}
         // if(count(Cart::content()) <= 0 || empty(Cart::content())){
         //     return redirect()->intended(route('users.index'));
         // }

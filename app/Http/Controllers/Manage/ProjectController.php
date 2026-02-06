@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 use Hashids\Hashids;
 use App\Models\Project;
 use App\Models\ProjectImage;
@@ -17,9 +18,9 @@ class ProjectController extends Controller
     public function Index(){
         
        $Project = Project::paginate(10);
-        foreach($Project as $Service){
+        foreach($Project as $proj){
             $hashids = new Hashids('products');
-            $Service->hashid = $hashids->encode($Service->id);
+            $proj->hashid = $hashids->encode($proj->id);
         }
         return view('manage.project.index')
         ->with('bheading', 'Project Index')
@@ -68,10 +69,61 @@ public function Store(Request $request)
 
 
 
+    public function Edit($id){
+        $hashids = new Hashids('products');
+        $id = $hashids->decode($id);
+        $project = Project::where('id', $id)->first();
+        $project->hashid = $hashids->encode($id);
+
+        return view('manage.project.edit')
+        ->with('bheading', 'Edit project')
+        ->with('breadcrumb', 'Edit project')
+        ->with('project', $project);
+    }
 
 
+ public function Update(Request $request, $id){
+        $hashids = new Hashids('products');
+        $id = $hashids->decode($id);
+        $project =  Project::where('id', $id)->first();
+        $project->title = $request->title;
+        $project->description = $request->content;
+        
+       if ($request->hasFile('images')) {
 
+    foreach ($request->file('images') as $image) {
 
+        // Store image
+        $path = $image->store('projects', 'public');
+
+        // Save to project_images table
+        ProjectImage::create([
+            'project_id' => $project->id,
+            'image_path' => $path
+        ]);
+    }
+}
+
+           
+        if($project->save()){
+        Session::flash('alert', 'success');
+        Session::flash('message','Service Updated Successfully');
+        return back();
+     }
+        Session::flash('alert', 'error');
+        Session::flash('message','Request Failed, something went wrong');
+        return back();
+    }
+
+    public function Delete($id){
+        $hashids = new Hashids('products');
+        $id = $hashids->decode($id);
+        $project = Project::whereId($id);
+        $project->delete();
+        Session::flash('alert', 'error');
+        Session::flash('message', 'Service Deleted Successfully');
+            return redirect()->back();
+        }
 
 
 

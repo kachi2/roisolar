@@ -17,12 +17,16 @@ use App\Http\Controllers\Users\PrescriptionController;
 use App\Http\Controllers\Users\ProductDetailsController;
 use App\Http\Controllers\ProjectController;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, '__invoke'] )->name('dashboard');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/', [HomeController::class, '__invoke'] )->name('dashboard');
+//     Route::get('/',  [HomeController::class, 'Index'])->name('users.index');
+// Route::get('/dashboard',  [HomeController::class, '__invoke'])->name('dashboard');
+// });
+
+
+ Route::get('/', [HomeController::class, '__invoke'] )->name('dashboard');
     Route::get('/',  [HomeController::class, 'Index'])->name('users.index');
 Route::get('/dashboard',  [HomeController::class, '__invoke'])->name('dashboard');
-});
-
 
 
 Route::get('/products', [ProductDetailsController::class, '__invoke'])->name('users.products');

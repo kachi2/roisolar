@@ -557,7 +557,13 @@
         </div>
       </div>
     @empty
-      <p class="text-center">No products available.</p>
+       <div class="col-12">
+        <div class="alert alert-warning text-center py-4">
+            <i class="fa-solid fa-box-open mb-2"></i><br>
+            <strong>No products found</strong><br>
+            This category does not have any products yet.
+        </div>
+    </div>
     @endforelse
 
   </div>

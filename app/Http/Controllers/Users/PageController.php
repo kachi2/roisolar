@@ -115,7 +115,8 @@ class PageController extends Controller
 
     public function services(){
         return view('users.pages.services')
-        ->with('services', Services::paginate(5))
+        // ->with('services', Services::paginate(5))
+        ->with('services', Services::all())
         ->with('categories', Category::all());
         // ->with('settings', Settings::first());
     }

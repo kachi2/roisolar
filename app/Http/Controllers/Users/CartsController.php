@@ -32,11 +32,12 @@ use imageUpload;
     $product = Product::findOrFail($request->product_id);
     //  $product = Product::with('category')->findOrFail($request->product_id); // Load category
     $quantity = $request->quantity;
-    $userId    = auth_user()->id;
+    // $userId    = auth_user()->id;
     // $rowId = $request->rowId;
       // If cartSession doesn't exist, create one
     if (!session()->has('cartSession')) {
-        $encodedSession = Hashids::connection('products')->encode(time(), $userId);
+        // $encodedSession = Hashids::connection('products')->encode(time(), $userId);
+        $encodedSession = Hashids::connection('products')->encode(time());
         session(['cartSession' => $encodedSession]);
     } else {
         $encodedSession = session('cartSession');
@@ -80,16 +81,17 @@ use imageUpload;
         $pp->hashid = Hashids::connection('products')->encode($pp->id);
         
       } 
-       //dd(session('cart'));
-        $user    = auth_user()->id;
+       
+        // $user    = auth_user()->id;
         
 
-        $cartSession = Hashids::connection('products')->encode(time(), $user ?? rand(1, 999));
+        // $cartSession = Hashids::connection('products')->encode(time(), $user ?? rand(1, 999));
+        $cartSession = Hashids::connection('products')->encode(time());
         return view('users.carts.carts') 
         ->with('carts', session()->get('cart', []))
         // ->with('carts', Cart::content())
         ->with('latest', $prod)
-        ->with('userId', $user)
+        // ->with('userId', $user)
         ->with('cartSession', $cartSession)
         ->with('breadcrumb', 'Shopping Cart');
         

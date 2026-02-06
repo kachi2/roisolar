@@ -203,6 +203,39 @@
 }
 
 
+.add-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 16px;
+
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.25);
+}
+
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, #0b3c91, #0d47a1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.35);
+  color: #fff;
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
+}
+
 
 </style>
 
@@ -330,7 +363,7 @@
                 <nav class="nav nav-tabs">
                   <a class="nav__link active" data-toggle="tab" href="#Description">Description</a>
                   {{-- <a class="nav__link" data-toggle="tab" href="#Details">Details</a> --}}
-                  <a class="nav__link" data-toggle="tab" href="#Reviews">Reviews (3)</a>
+                  {{-- <a class="nav__link" data-toggle="tab" href="#Reviews">Reviews (3)</a> --}}
                 </nav>
                 <div class="tab-content mb-50" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="Description">
@@ -346,7 +379,7 @@
                       At League Agency, we shows only the best websites and portfolios built completely with passion,
                       simplicity & creativity !</p>
                   </div><!-- /.details-tab --> --}}
-                  <div class="tab-pane fade" id="Reviews">
+                  {{-- <div class="tab-pane fade" id="Reviews">
                     <form class="reviews__form">
                       <div class="form-group">
                         <input type="text" class="form-control" placeholder="Name">
@@ -359,7 +392,7 @@
                       </div><!-- /.form-group -->
                       <button  class="btn btn__primary btn__rounded">Submit </button>
                     </form>
-                  </div><!-- /.reviews-tab -->
+                  </div><!-- /.reviews-tab --> --}}
                 </div>
               </div><!-- /.product-tabs -->
               
@@ -369,47 +402,46 @@
 </h6>
 
 <div class="container">
-    <div class="row row-cols-2 row-cols-md-4 g-3">
+  <div class="row row-cols-2 row-cols-md-4 g-3">
 
-        @forelse ($products as $item)
-        <div class="col">
-            <div class="product-card-elegant">
+    @forelse ($products as $item)
+      <div class="col">
+        <div class="product-card-elegant">
 
-                <!-- Product Name -->
-                <h6 class="product-title">
-                    <a href="{{ route('product.details', encrypt($item->id)) }}">
-                        {{ $item->name }}
-                    </a>
-                </h6>
+          <!-- Product Name -->
+          <h6 class="product-title">
+            <a href="{{ route('product.details', encrypt($item->id)) }}">
+              {{ $item->name }}
+            </a>
+          </h6>
 
-                <!-- Image -->
-                <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
-                    <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
-                </a>
+          <!-- Image -->
+          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+            <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+          </a>
 
-                <!-- Price + Cart -->
-                <div class="price-row">
-                    <div class="price">
-                        <span class="old-price">${{ $item->price }}</span>
-                        <span class="new-price">${{ $item->sale_price }}</span>
-                    </div>
-
-                    <i class="fa-solid fa-cart-shopping cart-icon"></i>
-                </div>
-
-                <!-- Add to Cart -->
-                <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
-                        Add to cart
-                    </a>
-
+          <!-- Price -->
+          <div class="price-row">
+            <div class="price">
+              <span class="old-price">${{ $item->price }}</span>
+              <span class="new-price">${{ $item->sale_price }}</span>
             </div>
-        </div>
-        @empty
-            <p class="text-center">No related products.</p>
-        @endforelse
+          </div>
 
-    </div>
+          <!-- Add to Cart Button (unchanged design) -->
+          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}">
+            Add to Cart
+          </a>
+
+        </div>
+      </div>
+    @empty
+      <p class="text-center">No related products.</p>
+    @endforelse
+
+  </div>
 </div>
+
 
             </div><!-- /.col-12 -->
           </div><!-- /.row -->

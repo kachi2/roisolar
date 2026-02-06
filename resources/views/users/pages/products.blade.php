@@ -289,27 +289,28 @@
 
 /* Title – fixed height */
 .product-title {
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: 6px;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 34px;
+  min-height: 42px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: #041936;
 }
 
 .product-title a {
-    text-decoration: none;
-     color: #040d5ef1;
-     font-weight: 600;
+  color: #041835;
+  text-decoration: none;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-title a:hover {
-    color: #163a5f;
+  color: #0d47a1;
 }
+
 
 /* Image */
 .product-image {
@@ -388,6 +389,40 @@
         font-size: 12px;
         padding: 6px;
     }
+}
+
+
+.add-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 16px;
+
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.25);
+}
+
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, #0b3c91, #0d47a1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.35);
+  color: #fff;
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
 }
 
 
@@ -530,7 +565,7 @@
           <!-- Product Name -->
           <h6 class="product-title">
             <a href="{{ route('product.details', encrypt($item->id)) }}">
-              <b>{{ $item->name }}</b>
+              {{ $item->name }}
             </a>
           </h6>
 
@@ -539,20 +574,18 @@
             <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
           </a>
 
-          <!-- Price + Cart Icon -->
+          <!-- Price -->
           <div class="price-row">
             <div class="price">
               <span class="old-price">${{ $item->price }}</span>
               <span class="new-price">${{ $item->sale_price }}</span>
             </div>
-
-            <i class="fa-solid fa-cart-shopping cart-icon"></i>
           </div>
 
-          <!-- Add to Cart -->
-          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
-                        Add to cart
-                    </a>
+          <!-- Add to Cart Button (your liked design) -->
+          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}">
+            Add to Cart
+          </a>
 
         </div>
       </div>
@@ -562,6 +595,7 @@
 
   </div>
 </div>
+
 
 
 

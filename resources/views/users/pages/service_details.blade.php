@@ -68,7 +68,7 @@
             <h2 class="fw-bold text-primary mb-3">{{ $service->title }}</h2>
             <p class="text-muted mb-4">{{ strip_tags($service->contents) }}</p>
 
-            <a href="" class="btn btn-primary shadow-sm">
+            <a href="{{route('contact-us')}}" class="btn btn-primary shadow-sm">
               Contact Us
             </a>
           </div>

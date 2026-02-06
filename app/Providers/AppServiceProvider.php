@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('category_dashboard', Category::with('products')->get());
         View::share('advert_top', Advert::where('placement', 'top')->first());
         View::share('unread_notify', AdminNotification::latest()->get());
-        $categories = Category::inRandomOrder()->get();
+        $categories = Category::inRandomOrder()->latest()->simplePaginate(10);
         foreach($categories as $cat){
             addHashId($cat->products);
             $cat->hashid = Hashids::connection('products')->encode($cat->id);

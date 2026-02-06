@@ -113,7 +113,7 @@
   .service-btn {
     display: inline-block;
     margin-top: 10px;
-    background: #4f46e5;
+    background: #08063b;
     color: #fff;
     padding: 10px;
     text-align: center;
@@ -122,8 +122,10 @@
     font-size: 14px;
     transition: background 0.3s ease;
   }
+
+  
   .service-btn:hover {
-    background: #3730a3;
+    background: #1b1a30;
   }
 
   .no-services {
@@ -158,7 +160,7 @@
         <div class="service-body">
           <h3>{{ $service['title'] ?? $service->title }}</h3>
           <p>{{ trim(strip_tags($service->contents)) }}</p>
-          <a href="{{ route('service.details',encrypt($service->id)) }}" class="service-btn">Read More</a>
+          <a href="{{ route('service.details',encrypt($service->id)) }}" class="service-btn btn-sm">Read More</a>
         </div>
       </article>
     @endforeach
