@@ -210,7 +210,7 @@
   </section>
 
   <!-- ===== Meet Our Team Section ===== -->
-  <section class="team-section">
+  {{-- <section class="team-section">
     <h2>Meet Our Team</h2>
     <div class="team-grid">
       <div class="team-card">
@@ -237,7 +237,7 @@
         <p>Marketing Strategist</p>
       </div>
     </div>
-  </section>
+  </section> --}}
 </div>
 
 @endsection

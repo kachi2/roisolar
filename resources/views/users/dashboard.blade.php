@@ -650,7 +650,8 @@
     <h4 class="text-center fw-bold mb-4">Categories</h4>
 
     <div class="row g-3 category-grid">
-      @foreach ($categories as $category)
+      
+      @foreach ($cate as $category)
         <div class="col-4 col-sm-4 col-md-3 col-lg-2">
           <a href="{{ route('category.products', $category->id) }}"
              class="category-card">

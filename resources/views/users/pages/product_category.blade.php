@@ -1,15 +1,65 @@
 @extends('layouts.app')
 
 @section('title')
-<title>{{$product[0]?->categories?->name }}</title>
+<title>{{ $category->name ?? 'Products' }}</title>
 @endsection
 @section('head')
-<link rel="canonical" href="{{ url('catalogs/'.Str::slug($product[0]?->categories?->name)) }}">
+<link rel="canonical" href="{{ url('catalogs/' . Str::slug($category->name ?? 'products')) }}">
 
 @endsection
 
 @section('styles')
  <style>
+
+
+.add-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  padding: 12px 16px;
+
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.25);
+}
+
+.add-cart-btn i {
+  font-size: 0.95rem;
+}
+
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, #0b3c91, #0d47a1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.35);
+  color: #fff;
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 576px) {
+  .add-cart-btn {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
+}
+
+
+
 
 .page-title {
     padding: 8px 0;
@@ -404,6 +454,12 @@
 
 
 
+{{-- @if($product->count() === 0)
+    <div class="alert alert-warning">
+        No products found in this category.
+    </div>
+@endif --}}
+
 
   <!-- ========================
        page title 
@@ -425,14 +481,7 @@
     <div class="row">
         <!-- Categories Sidebar -->
         <div class="col-md-3">
-            {{-- <h5 class="mb-3">Categories</h5> --}}
-            <!-- Search -->
-                {{-- <div class="search-container">
-    <input type="text" placeholder="Search products...">
-    <button type="submit">
-        
-    </button>
-</div> <br> --}}
+          
            
         <aside class="category-sidebar">
           <h3> Browse Categories</h3> 
@@ -523,52 +572,52 @@
 <div class="container my-4">
   <div class="row row-cols-2 row-cols-md-4 g-3">
 
-    @forelse ($product as $item)
-      <div class="col">
-        <div class="product-card-elegant">
-
-          <!-- Product Name -->
-          <h6 class="product-title">
-            <a href="{{ route('product.details', encrypt($item->id)) }}">
-              <b>{{ $item->name }}</b>
-            </a>
-          </h6>
-
-          <!-- Image -->
-          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
-            <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
-          </a>
-
-          <!-- Price + Cart Icon -->
-          <div class="price-row">
-            <div class="price">
-              <span class="old-price">${{ $item->price }}</span>
-              <span class="new-price">${{ $item->sale_price }}</span>
-            </div>
-
-            <i class="fa-solid fa-cart-shopping cart-icon"></i>
-          </div>
-
-          <!-- Add to Cart -->
-          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}"> 
-                        Add to cart
-                    </a>
-
+    @if($product->isEmpty())
+      <div class="col-12">
+        <div class="alert alert-warning text-center py-4">
+          <i class="fa-solid fa-circle-info"></i><br>
+          <strong>No products found</strong><br>
+          This category does not have any products yet.
         </div>
       </div>
-    @empty
-       <div class="col-12">
-        <div class="alert alert-warning text-center py-4">
-            <i class="fa-solid fa-box-open mb-2"></i><br>
-            <strong>No products found</strong><br>
-            This category does not have any products yet.
+    @else
+      @foreach ($product as $item)
+        <div class="col">
+          <div class="product-card-elegant">
+
+            <!-- Product Name -->
+            <h6 class="product-title">
+              <a href="{{ route('product.details', encrypt($item->id)) }}">
+                <b>{{ $item->name }}</b>
+              </a>
+            </h6>
+
+            <!-- Image -->
+            <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+              <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+            </a>
+
+            <!-- Price -->
+            <div class="price-row">
+              <div class="price">
+                <span class="old-price">${{ $item->price }}</span>
+                <span class="new-price">${{ $item->sale_price }}</span>
+              </div>
+            </div>
+
+            <!-- Add to Cart -->
+            <a href="{{ route('product.details', encrypt($item->id)) }}" class="add-cart-btn">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>Add to Cart</span>
+            </a>
+
+          </div>
         </div>
-    </div>
-    @endforelse
+      @endforeach
+    @endif
 
   </div>
 </div>
-
 
 
 
