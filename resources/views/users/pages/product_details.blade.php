@@ -423,8 +423,8 @@
           <!-- Price -->
           <div class="price-row">
             <div class="price">
-              <span class="old-price">${{ $item->price }}</span>
-              <span class="new-price">${{ $item->sale_price }}</span>
+              <span class="old-price">&#8358;{{ number_format($item->price) }}</span> &nbsp;&nbsp;
+              <span class="new-price">&#8358;{{ number_format($item->sale_price) }}</span>
             </div>
           </div>
 

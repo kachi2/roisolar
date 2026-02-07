@@ -146,13 +146,6 @@ class ProductController extends Controller
     // }
 
 
-
-
-
-
-
-
-
     public function store(Request $request)
 {
     $valid = Validator::make($request->all(), [
@@ -189,8 +182,12 @@ class ProductController extends Controller
         ) * 100;
 
         $prod->cost_price = $request->cost_price;
-        $prod->price = $request->cost_price * $cat->inflated;
-        $prod->sale_price = $request->cost_price * $cat->markup;
+        // $prod->price = $request->cost_price * $cat->inflated;
+        // $prod->sale_price = $request->cost_price * $cat->markup;
+
+        $prod->price = ceil($request->cost_price * $cat->inflated);
+        $prod->sale_price = ceil($request->cost_price * $cat->markup);
+
         $prod->requires_prescription = $request->requires_prescription ?? 0;
         $prod->sku = 'LVPH' . rand(11111, 99999);
         $prod->status = 0;
@@ -312,8 +309,12 @@ class ProductController extends Controller
             $prod->description = $request->description;
             $prod->discount =  ((($request->cost_price * $cat->inflated) - ($request->cost_price * $cat->markup))/ ($request->cost_price * $cat->inflated)) *100;
             $prod->cost_price = $request->cost_price;
-            $prod->price = $request->cost_price * $cat->inflated;
-            $prod->sale_price = $request->cost_price * $cat->markup;
+            // $prod->price = $request->cost_price * $cat->inflated;
+            // $prod->sale_price = $request->cost_price * $cat->markup;
+
+            $prod->price = ceil($request->cost_price * $cat->inflated);
+            $prod->sale_price = ceil($request->cost_price * $cat->markup);
+
             $prod->requires_prescription = $request->requires_prescription??0;
             if ($request->file('image')) {
                 $image =  $this->UploadImage($request, 'images/products/', 500,500);

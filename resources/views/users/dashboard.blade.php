@@ -718,10 +718,11 @@
 
           <!-- Price ONLY (no side icon anymore) -->
           <div class="price">
-            <span class="old-price">${{ $item->price }}</span>
-            <span class="new-price">${{ $item->sale_price }}</span>
-          </div>
+            <span class="old-price">₦{{ number_format($item->price) }}</span>   &nbsp; &nbsp;
 
+            <span class="new-price">₦{{ number_format($item->sale_price) }}</span>
+          </div>
+          <br>
           <!-- Add to Cart (YOUR preferred design) -->
           <a href="{{ route('product.details', encrypt($item->id)) }}" class="add-cart-btn">
             <i class="fa-solid fa-cart-shopping"></i>

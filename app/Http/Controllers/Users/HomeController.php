@@ -79,6 +79,7 @@ class HomeController extends Controller
 
     public function Index(){
         // $site_menu = Menu::get();
+        $cate = Category::all();
         $slider = Slider::latest()->get();
         $category = Category::latest()->get();
         $product = Product::latest()->get();
@@ -87,6 +88,7 @@ class HomeController extends Controller
         ->with('sliders', $slider)
         ->with('categories', $category)
         ->with('service', $services)
+        ->with('cate', $cate)
         ->with('products', $product);
 
     }
