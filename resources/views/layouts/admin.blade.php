@@ -200,7 +200,7 @@
 
     CKEDITOR.replace( 'summernote' );
 </script>
-@yield('script')
+@yield('scripts')
 
 
 </body>

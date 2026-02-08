@@ -132,23 +132,104 @@
   background-color: #b02a37;
 }
 
-/* .related-products {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 20px;
+
+
+/* ===== MOBILE STICKY CART (ICON ONLY) ===== */
+.mobile-cart-bar {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
 }
 
-.related-products h2 {
-  text-align: center;
-  font-size: 28px;
-  color: #0b1d3a;
-  margin-bottom: 30px;
-} */
+/* Circular button */
+.mobile-cart-link.icon-only {
+    position: relative;
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: #ffffff;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    box-shadow: 0 12px 32px rgba(13, 71, 161, 0.4);
+    transition: all 0.25s ease;
+}
+
+/* Cart icon */
+.mobile-cart-link.icon-only i {
+    font-size: 22px;
+}
+
+/* Badge */
+.mobile-cart-badge {
+    position: absolute;
+    top: -14px;
+    right: -22px;
+
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+
+    background: #f97316;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover / tap */
+.mobile-cart-link.icon-only:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(13, 71, 161, 0.55);
+    color: #fff;
+}
+
+.mobile-cart-link.cart-text{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .mobile-cart-bar {
+        display: none;
+    }
+}
 </style>
 @endsection
 
 @section('content')
 
+<!-- Mobile Sticky Cart -->
+<div class="mobile-cart-bar d-md-none">
+    <a href="{{ route('carts.index') }}" class="mobile-cart-link">
+    <span class="cart-text">
+            View Cart &nbsp;
+        </span>
+        <i class="icon-cart"></i>
+
+        @php
+            $cartCount = collect(session('cart', []))->sum('quantity');
+        @endphp
+
+        <span class="mobile-cart-badge">
+            {{ $cartCount }}
+        </span>
+    </a>
+</div>
    <!-- ========================
        page title 
     =========================== -->
@@ -208,27 +289,19 @@
       <div class="item-total">{{ moneyFormat($cart['price'] * $cart['quantity']) }}</div>
     </div>
          @empty
-                <div class="ps-product ps-product--li">
+               
+        @endforelse
+        @else
+        <div class="ps-product ps-product--li">
                     <div class="ps-prod" style="border-right:0px">
               <p style="text-align: center"> 
                 <i  style="font-size:50px; padding-right:2px; font-weight:800" class="icon-cart-empty"></i> 
-                <br> Your cart is empty.
+                <br> Your cart is empty. <br>
                 You have not added any item to your cart.</p> 
                     </div>
                 </div>
-        @endforelse
-        @endif
-    {{-- <div class="cart-item">
-      <img src="product2.jpg" alt="Product">
-      <div class="item-details">
-        <h4>Another Product</h4>
-        <p>₦15,000</p>
-        <div class="qty">
-          Quantity: <input type="number" value="2" min="1">
-        </div>
-      </div>
-      <div class="item-total">₦30,000</div>
-    </div> --}}
+                @endif
+
 
   </div>
 
@@ -267,36 +340,6 @@
 
 </div>
 
-
-
-{{-- <div class="related-products">
-  <h2>Related Products</h2> </dv> --}}
-                <!-- Product item #1 -->
-               
-             
-{{-- <div class="container my-5">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-    <!-- Card 1 -->
-    @forelse ($latest as $item)
-    <div class="col">
-      <div class="card h-100 shadow-sm rounded-4">
-        <img src="{{ asset('images/products/'.$item->image_path) }}" class="card-img-top" alt="Product Image">
-        <div class="card-body">
-          <b class="card-title"><a href="{{ route('product.details',encrypt($item->id)) }}"> {{ $item->name }}</a> </b>
-          <p class="card-text mb-1">
-            <small class="text-muted text-decoration-line-through">${{ $item->price }}</small>
-            <span class="text-danger fw-bold ms-2">${{ $item->sale_price }}</span>
-          </p>
-          <a href="{{route('users.products',[$item->hashid, $item->productUrl])}}" class="btn btn-sm btn-primary mt-2 w-100">Add to Cart</a>
-        </div>
-      </div>
-    </div>
- @empty
-                    
- @endforelse
-   
-  </div>
-</div> --}}
 
 
     

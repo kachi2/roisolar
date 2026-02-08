@@ -4,11 +4,36 @@
 @endsection
 @section('head')
 <link rel="canonical" href="{{ url()->current() }}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 @endsection
 @section('styles')
 <style>
 
 
+.alert-message {
+    position: relative;
+    padding: 14px 42px 14px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.close-alert {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    color: #155724;
+    cursor: pointer;
+}
+
+.close-alert:hover {
+    opacity: 0.7;
+}
 
 
 
@@ -237,10 +262,104 @@
 }
 
 
+
+
+
+/* ===== MOBILE STICKY CART (ICON ONLY) ===== */
+.mobile-cart-bar {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+}
+
+/* Circular button */
+.mobile-cart-link.icon-only {
+    position: relative;
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #0d47a1, #1565c0);
+    color: #ffffff;
+
+    border-radius: 50%;
+    text-decoration: none;
+
+    box-shadow: 0 12px 32px rgba(13, 71, 161, 0.4);
+    transition: all 0.25s ease;
+}
+
+/* Cart icon */
+.mobile-cart-link.icon-only i {
+    font-size: 22px;
+}
+
+/* Badge */
+.mobile-cart-badge {
+    position: absolute;
+    top: -14px;
+    right: -22px;
+
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+
+    background: #f97316;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover / tap */
+.mobile-cart-link.icon-only:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(13, 71, 161, 0.55);
+    color: #fff;
+}
+
+.mobile-cart-link.cart-text{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .mobile-cart-bar {
+        display: none;
+    }
+}
 </style>
 
 @endsection
 
+<!-- Mobile Sticky Cart -->
+<div class="mobile-cart-bar d-md-none">
+    <a href="{{ route('carts.index') }}" class="mobile-cart-link">
+    <span class="cart-text">
+            View Cart &nbsp;
+        </span>
+        <i class="icon-cart"></i>
+
+        @php
+            $cartCount = collect(session('cart', []))->sum('quantity');
+        @endphp
+
+        <span class="mobile-cart-badge">
+            {{ $cartCount }}
+        </span>
+    </a>
+</div>
 
 
 @if ($errors->any())
@@ -253,11 +372,18 @@
 @endif
 
 @if(session('success'))
-    <div class="alert-message alert-success">
-        <button type="button" class="close-alert">&times;</button>
+    <div class="alert alert-success alert-dismissible fade show alert-message" role="alert">
         {{ session('success') }}
+
+        <button type="button"
+                class="close-alert"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+            &times;
+        </button>
     </div>
 @endif
+
 
 
 
@@ -450,30 +576,16 @@
 
       @endsection
 
-      @section('scripts')
+ @section('scripts')
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const alerts = document.querySelectorAll('.alert-message');
-
-    alerts.forEach(alert => {
-        // Auto hide after 4 seconds
-        setTimeout(() => {
-            alert.classList.add('fade-out');
-            setTimeout(() => alert.remove(), 500);
-        }, 4000);
-
-        // Manual close
-        const closeBtn = alert.querySelector('.close-alert');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', () => {
-                alert.classList.add('fade-out');
-                setTimeout(() => alert.remove(), 500);
-            });
-        }
+setTimeout(() => {
+    document.querySelectorAll('.alert').forEach(alert => {
+        bootstrap.Alert.getOrCreateInstance(alert).close();
     });
-});
+}, 4000);
 </script>
+
 
 
 

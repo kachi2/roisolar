@@ -15,6 +15,7 @@
 } -->
 
  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+ 
 
   <!-- .cart-icon {
     position: relative;
@@ -109,7 +110,17 @@
           <span class="menu-lines"><span></span></span>
         </button>
         <div class="collapse navbar-collapse" id="mainNavigation">
+          
           <ul class="navbar-nav ml-auto">
+
+            <a class="navbar-brand d-lg-none" href="{{ route('dashboard') }}">
+    <img src="{{ asset('images/'.$settings->site_logo) }}"
+         class="logo-dark"
+         width="120"
+         alt="logo">
+</a>
+
+
             @forelse ($site_menu as $menu)
             @if($menu->has_child)
             <li class="nav__item has-dropdown">
@@ -132,11 +143,44 @@
             @empty 
             <p> menu is empty </p>
             @endforelse
+
+@guest
+             <li class="nav__item"> 
+<a href="" class=" btn-sm nav-link dropdown-toggle nav__item-link" role="button" data-bs-toggle="dropdown">
+              <i class="icon-user"></i>
+              <span>Get Started</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+              <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+          </ul>
+             </li>
+          @else
+          <li class="nav__item"> 
+          <a class="nav-link dropdown-toggle nav__item-link " href="#" role="button" data-bs-toggle="dropdown">
+            <i class="icon-user"></i>
+            {{ Auth::user()->first_name }}
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('users.account.index') }}">Profile</a></li>
+            <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+            </li>
+          </li>
+        </ul>
+          @endguest
+
+
           </ul><!-- /.navbar-nav -->
           <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
         </div><!-- /.navbar-collapse -->
+
+
     
-        <div class="d-none d-xl-flex align-items-center position-relative ml-30">
+        {{-- <div class="d-none d-xl-flex align-items-center position-relative ml-30">
           
           @guest
               
@@ -165,46 +209,11 @@
         </ul>
           @endguest
 
-          </div>
-
-{{-- <div class="d-flex justify-content-end align-items-center mb-4 pe-3">
-  <a href="{{ route('carts.index') }}" class="cart-icon position-relative text-dark text-decoration-none">
-    <i class="fa-solid fa-cart-shopping fs-4"></i>
-    <span class="cart-badge position-absolute translate-middle badge rounded-pill bg-danger">
-       @php
-        $cartCount = $cartCount = collect(session('cart', []))->sum('quantity');
-
-        @endphp
-        @if($cartCount > 0)
-            <span class="cart-count">{{ $cartCount }}</span>
-        @else
-      0
-      @endif
-    </span>
-  </a>
-  
-</div> --}}
-
-
-           
-       {{-- @php
-        $cartCount = $cartCount = collect(session('cart', []))->sum('quantity');
-
-        @endphp
-        @if($cartCount > 0)
-            <span class="cart-count">{{ $cartCount }}</span>
-        @else
-      0
-      @endif
-    </span> --}}
-
-
-          
+          </div> --}}
 
 
 
-
-<div class="cart-wrappers d-flex align-items-center position-relative">
+<div class="cart-wrappers d-none d-lg-flex align-items-center position-relative">
     <a href="{{ route('carts.index') }}" class="cart-link">
         <i class="icon-cart"></i>
 
@@ -217,9 +226,6 @@
         </span>
     </a>
 </div>
-
-
-
 
 
 
