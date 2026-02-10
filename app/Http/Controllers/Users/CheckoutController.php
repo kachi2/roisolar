@@ -102,7 +102,23 @@ class CheckoutController extends Controller
        
 
         $cart = Hashids::connection('products')->decode($cartSession); 
-        $check = CartItem::where(['user_id' => auth_user()->id, 'cartSession' => $cart[0]])->first();
+        // $check = CartItem::where(['user_id' => auth_user()->id, 'cartSession' => $cart[0]])->first();
+        $cart = session('cart');
+
+if (!$cart || empty($cart)) {
+    return response()->json([
+        'status' => 'error',
+        'message' => 'Cart is empty'
+    ]);
+}
+
+$cartSession = session()->getId();
+
+$check = CartItem::where([
+    'user_id' => auth()->id(),
+    'cartSession' => $cartSession
+])->first();
+
         if(!isset($check) || empty($check)){
             event(new CartItemsEvent($carts, $orderNo, $cartSession));
         }
@@ -122,7 +138,9 @@ class CheckoutController extends Controller
 
 
     public function process(Request $request)
-    {
+    { 
+       
+
         $cart = session('cart');
         if (!$cart || count($cart) === 0) {
             return response()->json(['status' => 'error', 'message' => 'Cart is empty']);
@@ -191,29 +209,38 @@ class CheckoutController extends Controller
         }
 
         // 💳 Card (Paystack)
-        if ($request->payment_method === 'credit') {
-            $verify = Http::withToken(config('paystack.secretKey'))
-                ->get("https://api.paystack.co/transaction/verify/{$request->reference}")
-                ->json();
+        if ($request->payment_method === 'card') {
 
-            if ($verify['status'] && $verify['data']['status'] === 'success') {
-                Order::create([
-                    'user_id' => Auth::id(),
-                    'items' => json_encode($cart),
-                    'payment_method' => 'credit',
-                    'total_amount' => $grandTotal,
-                    'status' => 'paid',
-                    'transaction_ref' => $request->reference, // store ref if column exists
-                ]);
-                
+    if (!$request->reference) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Payment reference missing'
+        ]);
+    }
 
-                Session::forget('cart');
+    $verify = Http::withToken(config('paystack.secretKey'))
+        ->get("https://api.paystack.co/transaction/verify/{$request->reference}")
+        ->json();
 
-                return response()->json(['status' => 'success']);
-            }
+    if ($verify['status'] && $verify['data']['status'] === 'success') {
 
-            return response()->json(['status' => 'error', 'message' => 'Payment verification failed']);
-        }
+        Order::create([
+            'user_id' => auth()->id(),
+            'items' => json_encode($cart),
+            'payment_method' => 'card',
+            'total_amount' => $verify['data']['amount'] / 100,
+            'status' => 'paid',
+            'transaction_ref' => $request->reference,
+        ]);
+
+        Session::forget('cart');
+
+        return redirect()->route('orders.success');
+    }
+
+    return back()->with('error', 'Payment verification failed');
+}
+
 
 
          // 🏦 Bank Transfer

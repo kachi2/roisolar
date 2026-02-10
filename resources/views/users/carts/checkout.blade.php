@@ -5,18 +5,12 @@
 @section('head')
 
 <link rel="canonical" href="{{ url()->current() }}">
-
-@endsection
-@section('scripts')
 <script src="https://js.paystack.co/v1/inline.js"></script>
-
 @endsection
-@section('content')
 @section('styles')
 
 <style>
 <!-- Custom Styles for Payment Button -->
-<style>
   .btn-gradient {
     background: linear-gradient(135deg, #007bff, #0056d2);
     color: #fff;
@@ -45,8 +39,28 @@
     color: white;
     padding-left: 8px;
 }
+
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #007bff, #0056d2);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #0056d2, #003d99);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
 </style>
 @endsection
+@section('content')
+
 
 <div style="height: 2em; background:#eee"></div>
 
@@ -88,11 +102,31 @@
         <div class="card-body">
           <h6 class="mb-3 text-secondary fw-semibold">Payment Method</h6>
 
+          @php
+        $totalCost = 0;
+        $totalItems = 0;
+
+        if (session('cart')) {
+            foreach (session('cart') as $item) {
+                $totalCost += $item['price'] * $item['quantity'];
+                $totalItems += $item['quantity'];
+            }
+        }
+      @endphp
+
           <!-- Credit Card Option -->
-          <form action="{{ route('checkout.process') }}" method="POST">
+     <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm" id="checkoutForm">
                 @csrf
+                
           <div class="form-check mb-3">
-            <input class="form-check-input" type="radio" name="payment_method" id="card" value="credit" data-bs-toggle="collapse" data-bs-target="#cardDetails" checked>
+             <!-- address -->
+          <input type="hidden" name="address_id" id="address_id" value="{{ $address->id }}">
+
+    <!-- paystack fields -->
+          <input type="hidden" name="amount" id="amount" value="{{ $totalCost + $shipping_fee }}">
+          <input type="hidden" name="reference" id="reference">
+
+            <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" data-bs-toggle="collapse" data-bs-target="#cardDetails" checked>
             <label class="form-check-label" for="creditCard">
               <i class="fas fa-credit-card me-2 text-primary"></i> Credit / Debit Card
             </label>
@@ -100,30 +134,6 @@
               Pay securely using Visa, Mastercard, or Verve.
             </div>
           </div>
-
-          <!-- Collapsible Card Fields -->
-          {{-- <div class="collapse show" id="cardDetails">
-            <div class="border rounded p-3 bg-light">
-              <div class="mb-3">
-                <label for="cardNumber" class="form-label small">Card Number</label>
-                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="expiryDate" class="form-label small">Expiry Date</label>
-                  <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cvv" class="form-label small">CVV</label>
-                  <input type="text" class="form-control" id="cvv" placeholder="123">
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="cardName" class="form-label small">Name on Card</label>
-                <input type="text" class="form-control" id="cardName" placeholder="John Doe">
-              </div>
-            </div>
-          </div> --}}
 
           <!-- PayPal Option -->
           <div class="form-check mb-3">
@@ -158,7 +168,7 @@
     <input type="hidden" name="address_id" id="address_id" value="{{ $address->id }}">
     
 
-@endif
+    @endif
 
 
     <!-- Order Summary -->
@@ -222,90 +232,66 @@
           <!-- 🚀 Payment Button -->
           <div class="mt-4">
           @if(session()->has('cartSession'))
-            <button type="submit" id="payBtn" class="btn btn-gradient w-100 py-3 d-flex justify-content-center align-items-center">
+            <button type="submit" id="payBtn" class="btn btn-gradient w-100 py-3">
               <i class="fas fa-lock me-2"></i>
               Proceed to Secure Payment
             </button> 
             @endif
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 </form>
 <!-- Custom Styles -->
-<style>
-  .btn-gradient {
-    background: linear-gradient(135deg, #007bff, #0056d2);
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .btn-gradient:hover {
-    background: linear-gradient(135deg, #0056d2, #003d99);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  }
-</style>
-
-
-
-
 
 
 @endsection
-
-@section('script')
-
+@section('scripts')
 <script>
-    
-    $('#delivery').on('click', function(){
-        if($('#delivery').attr('checked', true))
-        {
-           let amount = $('#sub_total').val(); 
-           let fee = $('#delivery').data('amount');
-           let total = parseFloat(amount) + parseFloat(fee);
-             $('#total').html('₦' + total.toLocaleString('en-US', { minimumFractionDigits: 2 }));
-            $('#amount').val(total);
-            $('#fee').html('₦' + fee.toLocaleString('en-US', { minimumFractionDigits: 2 }));
-        }
-    })
+document.getElementById('payBtn').addEventListener('click', function (e) {
+    e.preventDefault();
 
-    $('#home').on('click', function(){
-        if($('#home').attr('checked', true))
-        {
-           let amount = $('#sub_total').val(); 
-           let fee = $('#home').data('amount');
-           let total = parseFloat(amount) + parseFloat(fee);
-           $('#total').html('₦' + total.toLocaleString('en-US', { minimumFractionDigits: 2}));
-           $('#amount').val(total);
-           $('#fee').html('₦' + fee.toLocaleString('en-US', { minimumFractionDigits: 2 }));
-        }
-    });
+    let selected = document.querySelector('input[name="payment_method"]:checked');
 
+    if (!selected) {
+        alert('Please select a payment method');
+        return;
+    }
 
+    if (selected.value === 'delivery') {
+        document.getElementById('checkoutForm').submit();
+        return;
+    }
 
-document.getElementById('proceedBtn').addEventListener('click', function() {
-    let selected = document.querySelector('input[name="payment_method"]:checked').value;
+    if (selected.value === 'card') {
 
-    if (selected === 'card') {
-        // Show card form
-        document.getElementById('cardForm').classList.remove('d-none');
-        document.getElementById('cardForm').scrollIntoView({ behavior: 'smooth' });
-    } else if (selected === 'delivery') {
-        // Redirect to place order immediately
-        window.location.href = "{{ route('checkout.index') }}";
+        let amount = document.getElementById('amount').value * 100;
+        let reference = 'REF_' + Date.now();
+
+        document.getElementById('reference').value = reference;
+
+        let handler = PaystackPop.setup({
+            key: "{{ config('paystack.publicKey') }}",
+            email: "{{ auth()->user()->email }}",
+            amount: amount,
+            ref: reference,
+            callback: function (response) {
+                document.getElementById('reference').value = response.reference;
+                document.getElementById('checkoutForm').submit();
+            },
+            onClose: function () {
+                alert('Payment cancelled');
+            }
+        });
+
+        handler.openIframe();
     }
 });
-
-
-
 </script>
+
 
  
 

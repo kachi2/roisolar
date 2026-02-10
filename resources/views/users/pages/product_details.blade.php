@@ -106,13 +106,13 @@
 }
 
 .old-price {
-    font-size: 12px;
+    font-size: 10px;
     color: #dc3545;
     text-decoration: line-through;
 }
 
 .new-price {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #0a2540;
 }
@@ -434,17 +434,7 @@
                 </div>
                 <div class="col-sm-6">
                   <h6 class="product__title">{{ $product->name }}</h6>
-                  <div class="product__meta-review mb-20">
-                    <span class="product__rating">
-                      <i class="fa fa-star active"></i>
-                      <i class="fa fa-star active"></i>
-                      <i class="fa fa-star active"></i>
-                      <i class="fa fa-star active"></i>
-                      <i class="fa fa-star"></i>
-                    </span>
-                    <span>4 Review(s)</span>
-                    <a href="#">Add Review</a>
-                  </div><!-- /.product-meta-review -->
+                  
                   <span class="product__price mb-20"> {{ moneyFormat($product->sale_price)  }}</span>
                   {{-- <div class="product__desc">
                     <p>EGCG is one of the most powerful compounds in green tea. Research has tested its ability to help
@@ -549,7 +539,7 @@
           <!-- Price -->
           <div class="price-row">
             <div class="price">
-              <span class="old-price">&#8358;{{ number_format($item->price) }}</span> &nbsp;&nbsp;
+              <span class="old-price">&#8358;{{ number_format($item->price) }}</span>
               <span class="new-price">&#8358;{{ number_format($item->sale_price) }}</span>
             </div>
           </div>

@@ -344,13 +344,13 @@
 }
 
 .old-price {
-    font-size: 12px;
+    font-size: 10px;
     color: #dc3545; /* red strike */
     text-decoration: line-through;
 }
 
 .new-price {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #0a2540; /* dark blue */
 }
@@ -668,7 +668,7 @@
           <!-- Price -->
           <div class="price-row">
             <div class="price">
-              <span class="old-price">&#8358;{{ number_format($item->price) }}</span> &nbsp;&nbsp;
+              <span class="old-price">&#8358;{{ number_format($item->price) }}</span> 
               <span class="new-price">&#8358;{{ number_format($item->sale_price) }}</span>
             </div>
           </div>

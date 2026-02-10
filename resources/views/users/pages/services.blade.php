@@ -148,7 +148,16 @@
 </section>
 
 <div class="services-wrapper">
-  <h2 class="services-title">Our Services</h2>
+  {{-- <h2 class="services-title">Our Services</h2> --}}
+<div class="text-center mb-5">
+      <span class="badge bg-success-subtle text-success mb-2">
+        What We Do
+      </span>
+      <h4 class="fw-bold">Our Professional Services</h4>
+      <p class="text-muted small">
+        End-to-end renewable energy solutions tailored for you.
+      </p>
+    </div>
 
   <div class="services-grid">
     @foreach($services as $service)

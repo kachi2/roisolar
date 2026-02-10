@@ -158,7 +158,7 @@
     <div class="col-lg-8">
       @forelse ($projects as $item)
       <div class="project-card-main">
-        <img src="{{ asset('storage/' . $item->images->first()->image_path) }}">
+        <img src="{{ asset( $item->images->first()->image_path) }}">
 
         <div class="project-content">
           <h4 class="project-title">
@@ -192,7 +192,7 @@
 
         <!-- Item -->
         <div class="recent-project">
-          <img src="{{ asset('storage/' . $item->images->first()->image_path) }}">
+          <img src="{{ asset($item->images->first()->image_path) }}">
           <div class="recent-info">
             <h6>{{$item->title}}</h6>
             <a href="{{ route('project.details', $item->slug) }}" class="view-project">View Project</a>

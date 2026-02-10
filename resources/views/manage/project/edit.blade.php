@@ -33,7 +33,7 @@
                                     </div>
                                          </div>
                                                <div class="col-md-6">
-                                                <img src="{{ asset('storage/' . $project->images->first()->image_path) }}" width="100px" height="100px"> 
+                                                <img src="{{ asset($project->images->first()->image_path) }}" width="100px" height="100px"> 
                                   <div class="custom-file">
 
                                             <input type="file"name="images" class="custom-file-input  @error('images') is-invalid @enderror" id="customFile">

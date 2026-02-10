@@ -41,9 +41,13 @@
                                                     <a href="#">{{$sp->title}}</a>
                                                 </td>
                                                 <td>
-                                                    <img src="{{ asset('storage/' . $sp->images->first()->image_path) }}" width="100px" height="100px"> 
+                                                    {{-- <img src="{{ asset('storage/' . $sp->images->first()->image_path) }}" width="100px" height="100px">  --}}
+                                                   
+                                                    <img src="{{ asset($sp->images->first()->image_path) }}" width="100px" height="100px"> 
                                                 </td>
-                                                    
+                                                    {{-- @php
+                                                    dd($sp->images->first()->image_path);
+                                                    @endphp --}}
                                                   <td>
                                                     <a href="#">{{$sp->created_at->format('d/M/y')}}</a>
                                                 </td>

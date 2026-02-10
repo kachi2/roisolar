@@ -46,7 +46,8 @@ class HomeController extends Controller
         $cate = Category::all();
         $slider = Slider::latest()->get();
         $category = Category::latest()->simplePaginate(10);
-        $product = Product::latest()->get();
+        // $product = Product::latest()->get();
+        $product = Product::where('status', 0)->get();
         $services = Services::latest()->get();
          $services->transform(function ($service) {
         $service->short_description = Str::words($service->contents, 10, '...'); 
@@ -82,7 +83,8 @@ class HomeController extends Controller
         $cate = Category::all();
         $slider = Slider::latest()->get();
         $category = Category::latest()->get();
-        $product = Product::latest()->get();
+        // $product = Product::latest()->get();
+        $product = Product::where('status', 0)->get();
         $services = Services::latest()->get();
         return view('users.dashboard')
         ->with('sliders', $slider)

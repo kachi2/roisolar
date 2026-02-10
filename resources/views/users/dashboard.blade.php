@@ -133,13 +133,13 @@
 }
 
 .old-price {
-    font-size: 12px;
+    font-size: 10px;
     color: #dc3545;
     text-decoration: line-through;
 }
 
 .new-price {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #0a2540;
 }
@@ -184,13 +184,13 @@
 
 
 /* team section */
- .team-section {
-    margin-top: 0; /* remove gap above */
-    padding-top: 5px;
+ /* .team-section { */
+    /* margin-top: 0; remove gap above */
+    /* padding-top: 5px;
     animation: fadeInUp 1s ease forwards;
-  }
+  } */
 
-  .team-section h2 {
+  /* .team-section h2 {
     text-align: center;
     font-size: 24px;
     color: #111827;
@@ -233,16 +233,16 @@
     font-size: 14px;
     color: #555;
     margin-bottom: 12px;
-  }
+  } */
 
   /* ===== Animation ===== */
-  @keyframes fadeInUp {
+  /* @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
-  }
+  } */
 
   /* ==== RESPONSIVE ==== */
-  @media (max-width: 992px) {
+  /* @media (max-width: 992px) {
     .service-img {
       height: 120px;
     }
@@ -252,7 +252,7 @@
     .col-4 {
       flex: 0 0 33.333%;
       max-width: 33.333%;
-    }
+    } */
 
    
 
@@ -392,19 +392,19 @@
 }
 
 /* ===== SLIDE TRACK ===== */
-.brands-track {
+/* .brands-track {
     display: flex;
     gap: 30px;
     animation: slideBrands 25s linear infinite;
-}
+} */
 
 /* Pause on hover */
-.brands-slider:hover .brands-track {
+/* .brands-slider:hover .brands-track {
     animation-play-state: paused;
-}
+} */
 
 /* ===== BRAND CARD ===== */
-.brand-card {
+/* .brand-card {
     min-width: 180px;
     height: 100px;
     background: #fff;
@@ -422,10 +422,10 @@
     filter: grayscale(100%);
     opacity: .85;
     transition: all .3s ease;
-}
+} */
 
 /* Hover effect */
-.brand-card:hover {
+/* .brand-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
@@ -433,20 +433,20 @@
 .brand-card:hover img {
     filter: grayscale(0);
     opacity: 1;
-}
+} */
 
 /* ===== ANIMATION ===== */
-@keyframes slideBrands {
+/* @keyframes slideBrands {
     from {
         transform: translateX(0);
     }
     to {
         transform: translateX(-50%);
     }
-}
+} */
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .brand-card {
         min-width: 140px;
         height: 90px;
@@ -455,94 +455,76 @@
     .brand-card img {
         max-width: 100px;
     }
-}
+} */
 
 
 
-
-
-/* ===== SERVICE TILES ===== */
-.service-tiles {
-  background: #ffffff;
-}
 
 .service-tile {
-  display: block;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 18px 14px;
-  text-align: center;
-  text-decoration: none;
-  height: 100%;
-  transition: all 0.3s ease;
+    display: block;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    height: 100%;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: transform .3s ease;
 }
 
 .service-tile:hover {
-  background: #ffffff;
-  border-color: #0d6efd;
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
 }
 
-/* Icon */
+/* Image container */
 .icon-box {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 12px;
-  border-radius: 50%;
-  background: #e8f2ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
 .icon-box img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 🔥 critical */
 }
 
-/* Title */
+/* Text */
 .service-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #111;
 }
 
-/* Description */
 .service-text {
-  font-size: 0.75rem;
-  color: #6b7280;
-  line-height: 1.45;
-  margin-bottom: 10px;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
 }
 
-/* Link */
 .service-link {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: #0d6efd;
+    font-size: 0.85rem;
+    color: #f59e0b;
+    font-weight: 600;
 }
 
-/* Mobile fine-tune */
-@media (max-width: 576px) {
-  .icon-box {
-    width: 56px;
-    height: 56px;
-  }
 
-  .icon-box img {
-    width: 30px;
-    height: 30px;
-  }
+@media (max-width: 480px) {
+    .icon-box {
+        height: 120px;
+    }
+
+    .service-name {
+        font-size: 0.95rem;
+    }
+
+    .service-text {
+        font-size: 0.8rem;
+    }
 }
+
 
 
 
@@ -709,7 +691,7 @@
       </p>
     </div>
 
-    <div class="row g-3">
+    {{-- <div class="row g-3">
       @foreach ($service as $serv)
         <!-- Mobile: 3 per row -->
         <div class="col-4 col-md-4 col-lg-3">
@@ -734,7 +716,32 @@
           </a>
         </div>
       @endforeach
+    </div> --}}
+
+
+
+    <div class="row g-3">
+  @foreach ($service as $serv)
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a href="{{ route('service.details', encrypt($serv->id)) }}" class="service-tile h-100">
+
+        <div class="icon-box">
+          <img src="{{ asset('images/services/'.$serv->images) }}" alt="{{ $serv->title }}">
+        </div>
+
+        <h6 class="service-name">{{ $serv->title }}</h6>
+
+        <p class="service-text">
+          {{ trim(strip_tags($serv->short_description)) }}
+        </p>
+
+        <span class="service-link">Learn more →</span>
+
+      </a>
     </div>
+  @endforeach
+</div>
+
 
   </div>
 </section>
@@ -814,7 +821,7 @@
 
           <!-- Price ONLY (no side icon anymore) -->
           <div class="price">
-            <span class="old-price">₦{{ number_format($item->price) }}</span>   &nbsp; &nbsp;
+            <span class="old-price">₦{{ number_format($item->price) }}</span> 
 
             <span class="new-price">₦{{ number_format($item->sale_price) }}</span>
           </div>

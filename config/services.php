@@ -13,6 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+'paystack' => [
+    'public' => env('pk_test_7bf0bf8520cde28b27db59fd23fdfb1982da21d1'),
+    'secret' => env('sk_test_de667d53499e2a42856455341efd3698e5fee462'),
+    'url' => env('https://api.paystack.co/transaction/initialize'),
+],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

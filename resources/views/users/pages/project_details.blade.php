@@ -76,7 +76,7 @@
           <div class="carousel-inner">
             @foreach($project->images as $key => $image)
               <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                <img src="{{ asset('storage/'.$image->image_path) }}" class="d-block w-100" alt="{{ $project->title }}">
+                <img src="{{ asset($image->image_path) }}" class="d-block w-100" alt="{{ $project->title }}">
               </div>
             @endforeach
           </div>
@@ -113,7 +113,7 @@
 
             <img
               src="{{ $item->images->first()
-                    ? asset('storage/'.$item->images->first()->image_path)
+                    ? asset($item->images->first()->image_path)
                     : asset('images/no-image.png') }}"
               alt="{{ $item->title }}">
 

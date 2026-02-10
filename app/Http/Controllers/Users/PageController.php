@@ -50,9 +50,11 @@ class PageController extends Controller
     public function products(){
        
          return view('users.pages.products', [
-        'products' => product::all(),
+        'products'   => Product::where('status', 0)->get(),
         'categories' => Category::all(),
-        'latest' => Product::latest()->simplePaginate(4)
+        // 'latest' => Product::latest()->simplePaginate(4)
+        'latest' => Product::where('status', 0)->latest()->simplePaginate(4)
+
         
     ]);
 
@@ -80,10 +82,17 @@ class PageController extends Controller
     public function productsByCategory($id)
         {
             $category = Category::where('id',$id)->firstOrFail();
-            $product = $category->products()->get(); // or ->get()
+            // $product = $category->products()->get(); // or ->get()
+            $product = $category->products()
+            ->where('status', 0)
+            ->get();
             $cate = Category::all();
             $currentCategory = $category;
-            $latest =  Product::latest()->simplePaginate(4);
+            // $latest =  Product::latest()->simplePaginate(4);
+            $latest = Product::where('status', 0)
+            ->latest()
+            ->simplePaginate(4);
+
             return view('users.pages.product_category', compact('category', 'product', 'cate','currentCategory', 'latest'));
         }
 

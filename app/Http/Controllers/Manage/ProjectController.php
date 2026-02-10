@@ -10,14 +10,16 @@ use Hashids\Hashids;
 use App\Models\Project;
 use App\Models\ProjectImage;
 use App\Traits\imageUpload;
+use Intervention\Image\Facades\Image;
 
 class ProjectController extends Controller
 {
     //
     use imageUpload;
     public function Index(){
-        
-       $Project = Project::paginate(10);
+        $Project = Project::with('images')->paginate(10);
+
+    //    $Project = Project::paginate(10);
         foreach($Project as $proj){
             $hashids = new Hashids('products');
             $proj->hashid = $hashids->encode($proj->id);
@@ -29,6 +31,38 @@ class ProjectController extends Controller
         
     }
 
+public function UploadImages($request, $folder, $width = null, $height = null)
+{
+    $paths = [];
+
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $file) {
+
+            $name = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
+            $path = public_path($folder);
+
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            // If you use Intervention Image
+            if ($width && $height) {
+                Image::make($file)
+                    ->resize($width, $height, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->save($path.$name);
+            } else {
+                $file->move($path, $name);
+            }
+
+            $paths[] = $folder.$name;
+        }
+    }
+
+    return $paths;
+}
 
 
      public function Create(){
@@ -53,14 +87,27 @@ public function Store(Request $request)
     ]);
 
     // Store images
-    foreach ($request->file('images') as $image) {
-        $path = $image->store('projects', 'public');
+    // foreach ($request->file('images') as $image) {
+    //     $path = $image->store('projects', 'public');
 
+    //     ProjectImage::create([
+    //         'project_id' => $project->id,
+    //         'image_path' => $path
+    //     ]);
+    // }
+
+    if ($request->file('images')) {
+
+    $images = $this->UploadImages($request, 'images/projects/', 800, 600);
+
+    foreach ($images as $img) {
         ProjectImage::create([
             'project_id' => $project->id,
-            'image_path' => $path
+            'image_path' => $img
         ]);
     }
+}
+
 
     return redirect()->route('admin.project.index')
         ->with('success', 'Project created successfully');
@@ -89,21 +136,31 @@ public function Store(Request $request)
         $project->title = $request->title;
         $project->description = $request->content;
         
-       if ($request->hasFile('images')) {
+//        if ($request->hasFile('images')) {
 
-    foreach ($request->file('images') as $image) {
+//     foreach ($request->file('images') as $image) {
 
-        // Store image
-        $path = $image->store('projects', 'public');
+//         // Store image
+//         $path = $image->store('projects', 'public');
 
-        // Save to project_images table
+//         // Save to project_images table
+//         ProjectImage::create([
+//             'project_id' => $project->id,
+//             'image_path' => $path
+//         ]);
+//     }
+// }
+    if ($request->file('images')) {
+
+    $images = $this->UploadImages($request, 'images/projects/', 800, 600);
+
+    foreach ($images as $img) {
         ProjectImage::create([
             'project_id' => $project->id,
-            'image_path' => $path
+            'image_path' => $img
         ]);
     }
 }
-
            
         if($project->save()){
         Session::flash('alert', 'success');
