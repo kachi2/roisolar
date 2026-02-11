@@ -135,73 +135,69 @@
 }
     
     
-    .category-card {
-      transition: 0.3s;
-      
-    }
-    .category-card:hover {
-      transform: scale(1.03);
-    }
-    .category-img {
-      height: 170px;
-      object-fit: cover;
-    }
-
-    li.active a {
-    font-weight: bold;
-    color: #007bff;
-}
-
-
-
-
-.category-sidebar {
-    width: 250px;
+  .category-sidebar {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 15px;
-    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: relative;
 }
 
-.category-sidebar h3 {
-    margin-bottom: 12px;
-    font-size: 18px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 5px;
+/* HEADER */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
 
-.category-sidebar ul {
+/* LIST */
+.category-list {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin-top: 15px;
 }
 
-.category-sidebar ul li {
-    margin-bottom: 8px;
-}
-
-.category-sidebar ul li a {
-    display: block;
-    padding: 8px 10px;
-    color: #04104b;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.category-sidebar ul li a:hover {
-    background: #060813;
-    color: #fff !important;
-}
-
-/* Mobile Friendly */
+/* FORCE HIDE ON MOBILE */
 @media (max-width: 768px) {
-    .category-sidebar {
-        width: 100%;
-        margin-bottom: 20px;
+
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar.active .category-list {
+        display: block;
+    }
+
+}
+
+
+/* DESKTOP HOVER */
+@media (min-width: 769px) {
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar:hover .category-list {
+        display: block !important;
     }
 }
+
+/* LINKS */
+.category-list li a {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #444;
+    transition: 0.3s;
+}
+
+.category-list li a:hover {
+    background: #f3f3f3;
+    padding-left: 15px;
+}
+
 
 
 .latest-products {
@@ -574,18 +570,23 @@
           
            
         <aside class="category-sidebar">
-          <h3> Browse Categories</h3> 
-          <ul>
-              @foreach ($cate as $cat)
-                          <li  {{ request('category') == $cat->id ? 'active' : '' }}>
-                              <a href="{{route('category.products',$cat->id)}}" {{ request()->category == $cat->id ? 'text-yellow' : '' }}>
-                                  {{ $cat->name }} 
-                              </a>
-                          </li>
-                          
-                  @endforeach
-          </ul>
-    </aside>
+
+    <div class="category-header" id="categoryToggle">
+        <h6>Browse Categories</h6>
+        <span class="arrow"><h6> +</h6></span>
+    </div>
+
+    <ul class="category-list">
+        @foreach ($cate as $cat)
+            <li>
+                <a href="{{ route('category.products', $cat->id) }}">
+                    {{ $cat->name }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+
+</aside>
 <br>
 
 
@@ -726,4 +727,25 @@
 
 
 
+@endsection
+
+@section('script')
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("Category JS Loaded");
+
+    const toggle = document.getElementById("categoryToggle");
+    const sidebar = document.querySelector(".category-sidebar");
+
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+            console.log("Clicked");
+        });
+    }
+
+});
+</script>
 @endsection

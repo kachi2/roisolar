@@ -12,7 +12,14 @@
 <style>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
  /* ==== GENERAL ==== */
-  
+  /* Hide slick arrows on mobile */
+@media (max-width: 768px) {
+    .slick-prev,
+    .slick-next {
+        display: none !important;
+    }
+}
+
   .text-truncate-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

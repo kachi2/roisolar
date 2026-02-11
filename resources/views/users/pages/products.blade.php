@@ -85,7 +85,7 @@
 }
     
     
-    .category-card {
+    /* .category-card {
       transition: 0.3s;
       
     }
@@ -100,12 +100,12 @@
     li.active a {
     font-weight: bold;
     color: #007bff;
-}
+} */
 
 
 
 
-.category-sidebar {
+/* .category-sidebar {
     width: 250px;
     background: #fff;
     border-radius: 8px;
@@ -144,14 +144,80 @@
     background: #060813;
     color: #fff !important;
 }
-
+ */
 /* Mobile Friendly */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .category-sidebar {
         width: 100%;
         margin-bottom: 20px;
     }
+} */
+
+
+.category-sidebar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: relative;
 }
+
+/* HEADER */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* LIST */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* FORCE HIDE ON MOBILE */
+@media (max-width: 768px) {
+
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar.active .category-list {
+        display: block;
+    }
+
+}
+
+
+/* DESKTOP HOVER */
+@media (min-width: 769px) {
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar:hover .category-list {
+        display: block !important;
+    }
+}
+
+/* LINKS */
+.category-list li a {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #444;
+    transition: 0.3s;
+}
+
+.category-list li a:hover {
+    background: #f3f3f3;
+    padding-left: 15px;
+}
+
+
 
 
 .latest-products {
@@ -560,7 +626,7 @@
     </button>
 </div> <br> --}}
            
-        <aside class="category-sidebar">
+        {{-- <aside class="category-sidebar">
           <h3> Browse Categories</h3> 
           <ul>
               @foreach ($categories as $cat)
@@ -572,7 +638,28 @@
                           
                   @endforeach
           </ul>
-    </aside>
+    </aside> --}}
+
+
+   <aside class="category-sidebar">
+
+    <div class="category-header" id="categoryToggle">
+        <h6>Browse Categories</h6>
+        <span class="arrow"><h6> +</h6></span>
+    </div>
+
+    <ul class="category-list">
+        @foreach ($categories as $cat)
+            <li>
+                <a href="{{ route('category.products', $cat->id) }}">
+                    {{ $cat->name }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+
+</aside>
+
 <br>
 
 
@@ -705,5 +792,28 @@
 
 
 
+
+@endsection
+
+@section('script')
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("Category JS Loaded");
+
+    const toggle = document.getElementById("categoryToggle");
+    const sidebar = document.querySelector(".category-sidebar");
+
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+            console.log("Clicked");
+        });
+    }
+
+});
+</script>
 
 @endsection
