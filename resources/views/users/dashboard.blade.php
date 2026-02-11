@@ -330,7 +330,7 @@
 
 
 
-.category-card {
+/* .category-card {
     position: relative;
     display: block;
     border-radius: 8px;
@@ -367,17 +367,17 @@
 
 .category-card:hover img {
     transform: scale(1.1);
-}
+} */
 
 /* Mobile tweaks */
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
     .category-card {
         height: 100px;
     }
     .category-overlay span {
         font-size: 12px;
     }
-}
+} */
 
 
 
@@ -466,8 +466,56 @@
 
 
 
+/* SERVICE CARD */
+.service-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid #eaeaea;
+}
 
-.service-tile {
+/* IMAGE */
+.service-image img {
+    width: 75px;
+    height: 65px;
+    object-fit: contain;
+}
+
+/* TITLE FIX */
+.service-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 8px;
+
+    /* Force equal height */
+    min-height: 38px;
+
+    /* Prevent ugly breaking */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* LINK FIX */
+.service-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0d6efd;
+
+    white-space: nowrap;   /* 🚀 PREVENT BREAKING */
+}
+
+
+
+
+/* .service-tile {
     display: block;
     background: #fff;
     border-radius: 16px;
@@ -480,25 +528,25 @@
 
 .service-tile:hover {
     transform: translateY(-5px);
-}
+} */
 
 /* Image container */
-.icon-box {
+/* .icon-box {
     width: 100%;
     height: 140px;
     margin-bottom: 12px;
     overflow: hidden;
     border-radius: 12px;
-}
+} */
 
-.icon-box img {
+/* .icon-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 🔥 critical */
-}
+    object-fit: cover; 🔥 critical
+} */
 
 /* Text */
-.service-name {
+/* .service-name {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 6px;
@@ -515,10 +563,10 @@
     font-size: 0.85rem;
     color: #f59e0b;
     font-weight: 600;
-}
+} */
 
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .icon-box {
         height: 120px;
     }
@@ -530,7 +578,7 @@
     .service-text {
         font-size: 0.8rem;
     }
-}
+} */
 
 
 
@@ -658,6 +706,127 @@
 }
 
 
+
+
+/* SECTION */
+.category-section {
+    padding: 30px 0;
+}
+
+/* WRAPPER */
+.category-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* CARD */
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* important */
+}
+
+/* HOVER EFFECT */
+.category-card:hover {
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+}
+
+/* IMAGE */
+.category-image img {
+    width: 70px;
+    height: auto;
+}
+
+/* TEXT */
+.category-content h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 5px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;   /* show max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    /* min-height: 40px; keeps same height */
+}
+
+.shop-link {
+    font-size: 14px;
+    color: #555;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s;
+}
+
+.category-card:hover .shop-link {
+    color: #f5b400;
+}
+
+.arrow {
+    font-size: 14px;
+}
+
+
+
+/* TABLET */
+@media (max-width: 992px) {
+    .category-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* WRAPPER GRID */
+.category-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Desktop */
+    gap: 20px;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+    .category-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* MOBILE (2 PER ROW) */
+@media (max-width: 576px) {
+    .category-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .category-card {
+        flex-direction: column; /* stack image + text */
+        text-align: center;
+        padding: 15px;
+    }
+
+    
+
+    .category-image img {
+        width: 60px;
+        margin-bottom: 10px;
+        object-fit: contain;
+    }
+}
+
+
+
 </style>
 
 @endsection
@@ -727,7 +896,7 @@
 
 
 
-    <div class="row g-3">
+    {{-- <div class="row g-3">
   @foreach ($service as $serv)
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <a href="{{ route('service.details', encrypt($serv->id)) }}" class="service-tile h-100">
@@ -747,7 +916,41 @@
       </a>
     </div>
   @endforeach
+</div> --}}
+
+
+
+
+
+<div class="row g-4">
+    @foreach ($service as $serv)
+    <div class="col-6 col-md-6 col-lg-3">
+
+        <a href="{{ route('service.details', encrypt($serv->id)) }}" 
+           class="service-card">
+
+            <div class="service-image">
+                <img src="{{ asset('images/services/'.$serv->images) }}" 
+                     alt="{{ $serv->title }}">
+            </div>
+
+            <div class="service-content">
+                <h6>{{ $serv->title }}</h6>
+                <span class="service-link">
+                    Learn more 
+                    <i class="arrow">➜</i>
+                </span>
+            </div>
+
+        </a>
+
+    </div>
+    @endforeach
 </div>
+
+
+
+
 
 
   </div>
@@ -755,7 +958,7 @@
 
 <!-- ===== CATEGORY SECTION ===== -->
 
-<section id="shop" class="py-5 bg-light">
+{{-- <section id="shop" class="py-5 bg-light">
   <div class="container">
     <h4 class="text-center fw-bold mb-4">Categories</h4>
 
@@ -784,7 +987,43 @@
       @endforeach
     </div>
   </div>
+</section> --}}
+
+
+<section class="category-section">
+  <div class="text-center mb-5">
+      <h4 class="fw-bold">Categories</h4>
+      <p class="text-muted small">
+        End-to-end renewable energy solutions tailored for you.
+      </p>
+    </div>
+    <div class="container category-wrapper">
+
+        @foreach ($categories as $cat)
+        <a href="{{ route('category.products', $cat->id) }}" class="category-card">
+            
+            <div class="category-image">
+               <img src="{{ asset('images/category/'.$cat->image_path) }}"
+                   alt="{{ $cat->name }}">
+            </div>
+
+            <div class="category-content">
+                <h5>{{ $cat->name }}</h5>
+                <span class="shop-link">
+                    Shop now 
+                    <i class="arrow">➜</i>
+                </span>
+            </div>
+
+        </a>
+        @endforeach
+
+    </div>
 </section>
+
+
+
+
 
 
 
