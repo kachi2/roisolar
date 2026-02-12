@@ -825,6 +825,46 @@
     }
 }
 
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #25D366;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+
+    z-index: 9999;
+}
+
+.whatsapp-float:hover {
+    background: #1ebe5d;
+    transform: translateY(-4px);
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .whatsapp-float {
+        padding: 12px;
+        border-radius: 50%;
+    }
+
+    .whatsapp-float span {
+        display: none;
+    }
+}
 
 
 </style>
@@ -1155,10 +1195,24 @@
 
 
 
+<a href="https://wa.me/2348012345678" 
+   class="whatsapp-float" 
+   target="_blank">
+
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         width="24" 
+         height="24" 
+         fill="white">
+        <path d="M20.52 3.48A11.79 11.79 0 0012.02 0C5.38 0 .02 5.36.02 12c0 2.12.56 4.19 1.63 6.01L0 24l6.18-1.62A11.96 11.96 0 0012.02 24c6.64 0 12-5.36 12-12 0-3.2-1.25-6.21-3.5-8.52zM12.02 21.8c-1.88 0-3.72-.5-5.33-1.46l-.38-.23-3.67.96.98-3.58-.25-.37A9.74 9.74 0 012.22 12c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.4-7.36c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.95 1.15-.17.2-.35.22-.64.07-.29-.15-1.22-.45-2.32-1.45-.86-.77-1.45-1.72-1.62-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.35.43-.52.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.19-.24-.57-.48-.49-.67-.5-.17-.01-.37-.01-.57-.01s-.52.07-.8.37c-.27.29-1.05 1.03-1.05 2.52s1.08 2.93 1.23 3.13c.15.2 2.13 3.25 5.17 4.56.72.31 1.28.49 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.72-.7 1.97-1.38.24-.68.24-1.27.17-1.38-.07-.12-.27-.2-.56-.35z"/>
+    </svg>
+
+    <span>Chat with us</span>
+</a>
 
 
 
-@section('scripts')
+@section('script')
 <script>
 
 let index = 0;
