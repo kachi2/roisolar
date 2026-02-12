@@ -142,7 +142,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-0">
                   <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Home</a></li>
-                  <li class="breadcrumb-item"><a href="#">Product Details</a></li>
+                  <li class="breadcrumb-item"><a href="#">Project</a></li>
                   
                 </ol>
               </nav>
