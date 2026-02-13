@@ -996,38 +996,6 @@
   </div>
 </section>
 
-<!-- ===== CATEGORY SECTION ===== -->
-
-{{-- <section id="shop" class="py-5 bg-light">
-  <div class="container">
-    <h4 class="text-center fw-bold mb-4">Categories</h4>
-
-    <div class="row g-3 category-grid">
-      
-      @foreach ($cate as $category)
-        <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-          <a href="{{ route('category.products', $category->id) }}"
-             class="category-card">
-            
-            <div class="category-img">
-             
-              <img src="{{ asset('images/category/'.$category->image_path) }}"
-                   alt="{{ $category->name }}">
-               
-            </div>
-
-            <div class="category-overlay">
-              
-              <span>{{ $category->name }}</span>
-             
-            </div>
-
-          </a>
-        </div>
-      @endforeach
-    </div>
-  </div>
-</section> --}}
 
 
 <section class="category-section">

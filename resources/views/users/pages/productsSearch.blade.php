@@ -85,7 +85,7 @@
 }
     
     
-    .category-card {
+    /* .category-card {
       transition: 0.3s;
       
     }
@@ -143,15 +143,83 @@
 .category-sidebar ul li a:hover {
     background: #060813;
     color: #fff !important;
-}
+} */
 
 /* Mobile Friendly */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .category-sidebar {
         width: 100%;
         margin-bottom: 20px;
     }
+} */
+
+
+
+
+.category-sidebar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: relative;
 }
+
+/* HEADER */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* LIST */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* FORCE HIDE ON MOBILE */
+@media (max-width: 768px) {
+
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar.active .category-list {
+        display: block;
+    }
+
+}
+
+
+/* DESKTOP HOVER */
+@media (min-width: 769px) {
+    .category-list {
+        display: none;
+    }
+
+    .category-sidebar:hover .category-list {
+        display: block !important;
+    }
+}
+
+/* LINKS */
+.category-list li a {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #444;
+    transition: 0.3s;
+}
+
+.category-list li a:hover {
+    background: #f3f3f3;
+    padding-left: 15px;
+}
+
+
 
 
 .latest-products {
@@ -289,27 +357,28 @@
 
 /* Title – fixed height */
 .product-title {
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: 6px;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 34px;
+  min-height: 42px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: #041936;
 }
 
 .product-title a {
-    text-decoration: none;
-     color: #040d5ef1;
-     font-weight: 600;
+  color: #041835;
+  text-decoration: none;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* max 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-title a:hover {
-    color: #163a5f;
+  color: #0d47a1;
 }
+
 
 /* Image */
 .product-image {
@@ -343,13 +412,13 @@
 }
 
 .old-price {
-    font-size: 12px;
+    font-size: 10px;
     color: #dc3545; /* red strike */
     text-decoration: line-through;
 }
 
 .new-price {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: #0a2540; /* dark blue */
 }
@@ -388,6 +457,40 @@
         font-size: 12px;
         padding: 6px;
     }
+}
+
+
+.add-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 16px;
+
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.25);
+}
+
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, #0b3c91, #0d47a1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.35);
+  color: #fff;
+}
+
+.add-cart-btn:active {
+  transform: scale(0.98);
 }
 
 
@@ -524,7 +627,7 @@
     </button>
 </div> <br> --}}
            
-        <aside class="category-sidebar">
+        {{-- <aside class="category-sidebar">
           <h3> Browse Categories</h3> 
           <ul>
               @foreach ($categories as $cat)
@@ -536,7 +639,27 @@
                           
                   @endforeach
           </ul>
-    </aside>
+    </aside> --}}
+
+
+    <aside class="category-sidebar">
+
+    <div class="category-header" id="categoryToggle">
+        <h6>Browse Categories</h6>
+        <span class="arrow"><h6> +</h6></span>
+    </div>
+
+    <ul class="category-list">
+        @foreach ($categories as $cat)
+            <li>
+                <a href="{{ route('category.products', $cat->id) }}">
+                    {{ $cat->name }}
+                </a>
+            </li>
+        @endforeach
+    </ul>
+
+</aside>
 <br>
 
 
@@ -615,7 +738,7 @@
     Search results for: <span class="text-primary">"{{ $query }}"</span>
   </h6>
 
-  <div class="row row-cols-2 row-cols-md-4 g-3">
+  {{-- <div class="row row-cols-2 row-cols-md-4 g-3">
 
     @forelse ($products as $item)
       <div class="col">
@@ -655,8 +778,50 @@
       <p class="text-center">No products found for "{{ $query }}".</p>
     @endforelse
 
-  </div>
+  </div> --}}
 
+
+
+  <div class="container my-4">
+  <div class="row row-cols-2 row-cols-md-4 g-3">
+
+    @forelse ($products as $item)
+      <div class="col">
+        <div class="product-card-elegant">
+
+          <!-- Product Name -->
+          <h6 class="product-title">
+            <a href="{{ route('product.details', encrypt($item->id)) }}">
+              {{ $item->name }}
+            </a>
+          </h6>
+
+          <!-- Image -->
+          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+            <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+          </a>
+
+          <!-- Price -->
+          <div class="price-row">
+            <div class="price">
+              <span class="old-price">&#8358;{{ number_format($item->price) }}</span> 
+              <span class="new-price">&#8358;{{ number_format($item->sale_price) }}</span>
+            </div>
+          </div>
+          <br>
+          <!-- Add to Cart Button (your liked design) -->
+          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}">
+            Add to Cart
+          </a>
+
+        </div>
+      </div>
+    @empty
+      <p class="text-center">No products available.</p>
+    @endforelse
+
+  </div>
+</div>
   <div class="mt-4">
     {{ $products->links() }}
   </div>
@@ -681,4 +846,25 @@
 
 
 
+@endsection
+
+@section('scripts')
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("Category JS Loaded");
+
+    const toggle = document.getElementById("categoryToggle");
+    const sidebar = document.querySelector(".category-sidebar");
+
+    if (toggle) {
+        toggle.addEventListener("click", function () {
+            sidebar.classList.toggle("active");
+            console.log("Clicked");
+        });
+    }
+
+});
+</script>
 @endsection
