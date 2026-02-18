@@ -148,6 +148,14 @@ class PageController extends Controller
         
     }
 
+
+    public function PackageDetails($id)
+    {
+        return view('users.pages.package_details');
+        
+        
+    }
+
    
 //     public function Products()
 // {

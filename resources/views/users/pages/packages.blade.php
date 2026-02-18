@@ -94,14 +94,14 @@
     color: #0a7d2e;
     margin: 15px 0;
 
-    animation: zoomPulse 2s infinite ease-in-out;
+    /* animation: zoomPulse 2s infinite ease-in-out; */
 }
 
-@keyframes zoomPulse {
+/* @keyframes zoomPulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.08); }
     100% { transform: scale(1); }
-}
+} */
 
 
 .package-center img {
@@ -266,7 +266,7 @@
            <B>APPLIANCES:</B> {{ Str::limit(strip_tags($sp->usage_description), 200) }}
         </p>
 
-        <a href="#" class="shop-now-btn">Shop Now</a>
+        <a href="{{ route('contact-us') }}" class="shop-now-btn">Contact Us</a>
     </div>
 
 </div>

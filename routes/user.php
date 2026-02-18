@@ -104,6 +104,7 @@ Route::get('/pages/services', 'Services')->name('users.services');
 Route::get('/pages/services/details/{id}', 'ServiceDetails')->name('service.details');
 Route::get('/product/category/{id}', 'productsByCategory')->name('category.products');
 Route::get('/pages/packages', 'Packages')->name('users.package');
+Route::get('/pages/package/details/{id}', 'PackageDetails')->name('package.details');
 
 
 // Route::get('/pages/blogs', 'Blogs')->name('users.blogs');
