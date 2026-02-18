@@ -37,14 +37,17 @@
             <i class="fa-solid fa-location-dot"></i>
             <div>
               <h6>Our Office</h6>
-              <p>123 Risolar Street, Lagos, Nigeria</p>
+              <p>LAGOS- Alaba int'l market F1946-Facing Blockline after Firstbank.  </p>
+              <p>ABUJA- Unit C2-30 GSM village Olusegun Obasango way, Wuse Zone 1, Abuja.</p>
+              <p>BENUE- Unit 2 Ground floor Athans plaza No 75 Lyorchia Ayu Road opposite Keystone Bank wurukum Markurdi Benue State</p>
             </div>
           </div>
           <div class="info-item">
             <i class="fa-solid fa-phone"></i>
             <div>
               <h6>Phone</h6>
-              <p>+234 802 123 4567</p>
+              <p>+2349064838447</p>
+              <p>+2347951000600</p>
             </div>
           </div>
           <div class="info-item">

@@ -35,6 +35,19 @@
          </li>
 
 
+
+         <li>
+            <a  href="" data-toggle="tooltip" data-placement="right" title="Manage Categories"
+            data-nav-target="#dashboards">
+             <i class="fa fa-list"></i>&nbsp; Manage Packages</a>
+         </a>
+             <ul>
+                 <li><a  href="{{route('admin.package.create')}}">Add Package</a></li>
+                 <li><a href="{{route('admin.package.index')}}">Manage Package</a></li>
+             </ul>
+         </li>
+
+
          <li>
             <a  href="" data-toggle="tooltip" data-placement="right" title="Manage Menus"
            data-nav-target="#dashboards">

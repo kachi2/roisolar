@@ -9,6 +9,7 @@ use App\Models\Blog;
 use App\Models\ContactUs;
 use App\Models\TermsConditions;
 use App\Models\Privacypolicy;
+use App\Models\Services;
 
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -78,7 +79,7 @@ class PagesController extends Controller
                ->with('recent', Blog::latest()->take(5)->get());
             break;
             case "about": 
-                return view('users.pages.about')->with('news', News::latest()->get());
+                return view('users.pages.about')->with('news', Blog::latest()->get());
              break;
             case "contacts":
                 return view('users.pages.contact') 

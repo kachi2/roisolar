@@ -53,10 +53,10 @@
         </div>
         <p class="small mb-2"><i class="fa fa-headphones me-2 text-warning"></i> Got questions? Call us 24/7!</p>
         <p class="fw-semibold mb-3">{{$settings->site_phone}}</p>
-        <h6 class="fw-bold mb-2">Contact Info</h6>
+        {{-- <h6 class="fw-bold mb-2">Contact Info</h6>
         <p class="small text-muted">
           {{$settings->address}}
-        </p>
+        </p> --}}
         <div class="d-flex gap-3 mt-3">
           <a href="#" class="text-dark"><i class="fab fa-facebook-f"></i></a>
           <a href="#" class="text-dark"><i class="fab fa-google"></i></a>
@@ -95,18 +95,6 @@
            @empty
            @endforelse
 
-
-
-
-
-
-
-
-
-
-
-
-           
 
 
           <li><a href="{{ route('pages.terms') }}" class="text-decoration-none text-muted d-block mb-1">Terms & Conditions</a></li>

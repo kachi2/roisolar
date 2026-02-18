@@ -23,8 +23,8 @@ href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&am
 <link rel="shortcut icon" href="{{asset('images/'.$settings->fav)}}" type="image/x-icon">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 @yield('styles')
-
 
 </head>
 <body>
@@ -42,6 +42,33 @@ href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&am
 @yield('script')
 
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const swiper = new Swiper(".recentSwiper", {
+      slidesPerView: 4,
+      spaceBetween: 20,
+      loop: true,
+      speed: 800,
+
+      autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+      },
+
+      breakpoints: {
+          0: {
+              slidesPerView: 2,
+          },
+          992: {
+              slidesPerView: 4,
+          }
+      }
+  });
+
+});
+</script>
 
 </body>
 </html>

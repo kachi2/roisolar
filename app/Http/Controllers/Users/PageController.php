@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Services;
 use App\Models\Privacypolicy;
 use App\Models\TermsCondition;
+use App\Models\SolarPackage;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -139,6 +140,13 @@ class PageController extends Controller
         
     }
 
+    public function Packages()
+    {
+     $package = SolarPackage::where('is_active', true)->latest()->get();
+
+    return view('users.pages.packages', compact('package'));
+        
+    }
 
    
 //     public function Products()

@@ -566,7 +566,7 @@
 
       @endsection
 
- @section('scripts')
+ @section('script')
 
 <script>
 setTimeout(() => {

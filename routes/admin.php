@@ -18,6 +18,7 @@ use App\Http\Controllers\Manage\PageController;
 use App\Http\Controllers\Manage\PrescriptionController;
 use App\Http\Controllers\Manage\ShippingController;
 use App\Http\Controllers\Manage\ServiceController;
+use App\Http\Controllers\Manage\PackageController;
 
 Route::prefix('manage')->group(function () {
     Route::controller(AdminLoginController::class)->group(function () {
@@ -135,7 +136,16 @@ Route::prefix('manage')->group(function () {
             Route::post('service/delete/{id}', 'Delete')->name('admin.service.delete');
         });
 
-         Route::controller(ProjectController::class)->group(function(){
+         Route::controller(PackageController::class)->group(function(){
+            Route::get('/package', 'Index')->name('admin.package.index');
+            Route::get('package/create', 'Create')->name('admin.package.create');
+            Route::post('/package/store', 'Store')->name('admin.package.store');
+            Route::get('/package/edit/{id}', 'Edit')->name('admin.package.edit');
+            Route::post('package/update/{id}', 'Update')->name('admin.package.update');
+            Route::post('package/delete/{id}', 'Delete')->name('admin.package.delete');
+        });
+
+          Route::controller(ProjectController::class)->group(function(){
             Route::get('/projects', 'Index')->name('admin.project.index');
             Route::get('project/create', 'Create')->name('admin.project.create');
             Route::post('/project/store', 'Store')->name('admin.project.store');

@@ -4,6 +4,7 @@
 @endsection
 @section('head')
 <link rel="canonical" href="https://sanlivepharmacy.com/">
+
 @endsection
 @section('content')
 
@@ -19,6 +20,54 @@
         display: none !important;
     }
 }
+
+.recentProductSwiper {
+    padding-bottom: 50px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000;
+    top: 40%;
+}
+
+.swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: #000;
+}
+
+.swiper-slide {
+    height: auto;
+}
+  
+
+
+
+.recentSwiper {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.swiper-slide {
+    height: auto;
+}
+
+.product-card-elegant {
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
 
   .text-truncate-2 {
     display: -webkit-box;
@@ -867,6 +916,11 @@
 }
 
 
+
+
+
+
+
 </style>
 
 @endsection
@@ -1163,7 +1217,7 @@
 
 
 
-<a href="https://wa.me/2348012345678" 
+<a href="https://wa.me/2347951000600?text=Hello%20Solar%20Solutions%20Africa!%20I%20have%20a%20question%20about%20your%20products." 
    class="whatsapp-float" 
    target="_blank">
 
@@ -1178,7 +1232,51 @@
     <span>Chat with us</span>
 </a>
 
+<h6 class="related__products-title text-center mb-4">
+    Recent Products
+</h6>
 
+<div class="container">
+  <div class="swiper recentSwiper">
+    <div class="swiper-wrapper">
+
+      @forelse ($products as $item)
+        <div class="swiper-slide">
+          <div class="product-card-elegant">
+
+            <h6 class="product-title">
+              <a href="{{ route('product.details', encrypt($item->id)) }}">
+                {{ $item->name }}
+              </a>
+            </h6>
+
+            <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+              <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
+            </a>
+
+            <div class="price-row">
+              <div class="price">
+                <span class="old-price">&#8358;{{ number_format($item->price) }}</span>
+                <span class="new-price">&#8358;{{ number_format($item->sale_price) }}</span>
+              </div>
+            </div>
+
+            <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}">
+              Add to Cart
+            </a>
+
+          </div>
+        </div>
+      @empty
+        <p>No products available.</p>
+      @endforelse
+
+    </div>
+  </div>
+</div>
+
+
+@endsection
 
 @section('script')
 <script>
@@ -1196,38 +1294,44 @@ function moveSlide(step) {
 }
 
 // Auto slide every 3 seconds
-setInterval(() => moveSlide(1), 3000);
 
 
-<!-- Swiper CSS & JS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-
-    var swiper = new Swiper('.team-swiper', {
-        slidesPerView: 3,
-        spaceBetween: 20,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+var swiper = new Swiper(".recentProductSwiper", {
+    slidesPerView: 4,
+    spaceBetween: 20,
+    loop: true,
+    speed: 800,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 2,
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
+        768: {
+            slidesPerView: 3,
         },
-        breakpoints: {
-            0: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+        1024: {
+            slidesPerView: 4,
         }
-    });
+    }
+});
 
 
 </script>
 
 
 
-@endsection
 
 @endsection
+
+

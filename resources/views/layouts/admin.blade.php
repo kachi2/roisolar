@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{asset('/backend/vendors/vmap/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/backend/css/app.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('/backend/vendors/select2/css/select2.min.css')}}" type="text/css">
+
+    <!-- Summernote CSS -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+
     @yield('styles')
 </head>
 <body>
@@ -200,6 +204,9 @@
 
     CKEDITOR.replace( 'summernote' );
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
 @yield('scripts')
 
 
