@@ -64,6 +64,52 @@
 
 
 
+/* ===============================
+   CUSTOM HERO SLIDER
+================================= */
+
+.custom-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Force slick wrappers to inherit height */
+.custom-slider .slick-list,
+.custom-slider .slick-track {
+    height: 100%;
+}
+
+/* Slide Styling */
+.custom-slide {
+    width: 100%;
+    height: 90vh; /* Desktop height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .custom-slide {
+        height: 25vh;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .custom-slide {
+        height: 25vh;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .custom-slide {
+        height: 25vh;
+    }
+}
 
 
 
