@@ -569,11 +569,15 @@
  @section('script')
 
 <script>
-setTimeout(() => {
-    document.querySelectorAll('.alert').forEach(alert => {
-        bootstrap.Alert.getOrCreateInstance(alert).close();
+  document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let alert = document.querySelector('.alert-message');
+            if (alert) {
+                let bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }
+        }, 3000); // 3000ms = 3 seconds
     });
-}, 4000);
 </script>
 
 
