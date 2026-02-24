@@ -126,6 +126,7 @@
   
   .service-btn:hover {
     background: #1b1a30;
+    color: #fff;
   }
 
   .no-services {

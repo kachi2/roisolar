@@ -96,7 +96,7 @@
 
   .contact-btn {
     display: inline-block;
-    background: #4f46e5;
+    background: #0c094b;
     color: #fff;
     padding: 10px 18px;
     border-radius: 8px;
@@ -107,6 +107,7 @@
 
   .contact-btn:hover {
     background: #3730a3;
+    color: #fff;
   }
 
   /* ===== Team Section ===== */

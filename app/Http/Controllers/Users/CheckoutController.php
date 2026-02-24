@@ -137,46 +137,36 @@ $check = CartItem::where([
     }
 
 
-    public function process(Request $request)
-    { 
-       
+public function process(Request $request)
+{
+    $cart = session('cart');
 
-        $cart = session('cart');
-        if (!$cart || count($cart) === 0) {
-            return response()->json(['status' => 'error', 'message' => 'Cart is empty']);
-        }
-        // dd($cart);
-    $request->validate([
-        'address_id' => 'required|exists:shipping_addresses,id',
-        'set_default' => 'nullable|boolean',
-    ]);
-
-    // if set as default, update others to false
-    if ($request->has('set_default') && $request->set_default == 1) {
-        ShippingAddress::where('user_id', Auth::id())->update(['is_default' => false]);
-        ShippingAddress::where('id', $request->address_id)->update(['is_default' => true]);
+    if (!$cart || count($cart) === 0) {
+        return back()->with('error', 'Your cart is empty.');
     }
 
+    // Validate required fields
+    $request->validate([
+        'payment_method' => 'required|in:delivery,card,bank',
+        'address_id'     => 'required|exists:shipping_addresses,id',
+    ]);
 
-    //       $shippingAddress = ShippingAddress::where('id', $request->address_id)
-    //                     ->where('user_id', Auth::id())
-    //                     ->first();
-
-    // if (!$shippingAddress) {
-    //     return response()->json(['status' => 'error', 'message' => 'Invalid shipping address']);
-    // }
- $shipping_fee = 8000;
+    // Calculate totals
+    $shipping_fee = 8000;
     $totalCost = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
     $grandTotal = $totalCost + $shipping_fee;
 
-    // ✅ Generate a unique order number
+    // Generate order number
     $orderNo = 'ORD-' . strtoupper(uniqid());
-    $address_id = rand(111111111,999999999);
 
-        // 🚚 Home Delivery
-        if ($request->payment_method === 'delivery') {
-        // 1. Save order
-        Order::create([
+    /*
+    |--------------------------------------------------------------------------
+    | 🚚 HOME DELIVERY
+    |--------------------------------------------------------------------------
+    */
+    if ($request->payment_method === 'delivery') {
+
+        $order = Order::create([
             'user_id'        => Auth::id(),
             'order_no'       => $orderNo,
             'cart_items'     => json_encode($cart),
@@ -184,90 +174,135 @@ $check = CartItem::where([
             'payable'        => $grandTotal,
             'status'         => 'pending',
             'channel'        => 'Home Delivery',
-             'address_id'     => $request->address_id
+            'address_id'     => $request->address_id,
         ]);
-// dd($cart);
+
         foreach ($cart as $item) {
             CartItem::create([
-                'order_no'     => $orderNo, // ✅ store same order number
+                'order_no'     => $orderNo,
                 'product_id'   => $item['rowId'],
                 'product_name' => $item['name'],
-                'payable'        => $grandTotal,
                 'qty'          => $item['quantity'],
-                'price'        => $grandTotal,
+                'price'        => $item['price'],
+                'payable'      => $item['price'] * $item['quantity'],
                 'user_id'      => Auth::id(),
-                'image'        => $item['image'] ?? null, // if available
+                'image'        => $item['image'] ?? null,
             ]);
         }
-
-       
-        $success = "your order has been placed and is pending delivery";
-             Session::forget('cart');
-            return view('users.carts.success')
-            ->with('success', $success);
-            
-        }
-
-        // 💳 Card (Paystack)
-        if ($request->payment_method === 'card') {
-
-    if (!$request->reference) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Payment reference missing'
-        ]);
-    }
-
-    $verify = Http::withToken(config('paystack.secretKey'))
-        ->get("https://api.paystack.co/transaction/verify/{$request->reference}")
-        ->json();
-
-    if ($verify['status'] && $verify['data']['status'] === 'success') {
-
-        Order::create([
-            'user_id' => auth()->id(),
-            'items' => json_encode($cart),
-            'payment_method' => 'card',
-            'total_amount' => $verify['data']['amount'] / 100,
-            'status' => 'paid',
-            'transaction_ref' => $request->reference,
-        ]);
 
         Session::forget('cart');
 
-        return redirect()->route('orders.success');
-    }
-
-    return back()->with('error', 'Payment verification failed');
-}
-
-
-
-         // 🏦 Bank Transfer
-        if ($request->payment_method === 'bank') {
-            Order::create([
-                'user_id' => Auth::id(),
-                'items' => json_encode($cart),
-                'payment_method' => 'bank',
-                'total_amount' => $grandTotal,
-                'status' => 'pending',
-            ]);
-
-            $success = "Your order has been placed. Please complete the bank transfer.";
+         $success = "Your order has been placed. Please complete the bank transfer.";
              Session::forget('cart');
             return view('users.carts.success')
             ->with('success', $success);
-
-        }
-
-    
-
-        // Bank or others
-        return redirect()->route('checkout.index')->with('error', 'Invalid payment method.');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | 💳 CARD PAYMENT (PAYSTACK)
+    |--------------------------------------------------------------------------
+    */
+    if ($request->payment_method === 'card') {
+
+        if (!$request->reference) {
+            return back()->with('error', 'Payment reference missing.');
+        }
+
+        $verify = Http::withToken(config('paystack.secretKey'))
+            ->get("https://api.paystack.co/transaction/verify/{$request->reference}")
+            ->json();
+
+        if (!$verify['status'] || $verify['data']['status'] !== 'success') {
+            return back()->with('error', 'Payment verification failed.');
+        }
+
+        // Confirm amount matches
+        if (($verify['data']['amount'] / 100) != $grandTotal) {
+            return back()->with('error', 'Payment amount mismatch.');
+        }
+
+        $order = Order::create([
+            'user_id'        => Auth::id(),
+            'order_no'       => $orderNo,
+            'cart_items'     => json_encode($cart),
+            'payment_method' => 'card',
+            'payable'        => $grandTotal,
+            'status'         => 'paid',
+            'channel'        => 'Paystack',
+            'transaction_ref'=> $request->reference,
+            'address_id'     => $request->address_id,
+        ]);
+
+        foreach ($cart as $item) {
+            CartItem::create([
+                'order_no'     => $orderNo,
+                'product_id'   => $item['rowId'],
+                'product_name' => $item['name'],
+                'qty'          => $item['quantity'],
+                'price'        => $item['price'],
+                'payable'      => $item['price'] * $item['quantity'],
+                'user_id'      => Auth::id(),
+                'image'        => $item['image'] ?? null,
+            ]);
+        }
+
+        Session::forget('cart');
+
+       $success = "Your order has been placed. Please complete the bank transfer.";
+             Session::forget('cart');
+            return view('users.carts.success')
+            ->with('success', $success);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 🏦 BANK TRANSFER
+    |--------------------------------------------------------------------------
+    */
+    if ($request->payment_method === 'bank') {
+
+        $order = Order::create([
+            'user_id'        => Auth::id(),
+            'order_no'       => $orderNo,
+            'cart_items'     => json_encode($cart),
+            'payment_method' => 'bank',
+            'payable'        => $grandTotal,
+            'status'         => 'pending',
+            'channel'        => 'Bank Transfer',
+            'address_id'     => $request->address_id,
+        ]);
+
+        foreach ($cart as $item) {
+            CartItem::create([
+                'order_no'     => $orderNo,
+                'product_id'   => $item['rowId'],
+                'product_name' => $item['name'],
+                'qty'          => $item['quantity'],
+                'price'        => $item['price'],
+                'payable'      => $item['price'] * $item['quantity'],
+                'user_id'      => Auth::id(),
+                'image'        => $item['image'] ?? null,
+            ]);
+        }
+
+        Session::forget('cart');
+
+         $success = "Your order has been placed. Please complete the bank transfer.";
+             Session::forget('cart');
+            return view('users.carts.success')
+            ->with('success', $success);
+    }
+
+    return back()->with('error', 'Invalid payment method.');
+
+}
     public function success()
     {
         return view('users.carts.success');
     }
+
+
+
+    
 }

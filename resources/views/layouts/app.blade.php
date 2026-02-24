@@ -24,6 +24,7 @@ href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&am
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 @yield('styles')
 
 </head>

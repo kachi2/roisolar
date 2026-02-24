@@ -193,7 +193,7 @@ body {
 }
 
 .contact-btn {
-  background: #4f46e5;
+  background: #0d0a49;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -204,6 +204,7 @@ body {
 
 .contact-btn:hover {
   background: #3730a3;
+  color: #fff;
 }
 
 /* Map */

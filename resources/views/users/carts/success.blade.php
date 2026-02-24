@@ -15,13 +15,17 @@
             <p class="text-muted">Your order has been successfully placed.</p>
         @endif
 
-        <a href="{{ route('users.products') }}" class="btn btn-gradient mt-3">
-            Continue Shopping
-        </a>
+       <div class="d-flex flex-wrap gap-2 mt-3">
+    <a href="{{ route('users.products') }}" 
+       class="btn btn-outline-primary btn-sm flex-fill text-center">
+        Continue Shopping
+    </a>
 
-         <a href="{{ route('users.orderList') }}" class="btn btn-primary">
-            View order
-        </a>
+    <a href="{{ route('users.orderList') }}" 
+       class="btn btn-primary btn-sm flex-fill text-center">
+        View Order
+    </a>
+</div>
     </div>
 </div>
 @endsection
