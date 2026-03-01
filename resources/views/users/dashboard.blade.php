@@ -962,16 +962,15 @@
 }
 
 
-/* Floating container */
 /* Floating container - Middle Right Edge */
 .lux-promo {
     position: fixed;
     top: 50%;
-    right: -400px; /* start hidden */
+    right: -400px; /* hidden initially */
     transform: translateY(-50%);
     z-index: 9999;
-    animation: luxSlideInRight 0.7s ease forwards;
-    animation-delay: 1.5s;
+    /* animation: luxSlideInRight 0.7s ease forwards;
+    animation-delay: 1.5s; */
 }
 
 /* Slide from right animation */
@@ -983,6 +982,55 @@
     to {
         right: 30px;
         opacity: 1;
+    }
+}
+
+/* Base hidden state */
+.lux-promo {
+    position: fixed;
+    top: 50%;
+    right: -400px; /* hidden outside screen */
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: right 0.6s ease, opacity 0.6s ease;
+    z-index: 9999;
+}
+
+/* When visible */
+.lux-promo.show {
+    right: 20px;
+    opacity: 1;
+}
+
+
+
+/* Keep arrow pointing right */
+.lux-arrow {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+}
+
+/* Mobile adjustments (STILL middle-right) */
+@media (max-width: 576px) {
+
+    .lux-promo {
+        top: 50%;
+        right: -300px; /* hidden */
+        transform: translateY(-50%);
+    }
+
+    .lux-promo.show {
+        right: 10px; /* smaller margin for mobile */
+    }
+
+    .lux-card {
+        width: 250px;
+        padding: 18px;
     }
 }
 
@@ -1067,7 +1115,7 @@
 
 /* Arrow pointing up (towards cart area) */
 /* Arrow pointing to the right (towards cart area) */
-.lux-arrow {
+/* .lux-arrow {
     position: absolute;
     right: -10px;
     top: 50%;
@@ -1076,7 +1124,7 @@
     height: 20px;
     background: #ffffff;
     box-shadow: 5px -5px 15px rgba(0,0,0,0.05);
-}
+} */
 
 /* Slide animation */
 @keyframes luxSlideUp {
@@ -1090,7 +1138,7 @@
     }
 }
 
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
     .lux-promo {
         top: auto;
         bottom: 20px;
@@ -1105,9 +1153,9 @@
     }
 
     .lux-arrow {
-        display: none; /* cleaner on mobile */
+        display: none; 
     }
-}
+} */
 </style>
 
 @endsection
@@ -1540,7 +1588,28 @@ function closeLuxPromo() {
     setTimeout(() => popup.style.display = "none", 400);
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
+    const popup = document.getElementById("luxPromo");
+
+    function showPopup() {
+        popup.classList.add("show");
+
+        // Hide after 5 seconds
+        setTimeout(() => {
+            popup.classList.remove("show");
+        }, 5000);
+    }
+
+    // First appearance
+    setTimeout(showPopup, 2000);
+
+    // Repeat every 1 minute
+    setInterval(showPopup, 60000);
+
+});
+</script>
 @endsection
 
 
