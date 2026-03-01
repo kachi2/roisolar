@@ -962,11 +962,152 @@
 }
 
 
+/* Floating container */
+/* Floating container - Middle Right Edge */
+.lux-promo {
+    position: fixed;
+    top: 50%;
+    right: -400px; /* start hidden */
+    transform: translateY(-50%);
+    z-index: 9999;
+    animation: luxSlideInRight 0.7s ease forwards;
+    animation-delay: 1.5s;
+}
 
+/* Slide from right animation */
+@keyframes luxSlideInRight {
+    from {
+        right: -400px;
+        opacity: 0;
+    }
+    to {
+        right: 30px;
+        opacity: 1;
+    }
+}
 
+/* Premium Card */
+.lux-card {
+    width: 320px;
+    padding: 22px;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
 
+/* Close button */
+.lux-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+}
 
+.lux-close:hover {
+    color: #000;
+}
 
+/* Premium badge */
+.lux-badge {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+/* Title */
+.lux-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Text */
+.lux-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 18px;
+}
+
+/* Luxury Button */
+.lux-btn {
+    display: block;
+    text-align: center;
+    padding: 11px;
+    border-radius: 30px;
+    text-decoration: none;
+    background: #111;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.lux-btn:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* Pulse Animation */
+@keyframes pulseEffect {
+    0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0,0,0,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+}
+
+.pulse-btn {
+    animation: pulseEffect 2s infinite;
+}
+
+/* Arrow pointing up (towards cart area) */
+/* Arrow pointing to the right (towards cart area) */
+.lux-arrow {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    box-shadow: 5px -5px 15px rgba(0,0,0,0.05);
+}
+
+/* Slide animation */
+@keyframes luxSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 576px) {
+    .lux-promo {
+        top: auto;
+        bottom: 20px;
+        right: 15px;
+        left: 15px;
+        transform: none;
+        animation: luxSlideUp 0.6s ease forwards;
+    }
+
+    .lux-card {
+        width: 100%;
+    }
+
+    .lux-arrow {
+        display: none; /* cleaner on mobile */
+    }
+}
 </style>
 
 @endsection
@@ -1089,12 +1230,33 @@
 </div>
 
 
-
-
-
-
   </div>
 </section>
+
+
+<!-- Luxury Offer Popup -->
+<div class="lux-promo" id="luxPromo">
+    <div class="lux-card">
+
+        <span class="lux-close" onclick="closeLuxPromo()">×</span>
+
+        <div class="lux-badge">EXCLUSIVE</div>
+
+        <h6 class="lux-title">Latest Full Package Offer</h6>
+        <p class="lux-text">
+            Upgrade your power solution with our premium full solar package.
+            Limited-time professional installation included.
+        </p>
+
+        <a href="{{ route('users.package') }}" class="lux-btn pulse-btn">
+            View Full Package
+        </a>
+
+        <!-- Arrow pointing to cart -->
+        <div class="lux-arrow"></div>
+
+    </div>
+</div>
 
 
 
@@ -1128,12 +1290,6 @@
 
     </div>
 </section>
-
-
-
-
-
-
 
 
 
@@ -1373,10 +1529,17 @@ var swiper = new Swiper(".recentProductSwiper", {
 });
 
 
+
+
 </script>
 
-
-
+<script>
+function closeLuxPromo() {
+    const popup = document.getElementById("luxPromo");
+    popup.style.transform = "translateY(-50%) translateX(120%)";
+    setTimeout(() => popup.style.display = "none", 400);
+}
+</script>
 
 @endsection
 

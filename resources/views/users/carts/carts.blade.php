@@ -10,7 +10,91 @@
   
 @section('styles')
 <style>
-.cart-wrapper {
+
+
+.cart-card {
+    border: none;
+    border-radius: 15px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.cart-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.cart-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.summary-card {
+    border-radius: 15px;
+} 
+.product-title {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media (max-width: 576px) {
+    .cart-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        gap: 10px;
+    }
+
+    .card-body h5 {
+        font-size: 14px;
+    }
+
+    .card-body h6 {
+        font-size: 14px;
+    }
+}
+
+/* Fix product title layout */
+.card-body {
+    align-items: center;
+    gap: 20px;
+}
+
+/* Prevent title from scattering */
+.card-body h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+
+    /* Limit to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    word-break: break-word;
+}
+
+/* Keep middle content properly sized */
+.card-body .flex-grow-1 {
+    min-width: 0;
+}
+
+/* Prevent right section from pushing content */
+.card-body > div:last-child {
+    min-width: 90px;
+}
+
+
+
+/* .cart-wrapper {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
@@ -45,9 +129,9 @@
   object-fit: cover;
   border-radius: 8px;
   margin-right: 20px;
-}
+} */
 
-.item-details {
+/* .item-details {
   flex: 1;
 }
 
@@ -70,9 +154,9 @@
 .item-total {
   font-weight: bold;
   color: #0b1d3a;
-}
+} */
 
-.cart-summary {
+/* .cart-summary {
   border-top: 1px solid #ddd;
   padding-top: 20px;
 }
@@ -107,14 +191,14 @@
   background-color: #0056b3;
 }
 .cart-item {
-  position: relative; /* Needed to position the remove button */
-}
+  position: relative; 
+} */
 
-.remove-btn {
+/* .remove-btn {
   position: absolute;
   top: 8px;
   right: 8px;
-  background-color: #dc3545; /* red color */
+  background-color: #dc3545; 
   color: white;
   border: none;
   border-radius: 50%;
@@ -126,11 +210,11 @@
   align-items: center;
   justify-content: center;
   transition: background 0.3s ease;
-}
+} */
 
-.remove-btn:hover {
+/* .remove-btn:hover {
   background-color: #b02a37;
-}
+} */
 
 
 
@@ -253,14 +337,14 @@
     $totalCost = 0;
 @endphp
 
-<div class="cart-wrapper">
-  <h4 style="text-align:center;"> Cart</h4>
+{{-- <div class="cart-wrapper">
+  <h4 style="text-align:center;"> Cart</h4> --}}
 
   <!-- Cart Items -->
-  <div class="cart-items">
-    @if(session('cart') && count(session('cart')) > 0)
+  {{-- <div class="cart-items">
+    @if(session('cart') && count(session('cart')) > 0) --}}
   {{-- @forelse ($carts as $cart) --}}
-    @forelse (session('cart') as $id => $cart)
+    {{-- @forelse (session('cart') as $id => $cart)
     
         @php
             $totalItems += $cart['quantity'];
@@ -280,12 +364,12 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="remove-btn" title="Remove Item">&times;</button>
-        </form>
+        </form> --}}
 
         
         {{-- <a href="{{route('carts.delete',$carts['id'])}}" class="remove-btn" title="Remove Item">&times;</a> --}}
         
-      </div>
+      {{-- </div>
       <div class="item-total">{{ moneyFormat($cart['price'] * $cart['quantity']) }}</div>
     </div>
          @empty
@@ -303,11 +387,11 @@
                 @endif
 
 
-  </div>
+  </div> --}}
 
   <!-- Summary -->
  
- @if(session('cart') && count(session('cart')) > 0)
+ {{-- @if(session('cart') && count(session('cart')) > 0)
 
   
   <div class="cart-summary">
@@ -315,13 +399,13 @@
     <div class="summary-row">
       <span>Total Item:</span>
       <span><b>{{$totalItems}} Items</b></span>
-    </div>
+    </div> --}}
     {{-- <div class="summary-row">
       <span>Tax (5%):</span>
       <span>₦2,000</span>
       
     </div> --}}
-    <div class="summary-row total">
+    {{-- <div class="summary-row total">
       <strong>Total:</strong>
       <strong>{{moneyFormat($totalCost)}}</strong>
      
@@ -338,10 +422,108 @@
 
 @endif
 
+</div> --}}
+
+
+
+
+<div class="container my-5">
+    <h5 class="text-center fw-bold mb-4">🛒 Shopping Cart</h5>
+
+    @if(session('cart') && count(session('cart')) > 0)
+
+    <div class="row">
+        <!-- CART ITEMS -->
+        <div class="col-lg-8">
+            @php
+                $totalItems = 0;
+                $totalCost = 0;
+            @endphp
+
+            @foreach(session('cart') as $id => $cart)
+                @php
+                    $totalItems += $cart['quantity'];
+                    $totalCost += $cart['price'] * $cart['quantity'];
+                @endphp
+
+                <div class="card cart-card mb-3">
+                    <div class="card-body d-flex flex-row align-items-center">
+
+                        <img src="{{ asset('images/products/'.$cart['image']) }}"
+                             class="cart-img me-md-4 mb-3 mb-md-0">
+
+                        <div class="flex-grow-1 text-center text-md-start">
+                            <h5 class="fw-bold mb-1 product-title">
+                              {{ \Illuminate\Support\Str::limit($cart['name'], 40) }}
+                          </h5>
+                            {{-- <p class="text-muted mb-1">{{ moneyFormat($cart['price']) }}</p> --}}
+                            <small class="text-secondary">
+                                Quantity: {{ $cart['quantity'] }}
+                            </small>
+                        </div>
+
+                        <div class="text-center text-md-end mt-3 mt-md-0">
+                            <h6 class="fw-bold mb-2">
+                                {{ moneyFormat($cart['price'] * $cart['quantity']) }}
+                            </h6>
+
+                            <form action="{{ route('carts.delete', $id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-outline-danger">
+                                    Remove
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm p-4 summary-card">
+                <h5 class="fw-bold mb-3">Order Summary</h5>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Total Items</span>
+                    <span>{{ $totalItems }}</span>
+                </div>
+
+                <div class="d-flex justify-content-between border-top pt-3 mb-3">
+                    <strong>Total</strong>
+                    <strong>{{ moneyFormat($totalCost) }}</strong>
+                </div>
+
+                @if(session()->has('cartSession'))
+                    <a href="{{ route('checkout.index', $cartSession) }}"
+                       class="btn btn-success w-100 mb-2">
+                        Proceed to Checkout
+                    </a>
+                @endif
+
+                <a href="{{ route('users.products') }}"
+                   class="btn btn-outline-dark w-100">
+                    Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @else
+
+        <div class="text-center py-5">
+            <h4 class="mb-3">Your cart is empty 🛒</h4>
+            <p class="text-muted">Looks like you haven't added anything yet.</p>
+            <a href="{{ route('users.products') }}"
+               class="btn btn-primary mt-3">
+                Start Shopping
+            </a>
+        </div>
+
+    @endif
 </div>
-
-
-
     
               {{-- </div><!-- /.row --> --}}
 

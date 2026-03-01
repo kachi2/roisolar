@@ -258,8 +258,9 @@
     <!-- LEFT SECTION -->
     <div class="package-left">
         <h3 class="package-title">{{$sp->title}}</h3>
+        
         <p class="package-desc">
-            {{ Str::limit(strip_tags($sp->description), 250) }}
+          <b>What to Expect:</b>  {{ Str::limit(strip_tags($sp->description), 250) }}
         </p>
     </div>
 
@@ -270,12 +271,12 @@
 
     <!-- RIGHT SECTION -->
     <div class="package-right">
-        <span class="package-label">Total Package</span>
+        <span class="package-label">Full Package</span>
 
         <h2 class="package-price">&#8358; {{ number_format($sp->price, 2) }}</h2>
 
         <p class="usage-desc">
-           <B>APPLIANCES:</B> {{ Str::limit(strip_tags($sp->usage_description), 200) }}
+           <B>APPLIANCES: </B> {{ Str::limit(strip_tags($sp->usage_description), 200) }}
         </p>
 
         <a href="{{ route('contact-us') }}" class="shop-now-btn">Contact Us</a>
