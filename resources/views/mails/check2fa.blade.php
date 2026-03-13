@@ -24,7 +24,7 @@
                 </td>
                 <tr>
                     <td style="padding:0 30px">
-                        <p>Please login to your account witht the OTP below</p>
+                        <p>Please login to your account with the OTP below</p>
                         <table width="100%">
                             <tbody>
                                 <tr>
