@@ -16,6 +16,7 @@ use App\Http\Controllers\Users\CheckoutController;
 use App\Http\Controllers\Users\PrescriptionController;
 use App\Http\Controllers\Users\ProductDetailsController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Auth\GoogleController;
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/', [HomeController::class, '__invoke'] )->name('dashboard');
@@ -135,3 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 });
+
+
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);

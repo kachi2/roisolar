@@ -28,6 +28,7 @@ class User extends Authenticatable
         'status',
         'image_path',
         'last_login',
+        'google_id',
     ];
 
         public function orders()

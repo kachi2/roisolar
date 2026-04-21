@@ -56,7 +56,7 @@
     white-space: nowrap;
     display: inline-block;
     padding-left: 100%; /* start off screen */
-    animation: scroll-left 15s linear infinite;
+    animation: scroll-left 50s linear infinite;
 }
 
 /* Animation keyframes */

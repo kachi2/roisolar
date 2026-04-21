@@ -1,152 +1,141 @@
 @extends('layouts.app')
+
 @section('title')
-<title> Create Address | Sanlive Pharmarcy</title>
+<title>Create Address | Sanlive Pharmacy</title>
 @endsection
-@section('head')
 
-<link rel="canonical" href="{{ url()->current() }}">
-@endsection
 @section('content')
-@section('styles')
-    <style>
-        .navIL {
-            padding: 15px;
-            padding-left: 10px
-        }
 
-        .dropdown-item:hover {
-            background: rgb(219, 218, 218);
-        }
-    </style>
-@endsection
+<style>
+    .address-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
 
-<div class="ps-shopping" style="background: #eee; ">
-    <div class="container">
-        <div class="ps-shopping__content">
-            <div class="row">
-              @include('includes.sidebarAccount')
-                <div class="col-12 col-md-7 col-lg-8 mt-5" style="background: #fff; border-radius: 5px">
-                   <form method="post" action="{{route('users.address.store')}}">
-                    @csrf
-                    <div class="row">
-                 
-                        <div class="col-12 col-md-12 col-lg-12" style="background: #fff; border-radius:10px">
-                            <p class="m-4" style="color:#332d2d"> <i class="fa fa-check-square-o"
-                                    style="color:rgb(79, 81, 79)"></i>
-                                Add Address </p>
-                            <hr>
-                            <div class="row m-3">
-                                <div class="col-12 col-md-6 ">
-                                    <div class="ps-form__group">
-                                        <label for="name" style="color:rgb(114, 111, 111)"> Full Name</label>
-                                        <input style="border-radius: 5px" class="form-control ps-form__input @error('name') is-invalid @enderror" type="text"
-                                            value="{{old('name')}}" placeholder="Full name" id="name" name="name">
-                                    </div>
-                                    @error('name')
-                                    <span class="alert alert-danger" role="error">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-md-6 mt-1">
-                                    <div class="ps-form__group">
-                                        <label for="phone" style="color:rgb(114, 111, 111)"> Phone Number</label>
-                                        <input class="form-control ps-form__input @error('phone') is-invalid @enderror" type="text"
-                                            placeholder="Phone Number" id="phone"  value="{{old('phone')}}" name="phone">
-                                    </div>
-                                    @error('phone')
-                                    <span class="alert alert-danger" role="error">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row m-3">
-                                
-                                <div class="col-12 col-md-6 mt-1">
-                                    <div class="ps-form__group">
-                                        <label for="email" style="color:rgb(114, 111, 111)"> Email Address</label>
-                                        <input class="form-control ps-form__input @error('email') is-invalid @enderror" type="email"
-                                            placeholder="Email Address"  id="email" value="{{old('email')}}" name="email">
-                                    </div>
-                                    @error('email')
-                                    <span class="alert alert-danger" role="error">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-md-6 mt-1">
-                                    <div class="ps-form__group">
-                                        <label id="address" style="color:rgb(114, 111, 111)"> Full Address </label>
-                                        <input class="form-control ps-form__input @error('address') is-invalid @enderror" type="text"
-                                            placeholder="Full Address" id="address" value="{{old('address')}}" name="address">
-                                    </div>
-                                    @error('address')
-                                    <span class="alert alert-danger" role="error">
-                                        {{$message}}
-                                    </span>
-                                    @enderror
-                                </div>
-                                <!--<div class="col-12 col-md-4 mt-1">-->
-                                <!--    <div class="ps-form__group">-->
-                                <!--        <label id="city" style="color:rgb(114, 111, 111)"> City</label>-->
-                                <!--        <input class="form-control ps-form__input @error('city') is-invalid @enderror" type="text"-->
-                                <!--            placeholder="Enter City and State"  id="city" value="{{old('city')}}" name="city">-->
-                                <!--    </div>-->
-                                <!--    @error('city')-->
-                                <!--    <span class="alert alert-danger" role="error">-->
-                                <!--        {{$message}}-->
-                                <!--    </span>-->
-                                <!--    @enderror-->
-                                <!--</div>-->
-                                <!--<div class="col-12 col-md-4 mt-1">-->
-                                <!--    <div class="ps-form__group">-->
-                                <!--        <label id="state" style="color:rgb(114, 111, 111)"> State</label>-->
-                                <!--        <input class="form-control ps-form__input @error('state') is-invalid @enderror" type="text"-->
-                                <!--            placeholder="Enter City and State"  id="state" value="{{old('state')}}" name="state">-->
-                                <!--    </div>-->
-                                <!--    @error('state')-->
-                                <!--    <span class="alert alert-danger" role="error">-->
-                                <!--        {{$message}}-->
-                                <!--    </span>-->
-                                <!--    @enderror-->
-                                <!--</div>-->
-                                <!--<div class="col-12 col-md-4 mt-1">-->
-                                <!--    <div class="ps-form__group">-->
-                                <!--        <label id="country" style="color:rgb(114, 111, 111)">Country </label>-->
-                                <!--        <input class="form-control ps-form__input @error('country') is-invalid @enderror" type="text"-->
-                                <!--            placeholder="Country"  id="country" value="{{old('country')}}" name="country">-->
-                                <!--    </div>-->
-                                <!--    @error('country')-->
-                                <!--    <span class="alert alert-danger" role="error">-->
-                                <!--        {{$message}}-->
-                                <!--    </span>-->
-                                <!--    @enderror-->
-                                <!--</div>-->
-                                <div class="  " style="display: flex; color:rgb(114, 111, 111); align-items:center;">
-                                     <input style="color:rgb(114, 111, 111); width:18px" value="1" type="checkbox" name="is_default" id="is_default">  
-                                     <label for="is_default" class="pl-2"> Set as Default Address  </label> 
-                                    </div>
-                                <div class="m-4" style="float: right;">
-                                    <button class="ps-btn ps-btn--success w-100" style="border-radius: 5px"> Add Address</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </form>
+    .form-control {
+        height: 48px;
+        border-radius: 8px;
+        border: 1px solid #e5e5e5;
+    }
 
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: none;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 6px;
+    }
+
+    .btn-submit {
+        background: #0d6efd;
+        color: #fff;
+        height: 50px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+        background: #0b5ed7;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row">
+
+        {{-- Sidebar --}}
+        @include('includes.sidebarAccount')
+
+        {{-- Main Content --}}
+        <div class="col-md-8 mt-4">
+            <div class="address-card">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="section-title">📍 Add New Address</h5>
                 </div>
 
+                <form method="POST" action="{{ route('users.address.store') }}">
+                    @csrf
 
+                    <div class="row g-3">
+
+                        {{-- Name --}}
+                        <div class="col-md-6">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" value="{{ old('name') }}"
+                                class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Enter full name">
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Phone --}}
+                        <div class="col-md-6">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" name="phone" value="{{ old('phone') }}"
+                                class="form-control @error('phone') is-invalid @enderror"
+                                placeholder="Enter phone number">
+                            @error('phone')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Email --}}
+                        <div class="col-md-6">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter email">
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Address --}}
+                        <div class="col-md-6">
+                            <label class="form-label">Full Address</label>
+                            <input type="text" name="address" value="{{ old('address') }}"
+                                class="form-control @error('address') is-invalid @enderror"
+                                placeholder="Street, Area, City">
+                            @error('address')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Default checkbox --}}
+                        <div class="col-12 mt-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" name="is_default" id="is_default">
+                                <label class="form-check-label" for="is_default">
+                                    Set as default address
+                                </label>
+                            </div>
+                        </div>
+
+                        {{-- Button --}}
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn btn-submit w-100">
+                                Save Address
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
 
             </div>
-
         </div>
+
     </div>
 </div>
-<div style="height: 2em; background:#eee"></div>
 
-@endsection
-
-@section('script')
 @endsection

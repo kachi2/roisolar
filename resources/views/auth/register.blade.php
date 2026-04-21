@@ -83,6 +83,8 @@
             <input type="password" name="password" class="form-control"  id="password" placeholder="Password" required="">
         </div>
         <button class="btn btn-primary btn-block">Register</button>
+
+         </form>
         <hr>
         {{-- <ul class="list-inline">
             <li class="list-inline-item">
@@ -96,10 +98,15 @@
                 </a>
             </li>
         </ul> --}}
+
+            <a href="{{ route('google.login') }}" class="btn btn-light btn-block d-flex align-items-center justify-content-center">
+    <img src="{{ asset('frontend/images/icons/google-icon.svg') }}" width="20" class="me-2">
+    Sign up with Google
+</a>
    
         <p class="text-muted">Already have an account?</p>
         <a href="{{route('login')}}" class="btn btn-outline-light btn-sm">Login Here!</a>
-    </form>
+    
     <!-- ./ form -->
 </div>
 

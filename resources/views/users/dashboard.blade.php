@@ -1467,7 +1467,7 @@
 
 
 
-<a href="https://wa.me/2347951000600?text=Hello%20Solar%20Solutions%20Africa!%20I%20have%20a%20question%20about%20your%20products." 
+<a href="https://wa.me/2347051000600?text=Hello%20Solar%20Solutions%20Africa!%20I%20have%20a%20question%20about%20your%20products." 
    class="whatsapp-float" 
    target="_blank">
 

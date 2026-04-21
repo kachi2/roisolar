@@ -45,7 +45,7 @@
                                                     <img src="{{$sp->image}}" width="50px" height="50px"> 
                                                 </td>
                                                 <td>
-                                                    <a href="#">{{$sp->Order_no}}</a>
+                                                    <a href="#">{{$sp->order_no}}</a>
                                                 </td>
                                                 <td>
                                                     <a href="#">{{$sp->product_name}}</a>

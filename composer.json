@@ -15,6 +15,7 @@
         "laravel/breeze": "1.9.2",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.26",
         "laravel/tinker": "^2.5",
         "unicodeveloper/laravel-paystack": "^1.2",
         "vinkla/hashids": "^9.1"

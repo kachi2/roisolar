@@ -62,6 +62,8 @@
             <a href="{{route('password.request')}}">Reset password</a>
         </div>
         <button class="btn btn-primary btn-block">Sign in</button>
+
+         </form>
         <hr>
         {{-- <ul class="list-inline">
             <li class="list-inline-item">
@@ -76,10 +78,14 @@
             </li>
           
         </ul> --}}
+        <a href="{{ route('google.login') }}" class="btn btn-light btn-block d-flex align-items-center justify-content-center">
+    <img src="{{ asset('frontend/images/icons/google-icon.svg') }}" width="20" class="me-2">
+    Sign in with Google
+</a>
   
         <p class="text-muted">Don't have an account?</p>
         <a href="{{route('register')}}" class="btn btn-outline-light btn-sm">Register now!</a>
-    </form>
+   
     <!-- ./ form -->
 
 </div>
