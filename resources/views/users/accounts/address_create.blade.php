@@ -49,8 +49,10 @@
     }
 </style>
 
-<div class="container py-5">
-    <div class="row">
+<div class="ps-shopping" style="background: #eee; ">
+    <div class="container">
+        <div class="ps-shopping__content">
+            <div class="row">
 
         {{-- Sidebar --}}
         @include('includes.sidebarAccount')

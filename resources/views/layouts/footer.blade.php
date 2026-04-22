@@ -58,10 +58,10 @@
           {{$settings->address}}
         </p> --}}
         <div class="d-flex gap-3 mt-3">
-          <a href="#" class="text-dark"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-google"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-github"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61567981810199" class="text-dark"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/contactroisolar?igsh=YzljYTk1ODg3Zg==" class="text-dark"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com/Roisolar01" class="text-dark"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/@ROISOLAR-x3b" class="text-dark"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
 

@@ -119,13 +119,6 @@
 </div> --}}
 <div style="height: 2em; background:#eee"></div>
 
-
-
-
-
-
-
-
 <div class="container py-4">
     <div class="row">
         <!-- Sidebar -->
@@ -172,7 +165,7 @@
                                     <div class="ps-product__info"><a class="ps-product__branch" href="#"></a>
                                         <p class="ps-product__tite " style="font-size:16px; color:#262525"><a></a>
 
-                                          Shipping Address <small style="font-size: 10px; color:rgb(117, 131, 242)"> Default</small>
+                                          &nbsp; &nbsp; Shipping Address <small style="font-size: 10px; color:rgb(117, 131, 242)"> Default</small>
                                             <span style="float: right"> <a href=""> <i class="icon-pen"></i> </a> </span>
                                         </p>
                                         <hr>
