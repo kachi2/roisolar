@@ -5,7 +5,7 @@
     <a href="#" id="close-menu">
         <i class="icon-cross"></i></a>
     </div>
-    <div class="ps-nav__item"><a style="color:#000; height:0px" href="{{route('index')}}"><i class="icon-home2"></i></a>
+    <div class="ps-nav__item"><a style="color:#000; height:0px" href="{{route('users.index')}}"><i class="icon-home2"></i></a>
     <small> Home</small></div>
     <div class="ps-nav__item"><a  style="color:#000; height:0px" href="{{route('users.account.index')}}"><i class="icon-user"></i></a>
     <small> Account</small></div>

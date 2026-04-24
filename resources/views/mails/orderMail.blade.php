@@ -15,7 +15,7 @@
                             <tbody>
                                 <tr bgcolor="#ffffff">
                                   <td style="padding: 20px 20px; ">
-                                    <a href="{{route('index')}}">
+                                    <a href="{{route('users.index')}}">
                                     <img src="{{ asset('/images/'.$settings->site_logo)}}" 
                                     alt="{{ asset('/images/'.$settings->site_logo)}}" style="height: 30px; margin-left: auto; margin-right: auto; display:block;">
                                 </a>

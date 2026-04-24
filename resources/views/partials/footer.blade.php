@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <div class="ps-footer--address">
-                                <div class="ps-logo"><a href="{{route('index')}}"> <img src="{{asset('images/'.$settings->site_logo)}}" style="border-radius: 5px" alt>
+                                <div class="ps-logo"><a href="{{route('users.index')}}"> <img src="{{asset('images/'.$settings->site_logo)}}" style="border-radius: 5px" alt>
                                     <img class="logo-white" src="{{asset('images/'.$settings->site_logo)}}"  style="border-radius: 5px" alt="{{asset('images/'.$settings->site_logo)}}">
                                     <img class="logo-black" src="{{asset('images/'.$settings->site_logo)}}" style="border-radius: 5px"  alt="{{asset('images/'.$settings->site_logo)}}">
                                     <img class="logo-white-all" src="{{asset('images/'.$settings->site_logo)}}"  style="border-radius: 5px" alt="{{asset('images/'.$settings->site_logo)}}">
@@ -52,7 +52,7 @@
                                 <h5 class="ps-block__title" style="color:#000">Account</h5>
                                 <ul class="ps-block__list">
                                     <li><a href="{{route('users.account.index')}}">My account</a></li>
-                                    <li><a href="{{route('users.orders')}}">My orders</a></li>
+                                    <li><a href="{{route('users.orderList')}}">My orders</a></li>
                                     <li><a href="{{route('users.account.address')}}">Address Book</a></li>
                                 </ul>
                             </div>
@@ -61,11 +61,11 @@
                             <div class="ps-footer--block">
                                 <h5 class="ps-block__title" style="color:#000">Help Links</h5>
                                 <ul class="ps-block__list">
-                                    {{-- <li><a href="{{ route('AboutUs')}}">About Us</a></li> --}}
+                                    {{-- <li><a href="{{ route('about-us')}}">About Us</a></li> --}}
                                     <li><a href="{{ route('PrivacyPolicy')}}">Privacy Policy</a></li>
                                     <li><a href="{{route('pages.terms')}}">Terms &amp; Conditions</a></li>
-                                    {{-- <li><a href="{{ route('contactUs')}}">Contact Us</a></li> --}}
-                                    <li><a href="{{ route('blogs.index')}}">Blogs</a></li>
+                                    {{-- <li><a href="{{ route('contact-us')}}">Contact Us</a></li> --}}
+                                    <li><a href="{{ route('users.blogs')}}">Blogs</a></li>
                                 </ul>
                             </div>
                         </div>

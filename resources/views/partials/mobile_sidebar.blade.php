@@ -2,9 +2,9 @@
     <div class="ps-menu__content">
         <ul class="menu--mobile">
             <li><a href="{{route('users.account.index')}}">My account</a></li>
-            <li><a href="{{route('users.orders')}}">My orders</a></li>
+            <li><a href="{{route('users.orderList')}}">My orders</a></li>
             <li><a href="{{route('users.account.address')}}">Address Book</a></li>
-            <li><a href="{{ route('AboutUs')}}">About Us</a></li>
+            <li><a href="{{ route('about-us')}}">About Us</a></li>
             <li><a href="{{ route('PrivacyPolicy')}}">Privacy Policy</a></li>
             <li><a href="{{route('pages.terms')}}">Terms &amp; Conditions</a></li>
             <li><a href="{{ route('contact-us')}}">Contact Us</a></li>

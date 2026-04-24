@@ -670,12 +670,12 @@
 
     @foreach ($latest as $item)
         <div class="latest-card">
-            <a class="thumb" href="{{ route('product.details', encrypt($item->id)) }}">
+            <a class="thumb" href="{{ route('product.details', $item->slug) }}">
                 <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
             </a>
 
             <div class="latest-info">
-                <a class="product-name" href="{{ route('product.details', encrypt($item->id)) }}">
+                <a class="product-name" href="{{ route('product.details', $item->slug) }}">
                     {{ $item->name }}
                 </a>
 
@@ -746,13 +746,13 @@
 
           <!-- Product Name -->
           <h6 class="product-title">
-            <a href="{{ route('product.details', encrypt($item->id)) }}">
+            <a href="{{ route('product.details', $item->slug) }}">
               <b>{{ $item->name }}</b>
             </a>
           </h6>
 
           <!-- Image -->
-          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+          <a href="{{ route('product.details', $item->slug) }}" class="product-image">
             <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
           </a>
 
@@ -768,7 +768,7 @@
 
           <!-- Add to Cart -->
           <a class="add-cart-btn"
-             href="{{ route('product.details', encrypt($item->id)) }}">
+             href="{{ route('product.details', $item->slug) }}">
             Add to cart
           </a>
 
@@ -791,13 +791,13 @@
 
           <!-- Product Name -->
           <h6 class="product-title">
-            <a href="{{ route('product.details', encrypt($item->id)) }}">
+            <a href="{{ route('product.details', $item->slug) }}">
               {{ $item->name }}
             </a>
           </h6>
 
           <!-- Image -->
-          <a href="{{ route('product.details', encrypt($item->id)) }}" class="product-image">
+          <a href="{{ route('product.details', $item->slug) }}" class="product-image">
             <img src="{{ asset('images/products/'.$item->image_path) }}" alt="{{ $item->name }}">
           </a>
 
@@ -811,7 +811,7 @@
           </div>
           <br>
           <!-- Add to Cart Button (your liked design) -->
-          <a class="add-cart-btn" href="{{ route('product.details', encrypt($item->id)) }}">
+          <a class="add-cart-btn" href="{{ route('product.details', $item->slug) }}">
             Add to Cart
           </a>
 

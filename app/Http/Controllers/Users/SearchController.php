@@ -36,9 +36,11 @@ class SearchController extends Controller
             addHashId($cats->products);
         }
         addHashId($categories);
+        $latest = Product::where('status', 0)->latest()->simplePaginate(4);
         return view('users.pages.products',$data, [
             'products' => $products,
             'categories' => $categories,
+            'latest' => $latest,
         ])
         ->with('metaTitle', Str::slug($cat->name??' ', ' '). ' | Sanlive Pharmacy: Online Pharmacy in Nigeria')
         ->with('ogTitle', Str::slug($cat->name?? '', ' ') . ' | Sanlive Pharmacy: Online Pharmacy in Nigeria')

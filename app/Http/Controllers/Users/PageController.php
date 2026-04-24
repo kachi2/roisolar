@@ -10,6 +10,7 @@ use App\Models\Services;
 use App\Models\Privacypolicy;
 use App\Models\TermsCondition;
 use App\Models\SolarPackage;
+use App\Models\ContactUs;
 use Vinkla\Hashids\Facades\Hashids;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -42,8 +43,24 @@ class PageController extends Controller
     ]);
     }
 
-    public function ContactStore(){
+    public function ContactStore(Request $request){
+        $request->validate([
+            'name'    => 'required|string|max:100',
+            'email'   => 'required|email|max:150',
+            'phone'   => 'nullable|string|max:20',
+            'subject' => 'required|string|max:200',
+            'message' => 'required|string|max:2000',
+        ]);
 
+        ContactUs::create([
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        return back()->with('success', "Message sent! We'll get back to you soon.");
     }
 
 
@@ -62,21 +79,14 @@ class PageController extends Controller
         
     }
 
-    public function ProductDetails($id){
-        // $latest =  Product::latest()->simplePaginate(6);
-        // foreach($latest as $bb){
-        //     $bb->hashid = Hashids::connection('category')->encode($bb->id);
-        // }
-        // $id = Hashids::connection('category')->decode($id);
-        // $products = Product::findorfail($id[0]);
-        //  $product = Product::with('category')->findOrFail($id);
-    return view('users.pages.product_details')
-    ->with('product', Product::where('id', decrypt($id))->first())
-    ->with('prod', Product::with('category')->where('id', decrypt($id))->first())
-    ->with('products', Product::latest()->simplePaginate(4));
-
-    
-
+    public function ProductDetails($slug){
+        $product = Product::with('category')->where('slug', $slug)->firstOrFail();
+        return view('users.pages.product_details')
+            ->with('product', $product)
+            ->with('prod', $product)
+            ->with('products', Product::where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)
+                ->latest()->take(8)->get());
     }
 
     
@@ -131,13 +141,12 @@ class PageController extends Controller
         // ->with('settings', Settings::first());
     }
 
-    public function ServiceDetails($id)
+    public function ServiceDetails($slug)
     {
         return view('users.pages.service_details')
-        ->with('service', Services::where('id', decrypt($id))->first())
-        ->with('se', Services::latest()->simplePaginate(6))
+        ->with('service', Services::where('slug', $slug)->firstOrFail())
+        ->with('se', Services::latest()->get())
         ->with('categories', Category::all());
-        
     }
 
     public function Packages()
