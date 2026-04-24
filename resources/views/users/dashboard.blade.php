@@ -994,7 +994,7 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
 <div class="marquee-band">
   <div class="marquee-track">
     @foreach (range(0, 1) as $_)
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Free Nationwide Delivery on Qualifying Orders</span>
+    {{-- <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Free Nationwide Delivery on Qualifying Orders</span> --}}
     <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Certified Solar Installation — Trusted Engineers</span>
     <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Premium Panels, Inverters &amp; Batteries In Stock</span>
     <span class="marquee-item"><span class="marquee-dot">&#9679;</span> 24 / 7 Technical &amp; Customer Support</span>
@@ -1053,27 +1053,7 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
   </div>
 </section>
 {{-- ===== CTA BANNER ===== --}}
-<div class="cta-banner">
-  <div class="container position-relative" style="z-index:1">
-    <div class="row align-items-center gy-4">
-      <div class="col-lg-7">
-        <h2>Ready to Go Solar?</h2>
-        <p>Get a free consultation and custom quote for your home or business. Our experts are standing by.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="{{ route('users.package') }}" class="btn-cta-white">
-            <i class="fas fa-solar-panel"></i> View Packages
-          </a>
-          <a href="{{ route('contact-us') }}" class="btn-cta-ghost">
-            Contact an Expert
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-5 text-center">
-        <div style="font-size:7rem;opacity:.15;line-height:1">&#9728;</div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 {{-- ===== RECENT PRODUCTS ===== --}}
 <section class="section-wrap" id="recent">
