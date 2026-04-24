@@ -322,9 +322,9 @@
       </form>
 
       <div class="auth-register-cta">
-        <p>Don't have an account? Join thousands powering their homes with solar.</p>
+        <p>Don't have an account? Join us</p>
         <a href="{{ route('register') }}" class="btn-register">
-          <i class="fas fa-user-plus"></i> Create Account &mdash; It's Free
+          <i class="fas fa-user-plus"></i> Create Account
         </a>
       </div>
 

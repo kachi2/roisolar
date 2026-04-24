@@ -30,10 +30,20 @@ class UserController extends Controller
 
     public function Index()
     {
+        $userId = auth_user()->id;
+        $orderCount   = Order::where('user_id', $userId)->count();
+        $addressCount = ShippingAddress::where('user_id', $userId)->count();
+        $paymentCount = Payment::where('user_id', $userId)->count();
+        $recentIds    = session()->get('products.recently_viewed', []);
+        $recentCount  = is_array($recentIds) ? count(array_unique($recentIds)) : 0;
 
         return view('users.accounts.account')
-            ->with('address', ShippingAddress::where(['user_id' => auth_user()->id, 'is_default' => 1])->first())
-            ->with('account', User::where('id', auth_user()->id)->first());
+            ->with('address',      ShippingAddress::where(['user_id' => $userId, 'is_default' => 1])->first())
+            ->with('account',      User::where('id', $userId)->first())
+            ->with('orderCount',   $orderCount)
+            ->with('addressCount', $addressCount)
+            ->with('paymentCount', $paymentCount)
+            ->with('recentCount',  $recentCount);
     }
 
     public function Orders()
