@@ -629,6 +629,7 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
   align-items: baseline;
   gap: 8px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 .p-was  { font-size: .72rem; color: #94a3b8; text-decoration: line-through; }
 .p-now  { font-size: 1.05rem; font-weight: 800; color: var(--primary); letter-spacing: -.02em; }

@@ -33,7 +33,7 @@
 }
 
 /* ---- Columns ---- */
-.footer-brand .footer-logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
+.footer-brand .footer-logo img { height: 44px; width: auto;  }
 .footer-brand .footer-tagline {
   font-size: 13px; color: rgba(255,255,255,.55);
   line-height: 1.6; margin: 14px 0 20px;
@@ -217,7 +217,7 @@
             <a href="https://www.instagram.com/contactroisolar?igsh=YzljYTk1ODg3Zg==" title="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
             <a href="https://x.com/Roisolar01" title="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
             <a href="https://www.youtube.com/@ROISOLAR-x3b" title="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-            <a href="https://wa.me/{{ preg_replace('/\D/','',$settings->site_phone) }}" title="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://wa.me/2347051000600" title="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </div>
