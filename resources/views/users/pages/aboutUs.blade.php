@@ -584,9 +584,9 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
         <div class="about-text-col">
           <span class="section-tag"><i class="fas fa-bolt"></i> Who We Are</span>
           <h2>Nigeria's #1 <em>Solar Energy</em> Marketplace</h2>
-
+          
           @if($aboutUs && $aboutUs->content)
-            <div class="about-body">{!! $aboutUs->content !!}</div>
+            {{-- <div class="about-body">{!! $aboutUs->content !!}</div> --}}
           @else
             <p class="about-body">
               Roisolar NG is Nigeria's premier online destination for solar energy products. From solar panels and inverters to batteries and accessories, we deliver premium quality products directly to your doorstep — across all 36 states and the FCT.
@@ -606,6 +606,19 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
           <a href="{{ route('contact-us') }}" class="btn-about-cta">
             <i class="fas fa-envelope"></i> Get In Touch
           </a>
+
+          <p> <br>
+            <b>VISION</b> <br> 
+To drive Africa’s transition to a sustainable energy future by empowering individuals, communities, 
+and industries through innovative solar technologies and clean energy solutions. <br> <br>
+
+<b>MISSION</b> <br>
+
+Our mission is to deliver cutting-edge, affordable, and reliable solar energy systems that unlock 
+the full potential of African businesses and communities. We are committed to leading the continent’s 
+energy transformation by providing sustainable solutions that foster economic growth, environmental stewardship, 
+and a better tomorrow for all.
+          </p>
         </div>
 
         {{-- Image column --}}
