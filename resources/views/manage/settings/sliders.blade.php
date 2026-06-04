@@ -24,6 +24,18 @@
                           &nbsp; &nbsp;  <a  href="{{route('admin.sliderDelete', encrypt($ss->id))}}" onclick="return confirm('Are you sure, you want to delete this slider')" class="badge badge-danger"> Delete Slider</a>
                         </h6>
                             <div class="slider-for">
+
+
+                                @php
+    $ext = strtolower(pathinfo($ss->image_path, PATHINFO_EXTENSION));
+@endphp
+
+@if(in_array($ext, ['mp4','mov','avi','wmv','mkv']))
+    <video controls width="100%">
+        <source src="{{ asset('images/sliders/'.$ss->image_path) }}">
+    </video>
+
+    @else
                                
                                 <div class="slick-slide-item">
                                     <img src="{{asset('images/sliders/'.$ss->image_path)}}" class="img-fluid" style="width:100%"
@@ -46,6 +58,8 @@
                                 {{$ss->content}}
                             </div> --}}
                         </div>
+
+                        @endif
                         @empty         
                         @endforelse
                     </div>

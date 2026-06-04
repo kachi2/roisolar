@@ -869,6 +869,12 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
   opacity: 1;
   transform: translateY(0);
 }
+
+
+.hero-slide {
+    height: 500px;
+    object-fit: cover;
+}
 </style>
 @endsection
 
@@ -1182,5 +1188,37 @@ function closePromo() {
   const p = document.getElementById('promoPopup');
   if (p) { p.classList.remove('show'); }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.querySelector('#heroCarousel');
+    const bsCarousel = new bootstrap.Carousel(carousel, {
+        interval: false
+    });
+
+    const videos = document.querySelectorAll('.hero-slide');
+
+    videos.forEach(video => {
+        video.addEventListener('ended', function() {
+            bsCarousel.next();
+        });
+    });
+
+    carousel.addEventListener('slide.bs.carousel', function() {
+        videos.forEach(video => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+
+    carousel.addEventListener('slid.bs.carousel', function() {
+        const activeVideo = carousel.querySelector('.carousel-item.active video');
+
+        if(activeVideo){
+            activeVideo.play();
+        }
+    });
+});
+
 </script>
 @endsection

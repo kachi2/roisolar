@@ -43,9 +43,23 @@
                                                 <td>
                                                     <a href="#">{{$sp->secondname}}</a>
                                                 </td> 
+
                                                 <td>
-                                                    <a href="#"><img src="{{asset('/images/sliders/'.$sp->image)}}" width="50px" height="50px"></a> 
-                                                </td>        
+                                                    {{-- <a href="#"><img src="{{asset('/images/sliders/'.$sp->image)}}" width="50px" height="50px"></a> --}}
+                                                     @php
+    $extension = pathinfo($sp->image_path, PATHINFO_EXTENSION);
+@endphp
+
+@if(in_array(strtolower($extension), ['mp4','mov','avi','wmv','mkv']))
+    <video width="250" controls>
+        <source src="{{ asset('images/sliders/'.$sp->image_path) }}">
+    </video>
+@else
+    <img src="{{ asset('images/sliders/'.$sp->image_path) }}" width="250">
+@endif 
+                                                </td>
+
+
                                                   <td>
                                                     <a href="#">{{$sp->created_at->format('d/M/y')}}</a>
                                                 </td>

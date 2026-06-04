@@ -5,8 +5,18 @@
 
       @forelse($sliders as $slider)
       <div class="swiper-slide">
+@php
+    $ext = strtolower(pathinfo($slider->image_path, PATHINFO_EXTENSION));
+@endphp
+
+@if(in_array($ext, ['mp4','mov','avi','wmv','mkv']))
+   <video autoplay muted loop playsinline class="hero-slide w-100">
+    <source src="{{ asset('images/sliders/'.$slider->image_path) }}">
+</video>
+    @else
         <div class="hero-slide"
              style="background-image: url('{{ asset('images/sliders/'.$slider->image_path) }}');">
+             
           <div class="hero-content">
             <div class="container">
               <div class="hero-inner">
@@ -33,6 +43,7 @@
             </div>
           </div>
         </div>
+@endif
       </div>
       @empty
       <div class="swiper-slide">

@@ -50,7 +50,7 @@
                               
                               <div class="col-md-6">
                                 <div class="custom-file">
-                                  <input type="file"name="image" required class="custom-file-input  @error('image') is-invalid @enderror" id="customFile">
+                                  <input type="file"name="image" accept="image/*,video/*" required class="custom-file-input  @error('image') is-invalid @enderror" id="customFile">
                                   <label class="custom-file-label" for="customFile">Choose Image</label>
                                 </div>
                                 <small id="emailHelp" class="form-text text-muted">Upload Slider Image.. Image must be 1920 by 590 pixels

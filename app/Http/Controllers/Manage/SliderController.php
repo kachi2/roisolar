@@ -28,7 +28,8 @@ class SliderController extends Controller
     ->with('bheading', 'Website Settings')
     ->with('breadcrumb', 'Website Settings');
     }
-    public function Store(Request $request){
+
+    public function tore(Request $request){
         $request->validate([
             'image' => 'required',
         ]);
@@ -59,6 +60,36 @@ class SliderController extends Controller
         return back();
     }
 
+
+
+    public function Store(Request $request)
+{
+    $request->validate([
+        'image' => 'required|file|mimes:jpg,jpeg,png,gif,webp,mp4,mov,avi,wmv,mkv|max:51200',
+    ]);
+
+    $fileName = '';
+
+    if ($request->hasFile('image')) {
+
+        $file = $request->file('image');
+
+        $extension = $file->getClientOriginalExtension();
+
+        $fileName = time() . '_' . uniqid() . '.' . $extension;
+
+        $file->move(public_path('images/sliders'), $fileName);
+    }
+
+    Slider::create([
+        'image_path' => $fileName,
+    ]);
+
+    Session::flash('alert', 'success');
+    Session::flash('msg', 'Slider Added Successfully');
+
+    return back();
+}
 
 
     public function Edit($id){
