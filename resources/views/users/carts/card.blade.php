@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-<title>  Checkout | Risolar</title>
-@endsection
+@section('title', 'Checkout')
 @section('head')
 
 <link rel="canonical" href="{{ url()->current() }}">

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>{{ $blog->title }} — {{ config('app.name') }}</title>
-@endsection
+@section('title', $blog->title)
 
 @section('head')
 <link rel="canonical" href="{{ url()->current() }}">

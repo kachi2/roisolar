@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-<title>Roisolar NG</title>
-@endsection
+@section('title', 'Solar Packages')
 
 @section('styles')
 

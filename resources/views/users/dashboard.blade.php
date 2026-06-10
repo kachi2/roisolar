@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-<title>Roisolar NG — Nigeria's #1 Solar Energy Store</title>
-@endsection
+@section('title', 'Home')
 @section('head')
 <link rel="canonical" href="https://roisolar.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>{{$products[0]?->categories?->name }}</title>
-@endsection
+@section('title', 'Search Results')
 @section('head')
 <link rel="canonical" href="{{ url('catalogs/'.Str::slug($products[0]?->categories?->name)) }}">
 

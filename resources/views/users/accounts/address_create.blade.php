@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>Create Address | Sanlive Pharmacy</title>
-@endsection
+@section('title', 'Create Address')
 
 @section('content')
 

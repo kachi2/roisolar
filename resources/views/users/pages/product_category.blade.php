@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>{{ $category->name ?? 'Products' }} — Roisolar NG</title>
-@endsection
+@section('title', $category->name ?? 'Products')
 
 @section('head')
 <link rel="canonical" href="{{ url('product/category/' . ($category->id ?? '')) }}">

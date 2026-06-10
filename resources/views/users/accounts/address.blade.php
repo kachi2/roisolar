@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title')<title>Address Book | Roisolar NG</title>@endsection
+@section('title', 'Address Book')
 @section('head')
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">

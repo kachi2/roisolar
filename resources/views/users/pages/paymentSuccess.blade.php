@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Payment Successful')
 @section('content')
 <div class="ps-shopping" style="background: #eee; ">
     <div class="container">

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>Order Success | Risolar</title>
-@endsection
+@section('title', 'Order Placed Successfully')
 
 @section('content')
 <div class="container py-5 text-center">

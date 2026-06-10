@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> {{config('app.name')}}</title>
+    <title>{{$bheading ?? config('app.name')}} — {{config('app.name')}}</title>
     <!-- Favicon -->
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/images/'.$settings->fav)}}">

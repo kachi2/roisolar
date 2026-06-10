@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-<title>All Products — {{ config('app.name') }}</title>
-@endsection
+@section('title', 'All Products')
 
 @section('head')
 <link rel="canonical" href="{{ url('catalogs') }}">

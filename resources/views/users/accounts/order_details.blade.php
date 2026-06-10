@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-<title> Order Details | Sanlive Pharmarcy</title>
-@endsection
+@section('title', 'Order Details')
 @section('head')
 
 <link rel="canonical" href="{{ url()->current() }}">

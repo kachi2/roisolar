@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('title')
-<title> {{$product->name}} </title>
-@endsection
+@section('title', $product->name)
 @section('head')
 <link rel="canonical" href="{{ route('users.products', [$product->hashid, $product->productUrl]) }}">
 @endsection
