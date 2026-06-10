@@ -1,7 +1,7 @@
 <header class="ps-header ps-header--8 ps-header--mobile">
     <div class="ps-noti">
         <div class="container">
-            <p class="m-0"> <marquee> {!! $announcment->content??null !!}</marquee> </p>
+            {{-- <p class="m-0"> <marquee> {!! $announcment->content??null !!}</marquee> </p> --}}
         </div><a class="ps-noti__close"><i class="icon-cross"></i></a>
     </div>
     <div class="ps-header__middle">
