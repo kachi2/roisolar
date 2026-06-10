@@ -75,7 +75,7 @@
 @media (prefers-reduced-motion: reduce) { .top-announcement-inner { animation: none; } }
 </style>
 
-<div class="top-announcement">
+{{-- <div class="top-announcement">
   <div class="top-announcement-inner">
     @foreach (array_fill(0, 2, null) as $_)
     <span class="top-announcement-item">
@@ -90,7 +90,6 @@
       <i class="fas fa-truck"></i> Free Delivery on Qualifying Orders
     </span>
     <span class="top-announcement-item">
-      {{-- <i class="fas fa-bolt"></i> {!! $announcment->content ?? 'Nigeria\'s #1 Solar Energy Store — Premium Panels &amp; Inverters' !!} --}}
       <i class="fas fa-bolt"></i> Nigerian's #1 Solar Energy Store — Premium Panels &amp; Inverters
     </span>
     <span class="top-announcement-item">
@@ -98,5 +97,5 @@
     </span>
     @endforeach
   </div>
-</div>
+</div> --}}
 
