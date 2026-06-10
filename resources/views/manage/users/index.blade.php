@@ -178,6 +178,9 @@
 
 @endsection
 @section('script')
+<script src="{{asset('/backend/vendors/charts/peity/jquery.peity.min.js')}}"></script>
+<script src="{{asset('/backend/js/examples/charts/peity.js')}}"></script>
+<script src="{{asset('/backend/js/examples/dashboard.js')}}"></script>
 <script>
     $(function () {
         $('.slick-js').slick({

@@ -14,18 +14,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Roboto:wght@400;700&amp;display=swap">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-<!-- Bootstrap 5 scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{{-- Font Awesome v5 removed — v6.6.0 already loaded above --}}
+<!-- Bootstrap 5 scripts (deferred — non-render-blocking) -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <link rel="stylesheet" href="{{asset('/frontend/css/libraries.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 
 <link rel="shortcut icon" href="{{asset('images/'.$settings->fav)}}" type="image/x-icon">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+{{-- Bootstrap Icons duplicate removed — already loaded above --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<script defer src="https://js.paystack.co/v1/inline.js"></script>
 
 @yield('styles')
 

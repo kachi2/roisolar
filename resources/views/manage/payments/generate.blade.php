@@ -82,14 +82,17 @@
                    
 
 @endsection
+@section('styles')
+<link rel="stylesheet" href="{{asset('/backend/vendors/select2/css/select2.min.css')}}">
+@endsection
+
 @section('script')
+<script src="{{asset('/backend/vendors/select2/js/select2.min.js')}}"></script>
 <script>
+    $('.select2-example').select2({
+        placeholder: 'Select Products Customer wants to buy'
+    });
 
-
-
-$('.clockpicker-example').clockpicker({
-    autoclose: true
-});
 
 $('input[name="date"]').daterangepicker({
   singleDatePicker: true,

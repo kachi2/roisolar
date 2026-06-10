@@ -75,8 +75,8 @@
 @media (prefers-reduced-motion: reduce) { .top-announcement-inner { animation: none; } }
 </style>
 
-{{-- <div class="top-announcement">
-  <div class="top-announcement-inner">
+<div class="top-announcement">
+  {{-- <div class="top-announcement-inner">
     @foreach (array_fill(0, 2, null) as $_)
     <span class="top-announcement-item">
       <i class="fas fa-phone-alt"></i>
@@ -96,6 +96,6 @@
       <i class="fas fa-shield-alt"></i> 100% Secure Payments &amp; Expert Installation
     </span>
     @endforeach
-  </div>
-</div> --}}
+  </div> --}}
+</div>
 
