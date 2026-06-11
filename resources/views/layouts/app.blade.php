@@ -9,27 +9,22 @@
 @else
 <title>{{$settings->site_name ?? config('app.name')}}</title>
 @endif
-<!-- Stylesheets -->
+<!-- Self-hosted CSS — no external network requests, eliminates CDN latency -->
+<link rel="stylesheet" href="{{asset('/frontend/vendors/fontawesome/css/all.min.css')}}">
+<link rel="stylesheet" href="{{asset('/frontend/vendors/bootstrap-icons/bootstrap-icons.css')}}">
+<link rel="stylesheet" href="{{asset('/frontend/vendors/bootstrap/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('/frontend/fonts/google-fonts.css')}}">
+<link rel="stylesheet" href="{{asset('/frontend/vendors/swiper/swiper-bundle.min.css')}}">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Roboto:wght@400;700&amp;display=swap">
-{{-- Font Awesome v5 removed — v6.6.0 already loaded above --}}
-<!-- Bootstrap 5 scripts (deferred — non-render-blocking) -->
-<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- Local site CSS -->
 <link rel="stylesheet" href="{{asset('/frontend/css/libraries.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 
-<link rel="shortcut icon" href="{{asset('images/'.$settings->fav)}}" type="image/x-icon">
-
-{{-- Bootstrap Icons duplicate removed — already loaded above --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<!-- Bootstrap JS (deferred — non-render-blocking) -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script defer src="https://js.paystack.co/v1/inline.js"></script>
+
+<link rel="shortcut icon" href="{{asset('images/'.$settings->fav)}}" type="image/x-icon">
 
 @yield('styles')
 
