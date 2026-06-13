@@ -29,6 +29,6 @@ class ManualPaymentEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('superadmin@livehealthepharma.com', 'Sanlive Pharmacy')->subject($this->data->subject)->view('mails.manualPayment')->with('data', $this->data);
+        return $this->from('support@roisolar.com.ng', 'Roisolar support')->subject($this->data->subject)->view('mails.manualPayment')->with('data', $this->data);
     }
 }

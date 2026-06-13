@@ -30,6 +30,6 @@ class RegMail extends Mailable
      */
     public function build()
     {
-        return $this->from('superadmin@livehealthepharma.com', 'Livehealth Support')->subject('User Registeration Details')->view('mails.regMail')->with('data', $this->data);
+        return $this->from('support@roisolar.com.ng', 'Roisolar Support')->subject('User Registeration Details')->view('mails.regMail')->with('data', $this->data);
     }
 }
