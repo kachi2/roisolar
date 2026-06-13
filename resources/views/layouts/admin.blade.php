@@ -9,9 +9,9 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/images/'.$settings->fav)}}">
     <!-- Admin bundle (CSS) -->
-    <link rel="stylesheet" href="{{asset('/backend/css/admin.bundle.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('/backend/css/app.min.css')}}" type="text/css">
     <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     @yield('styles')
 </head>
@@ -122,7 +122,7 @@
 <!-- end::main -->
 
 <!-- Admin bundle (JS) -->
-<script src="{{asset('/backend/js/admin.bundle.js')}}"></script>
+<script src="{{asset('/backend/js/app.min.js')}}"></script>
 <div class="colors"> <!-- To use theme colors with Javascript -->
     <div class="bg-primary"></div>
     <div class="bg-primary-bright"></div>
