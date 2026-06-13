@@ -7,12 +7,17 @@
     <title>{{$bheading ?? config('app.name')}} — {{config('app.name')}}</title>
     <!-- Favicon -->
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('/images/'.$settings->fav)}}">
-    <!-- Admin bundle (CSS) -->
+     <!-- Plugin styles -->
+    <link rel="stylesheet" href="{{asset('/backend/vendors/bundle.css')}}" type="text/css">
+  <!-- Datepicker -->
+    <link rel="stylesheet" href="{{asset('/backend/vendors/clockpicker/bootstrap-clockpicker.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('/backend/vendors/datepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('/backend/vendors/slick/slick.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('/backend/vendors/slick/slick-theme.css')}}" type="text/css">
+    <!-- Vmap -->
+    <link rel="stylesheet" href="{{asset('/backend/vendors/vmap/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/backend/css/app.min.css')}}" type="text/css">
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="{{asset('/backend/vendors/select2/css/select2.min.css')}}" type="text/css">
     @yield('styles')
 </head>
 <body>
@@ -121,8 +126,40 @@
 </div>
 <!-- end::main -->
 
-<!-- Admin bundle (JS) -->
+<!-- Plugin scripts -->
+<script src="{{asset('/backend/vendors/bundle.js')}}"></script>
 <script src="{{asset('/backend/js/app.min.js')}}"></script>
+<!-- Chartjs -->
+<script src="{{asset('/backend/vendors/charts/chartjs/chart.min.js')}}"></script>
+<script src="{{asset('/backend/vendors/dataTable/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/backend/vendors/dataTable/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('/backend/vendors/dataTable/dataTables.bootstrap4.min.js')}}"></script>
+<!-- Apex chart -->
+<script src="{{asset('/backend/vendors/charts/apex/apexcharts.min.js')}}"></script>
+<script src="{{asset('/backend/vendors/irregular-data-series.js')}}"></script>
+<script src="{{asset('/backend/vendors/charts/apex/apexcharts.min.js')}}"></script>
+
+<!-- Circle progress -->
+<script src="{{asset('/backend/vendors/circle-progress/circle-progress.min.js')}}"></script>
+<!-- Peity -->
+<script src="{{asset('/backend/vendors/charts/peity/jquery.peity.min.js')}}"></script>
+<script src="{{asset('/backend/js/examples/charts/peity.js')}}"></script>
+
+<script src="{{asset('/backend/vendors/prism/prism.js')}}"></script>
+<script src="{{asset('/backend/js/examples/clockpicker.js')}}"></script>
+<!-- Datepicker -->
+<script src="{{asset('/backend/vendors/datepicker/daterangepicker.js')}}"></script>
+<script src="{{asset('/backend/vendors/clockpicker/bootstrap-clockpicker.min.js')}}"></script>
+<!-- Slick -->
+<script src="{{asset('/backend/vendors/slick/slick.min.js')}}"></script>
+<!-- Vamp -->
+<script src="{{asset('/backend/vendors/vmap/jquery.vmap.min.js')}}"></script>
+<script src="{{asset('/backend/vendors/vmap/maps/jquery.vmap.usa.js')}}"></script>
+<script src="{{asset('/backend/js/examples/vmap.js')}}"></script>
+<script src="{{asset('/backend/vendors/select2/js/select2.min.js')}}"></script>
+
+<!-- Dashboard scripts -->
+<script src="{{asset('/backend/js/examples/dashboard.js')}}"></script>
 <div class="colors"> <!-- To use theme colors with Javascript -->
     <div class="bg-primary"></div>
     <div class="bg-primary-bright"></div>
@@ -137,7 +174,7 @@
     <div class="bg-warning"></div>
     <div class="bg-warning-bright"></div>
 </div>
-<!-- app.min.js is included in admin.bundle.js -->
+
 
 <script>
     $(document).ready(function (){
