@@ -59,16 +59,6 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
   align-items: center;
 }
 
-.hero-slide::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg,
-    rgba(12,74,110,.92) 0%,
-    rgba(12,74,110,.65) 45%,
-    rgba(12,74,110,.12) 100%);
-}
-
 .hero-content {
   position: relative;
   z-index: 2;
