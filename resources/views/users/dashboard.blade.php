@@ -888,127 +888,6 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
 {{-- ===== HERO SLIDER ===== --}}
 @include('users.slider')
 
-{{-- ===== TRUST STRIP ===== --}}
-<div class="trust-strip">
-  <div class="container-fluid px-0">
-    <div class="trust-grid">
-      <div class="trust-item">
-        <div class="trust-icon-box"><i class="fas fa-truck"></i></div>
-        <div>
-          <p class="trust-label">Free Delivery</p>
-          <span class="trust-sub">On qualifying orders</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon-box"><i class="fas fa-shield-alt"></i></div>
-        <div>
-          <p class="trust-label">Secure Payment</p>
-          <span class="trust-sub">100% protected</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon-box"><i class="fas fa-tools"></i></div>
-        <div>
-          <p class="trust-label">Expert Installation</p>
-          <span class="trust-sub">Certified engineers</span>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon-box"><i class="fas fa-headset"></i></div>
-        <div>
-          <p class="trust-label">24 / 7 Support</p>
-          <span class="trust-sub">Always here for you</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{{-- ===== SERVICES ===== --}}
-<section class="section-wrap section-wrap--alt" id="services">
-  <div class="container">
-    <div class="sec-header sec-header--center reveal">
-      <div class="sec-label">What We Do</div>
-      <h2 class="sec-title">Professional <span>Solar Services</span></h2>
-      <p class="sec-sub">End-to-end renewable energy solutions designed for homes and businesses across Nigeria.</p>
-    </div>
-    <div class="row g-4">
-      @foreach ($service as $serv)
-      <div class="col-6 col-md-4 col-lg-3 reveal">
-        <a href="{{ route('service.details', encrypt($serv->id)) }}" class="service-card">
-          <div class="srv-icon">
-            <img src="{{ asset('images/services/'.$serv->images) }}" alt="{{ $serv->title }}">
-          </div>
-          <p class="srv-name">{{ $serv->title }}</p>
-          <span class="srv-link">Learn more <i class="fas fa-arrow-right"></i></span>
-        </a>
-      </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-
-{{-- ===== STATS ===== --}}
-<div class="stats-banner">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-num">2,400<span>+</span></div>
-        <div class="stat-desc">Installations Done</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">98<span>%</span></div>
-        <div class="stat-desc">Customer Satisfaction</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">500<span>+</span></div>
-        <div class="stat-desc">Products in Stock</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">36</div>
-        <div class="stat-desc">States Covered</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{{-- ===== CATEGORIES ===== --}}
-<section class="section-wrap" id="categories">
-  <div class="container">
-    <div class="sec-header sec-header--center reveal">
-      <div class="sec-label">Browse By Type</div>
-      <h2 class="sec-title">Shop by <span>Category</span></h2>
-    </div>
-    <div class="row g-3">
-      @foreach ($categories as $cat)
-      <div class="col-6 col-md-4 col-lg-3 reveal">
-        <a href="{{ route('category.products', $cat->id) }}" class="cat-card">
-          <div class="cat-img-ring">
-            <img src="{{ asset('images/category/'.$cat->image_path) }}" alt="{{ $cat->name }}">
-          </div>
-          <p class="cat-name">{{ $cat->name }}</p>
-          <span class="cat-cta">Shop now <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
-        </a>
-      </div>
-      @endforeach
-    </div>
-  </div>
-</section>
-
-{{-- ===== MARQUEE ===== --}}
-<div class="marquee-band">
-  <div class="marquee-track">
-    @foreach (range(0, 1) as $_)
-    {{-- <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Free Nationwide Delivery on Qualifying Orders</span> --}}
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Certified Solar Installation — Trusted Engineers</span>
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Premium Panels, Inverters &amp; Batteries In Stock</span>
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> 24 / 7 Technical &amp; Customer Support</span>
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> 100% Secure Payments — Paystack &amp; Bank Transfer</span>
-    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Scalable Solar Packages for Every Budget</span>
-    @endforeach
-  </div>
-</div>
-
 {{-- ===== FEATURED PRODUCTS ===== --}}
 <section class="section-wrap section-wrap--alt" id="shop">
   <div class="container">
@@ -1057,8 +936,6 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
     </div>
   </div>
 </section>
-{{-- ===== CTA BANNER ===== --}}
-
 
 {{-- ===== RECENT PRODUCTS ===== --}}
 <section class="section-wrap" id="recent">
@@ -1100,6 +977,110 @@ body { font-family: 'Inter', 'Segoe UI', sans-serif !important; }
     </div>
   </div>
 </section>
+
+{{-- ===== TRUST STRIP ===== --}}
+<div class="trust-strip">
+  <div class="container-fluid px-0">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fas fa-truck"></i></div>
+        <div>
+          <p class="trust-label">Free Delivery</p>
+          <span class="trust-sub">On qualifying orders</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fas fa-shield-alt"></i></div>
+        <div>
+          <p class="trust-label">Secure Payment</p>
+          <span class="trust-sub">100% protected</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fas fa-tools"></i></div>
+        <div>
+          <p class="trust-label">Expert Installation</p>
+          <span class="trust-sub">Certified engineers</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fas fa-headset"></i></div>
+        <div>
+          <p class="trust-label">24 / 7 Support</p>
+          <span class="trust-sub">Always here for you</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- ===== SERVICES ===== --}}
+<section class="section-wrap section-wrap--alt" id="services">
+  <div class="container">
+    <div class="sec-header sec-header--center reveal">
+      <div class="sec-label">What We Do</div>
+      <h2 class="sec-title">Professional <span>Solar Services</span></h2>
+      <p class="sec-sub">End-to-end renewable energy solutions designed for homes and businesses across Nigeria.</p>
+    </div>
+    <div class="row g-4">
+      @foreach ($service as $serv)
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="{{ route('service.details', $serv->slug) }}" class="service-card">
+          <div class="srv-icon">
+            <img src="{{ asset('images/services/'.$serv->images) }}" alt="{{ $serv->title }}">
+          </div>
+          <p class="srv-name">{{ $serv->title }}</p>
+          <span class="srv-link">Learn more <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+
+{{-- ===== CATEGORIES ===== --}}
+<section class="section-wrap" id="categories">
+  <div class="container">
+    <div class="sec-header sec-header--center reveal">
+      <div class="sec-label">Browse By Type</div>
+      <h2 class="sec-title">Shop by <span>Category</span></h2>
+    </div>
+    <div class="row g-3">
+      @foreach ($categories->take(8) as $cat)
+      <div class="col-6 col-md-4 col-lg-3 reveal">
+        <a href="{{ route('category.products', $cat->id) }}" class="cat-card">
+          <div class="cat-img-ring">
+            <img src="{{ asset('images/category/'.$cat->image_path) }}" alt="{{ $cat->name }}">
+          </div>
+          <p class="cat-name">{{ $cat->name }}</p>
+          <span class="cat-cta">Shop now <i class="fas fa-arrow-right" style="font-size:10px"></i></span>
+        </a>
+      </div>
+      @endforeach
+    </div>
+    <div class="text-center mt-4 reveal">
+      <a href="{{ route('products.search') }}" class="btn btn-outline-primary btn-sm px-4 py-2 fw-600" style="border-radius:50px;font-size:.82rem;font-weight:600">
+        View More Categories <i class="fas fa-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+{{-- ===== MARQUEE ===== --}}
+<div class="marquee-band">
+  <div class="marquee-track">
+    @foreach (range(0, 1) as $_)
+    {{-- <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Free Nationwide Delivery on Qualifying Orders</span> --}}
+    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Certified Solar Installation — Trusted Engineers</span>
+    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Premium Panels, Inverters &amp; Batteries In Stock</span>
+    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> 24 / 7 Technical &amp; Customer Support</span>
+    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> 100% Secure Payments — Paystack &amp; Bank Transfer</span>
+    <span class="marquee-item"><span class="marquee-dot">&#9679;</span> Scalable Solar Packages for Every Budget</span>
+    @endforeach
+  </div>
+</div>
+
+{{-- ===== CTA BANNER ===== --}}
 
 {{-- ===== PROMO POPUP ===== --}}
 <div class="promo-popup" id="promoPopup">
