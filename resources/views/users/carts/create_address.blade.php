@@ -43,9 +43,9 @@
                     <div class="row">
                  
                         <div class="col-12 col-md-12 col-lg-12" style="background: #fff; border-radius:10px">
-                            <p class="m-4" style="color:#332d2d"> <i class="fa fa-check-square-o"
-                                    style="color:rgb(79, 81, 79)"></i>
-                                Add Address </p>
+                            <button type="button" class="ps-btn ps-btn--primary m-4" style="border-radius:5px; cursor:default" disabled>
+                                <i class="fa fa-check-square-o"></i> Add Address
+                            </button>
                             <hr>
                             <div class="row m-3">
                                 <div class="col-12 col-md-6 ">
