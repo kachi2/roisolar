@@ -37,8 +37,11 @@ class GoogleController extends Controller
             Auth::login($user);
         } else {
             // New user → register
+            $nameParts = explode(' ', trim($googleUser->getName()), 2);
+
             $user = User::create([
-                'name' => $googleUser->getName(),
+                'first_name' => $nameParts[0] ?: 'Google',
+                'last_name' => $nameParts[1] ?? '',
                 'email' => $googleUser->getEmail(),
                 'google_id' => $googleUser->getId(),
                 // 'avatar' => $googleUser->getAvatar(),
