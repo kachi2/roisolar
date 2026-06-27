@@ -35,6 +35,9 @@
         <div class="ps-shopping__content">
             <div class="row">
                 <div class="col-12 col-md-7 col-lg-9 mt-5">
+                    @if (session('msg'))
+                        <div class="alert alert-warning">{{ session('msg') }}</div>
+                    @endif
                     <form action="{{route('storeAddress')}}" method="post">
                         @csrf
                     <div class="row">

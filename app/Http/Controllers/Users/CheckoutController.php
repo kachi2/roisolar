@@ -66,18 +66,15 @@ class CheckoutController extends Controller
 
         
 
-        $address = ShippingAddress::where('user_id', Auth::id())->first();
+        $addresses = ShippingAddress::where('user_id', Auth::id())->get();
 
-    // pick default if exists, else latest one
-    $defaultAddressId = $address->where('is_default', true)->first()->id 
-        ?? $address->last()->id 
-        ?? null;
-        
-        // $address = ShippingAddress::where(['user_id' => auth_user()->id, 'is_default' =>1])->get();
-     
-            if(!$address){
-                return view('users.accounts.address_create');
-            }
+        if($addresses->isEmpty()){
+            return redirect()->route('createAddress')->with('msg', 'Please add a shipping address to continue checkout.');
+        }
+
+        // pick default if exists, else latest one
+        $address = $addresses->firstWhere('is_default', true) ?? $addresses->last();
+        $defaultAddressId = $address->id;
         if($currency){
             if($currency['country'] == "NG" && Str::contains(strtolower($address->address), 'lagos')){
                 $shipping_fee = '8000';
